@@ -1,3 +1,3 @@
-# Objectivos
+# Objectives
 
-Concretar la construcción de un sitio de noticias
+Build an App in typescript
