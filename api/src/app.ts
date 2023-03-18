@@ -1,6 +1,6 @@
 // Imports
 import express from "express";
-import { statusApi } from "./controllers/status";
+import statusRouter  from "./routes/statusRoutes";
 
 
 // Express and midlewares
@@ -9,8 +9,7 @@ app.use(express.json());
 
 
 // Routers
-statusApi(app);
-
+app.use("/status", statusRouter);
 
 // Exports
 export default app;
