@@ -1,10 +1,22 @@
 import { Router } from "express";
-import { getArticles } from "../controllers/articlesController";
+import {
+  getAll,
+  getOne,
+  createArticle,
+  updateArticle,
+  deleteArticle,
+} from "../controllers/articlesController";
 
-const articlesRouter = Router();
+const router = Router();
 
+router.get("/", getAll);
 
-articlesRouter.get("/", getArticles);
+router.get("/:id", getOne);
 
+router.post("/", createArticle);
 
-export default articlesRouter;
+router.put("/:id", updateArticle);
+
+router.delete("/:id", deleteArticle);
+
+export default router;
