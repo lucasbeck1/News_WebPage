@@ -6,11 +6,6 @@ import statusRouter from "./routes/statusRoutes";
 import articlesRouter from "./routes/articlesRoutes";
 import "reflect-metadata";
 
-//.env ????
-const { PORT } = process.env;
-console.log("Port .env: ", PORT);
-//
-
 // Express and midlewares
 const app = express();
 app.use(cors());

@@ -10,3 +10,6 @@ Commands that were used to build the api
 
 - npm ./node_modules/.bin/eslint --init
   This will initialize a wizard to create our linter setup
+
+Create a .env file in the root (api folder in this case) with values:
+PORT=port_number
