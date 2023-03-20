@@ -6,7 +6,11 @@ import {
   BaseEntity,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from "typeorm";
+
+import { Author } from "./authorEntity";
+import { Section } from "./sectionEntity";
 
 @Entity()
 export class Article extends BaseEntity {
@@ -25,12 +29,15 @@ export class Article extends BaseEntity {
   @Column()
   image: string;
 
-  @Column({ default: "Admin" })
-  author: string;
-
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToOne(() => Author, (author) => author.article)
+  author: Author;
+
+  @ManyToOne(() => Section, (section) => section.article)
+  section: Section;
 }
