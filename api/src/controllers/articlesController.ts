@@ -1,25 +1,26 @@
 import { Request, Response } from "express";
 import { Article } from "../entities/articleEntity";
-
-//{
-//  getAll,
-//  getOne,
-//  createArticle,
-//  updateArticle,
-//  deleteArticle,
-//}
+import { Author } from "../entities/authorEntity";
+import { Section } from "../entities/sectionEntity";
 
 type articleType = {
   headline: string;
   drophead: string;
   body: string;
   image: string;
+  author: string;
+  section: string;
 };
 
-export const getAll = async (_req: Request, res: Response) => {
+export const getAllArticles = async (_req: Request, res: Response) => {
   try {
-    const getArticles = await Article.find();
-    return res.status(200).json(getArticles);
+    const allArticles = await Article.find({
+      relations: {
+        author: true,
+        section: true,
+      },
+    });
+    return res.status(200).json(allArticles);
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });
@@ -29,15 +30,15 @@ export const getAll = async (_req: Request, res: Response) => {
   }
 };
 
-export const getOne = async (req: Request, res: Response) => {
+export const getOneArticle = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const getArticle = await Article.findOneBy({ id: parseInt(id) });
+    const oneArticle = await Article.findOneBy({ id: parseInt(id) });
 
-    if (!getArticle)
+    if (!oneArticle)
       return res.status(404).json({ message: "Article not found" });
 
-    return res.status(200).json(getArticle);
+    return res.status(200).json(oneArticle);
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });
@@ -52,14 +53,27 @@ export const createArticle = async (
   res: Response
 ) => {
   try {
-    const { headline, drophead, body, image } = req.body;
+    const { headline, drophead, body, image, author, section } = req.body;
     const articleNew = new Article();
     articleNew.headline = headline;
     articleNew.drophead = drophead;
     articleNew.body = body;
     articleNew.image = image;
 
+    const findAuthor = await Author.findOneBy({ name: author });
+    const findSection = await Section.findOneBy({ name: section });
+
+    if (findAuthor) {
+      articleNew.author = findAuthor;
+    }
+
+    if (findSection) {
+      articleNew.section = findSection;
+    }
+
     await articleNew.save();
+    //await dataSource.manager.save(articleNew);
+
     return res.status(201).json(articleNew);
   } catch (error) {
     if (error instanceof Error) {
