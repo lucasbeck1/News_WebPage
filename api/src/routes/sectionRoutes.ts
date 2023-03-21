@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
-  getAll,
-  getOne,
+  getAllSections,
+  getOneSection,
   createSection,
   updateSection,
   deleteSection,
@@ -9,9 +9,9 @@ import {
 
 const router = Router();
 
-router.get("/", getAll);
+router.get("/", getAllSections);
 
-router.get("/:id", getOne);
+router.get("/:id", getOneSection);
 
 router.post("/", createSection);
 

@@ -3,14 +3,12 @@ import { Section } from "../entities/sectionEntity";
 
 type sectionType = {
   name: string;
-  mail: string;
-  password: string;
 };
 
-export const getAll = async (_req: Request, res: Response) => {
+export const getAllSections = async (_req: Request, res: Response) => {
   try {
-    const getSection = await Section.find();
-    return res.status(200).json(getSection);
+    const allSections = await Section.find();
+    return res.status(200).json(allSections);
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });
@@ -20,15 +18,15 @@ export const getAll = async (_req: Request, res: Response) => {
   }
 };
 
-export const getOne = async (req: Request, res: Response) => {
+export const getOneSection = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const getSection = await Section.findOneBy({ id: parseInt(id) });
+    const oneSection = await Section.findOneBy({ id: parseInt(id) });
 
-    if (!getSection)
+    if (!oneSection)
       return res.status(404).json({ message: "Section not found" });
 
-    return res.status(200).json(getSection);
+    return res.status(200).json(oneSection);
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });

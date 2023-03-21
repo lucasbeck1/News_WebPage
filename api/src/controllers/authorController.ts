@@ -7,10 +7,10 @@ type authorType = {
   password: string;
 };
 
-export const getAll = async (_req: Request, res: Response) => {
+export const getAllAuthors = async (_req: Request, res: Response) => {
   try {
-    const getAuthor = await Author.find();
-    return res.status(200).json(getAuthor);
+    const allAuthors = await Author.find();
+    return res.status(200).json(allAuthors);
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });
@@ -20,15 +20,15 @@ export const getAll = async (_req: Request, res: Response) => {
   }
 };
 
-export const getOne = async (req: Request, res: Response) => {
+export const getOneAuthor = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const getAuthor = await Author.findOneBy({ id: parseInt(id) });
+    const oneAuthor = await Author.findOneBy({ id: parseInt(id) });
 
-    if (!getAuthor)
+    if (!oneAuthor)
       return res.status(404).json({ message: "Author not found" });
 
-    return res.status(200).json(getAuthor);
+    return res.status(200).json(oneAuthor);
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });
