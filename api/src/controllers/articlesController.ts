@@ -33,7 +33,15 @@ export const getAllArticles = async (_req: Request, res: Response) => {
 export const getOneArticle = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const oneArticle = await Article.findOneBy({ id: parseInt(id) });
+    const oneArticle = await Article.findOne({
+      where: {
+        id: parseInt(id),
+      },
+      relations: {
+        author: true,
+        section: true,
+      },
+    });
 
     if (!oneArticle)
       return res.status(404).json({ message: "Article not found" });

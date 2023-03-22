@@ -13,7 +13,11 @@ type publicityType = {
 
 export const getAllPublicity = async (_req: Request, res: Response) => {
   try {
-    const allPublicity = await Publicity.find();
+    const allPublicity = await Publicity.find({
+      relations: {
+        sponsor: true,
+      },
+    });
 
     return res.status(200).json(allPublicity);
   } catch (error) {
@@ -28,7 +32,14 @@ export const getAllPublicity = async (_req: Request, res: Response) => {
 export const getOnePublicity = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const onePublicity = await Publicity.findOneBy({ id: parseInt(id) });
+    const onePublicity = await Publicity.findOne({
+      where: {
+        id: parseInt(id),
+      },
+      relations: {
+        sponsor: true,
+      },
+    });
 
     if (!onePublicity)
       return res.status(404).json({ message: "Publicity not found" });

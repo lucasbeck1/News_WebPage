@@ -9,7 +9,11 @@ type authorType = {
 
 export const getAllAuthors = async (_req: Request, res: Response) => {
   try {
-    const allAuthors = await Author.find();
+    const allAuthors = await Author.find({
+      relations: {
+        article: true,
+      },
+    });
     return res.status(200).json(allAuthors);
   } catch (error) {
     if (error instanceof Error) {
@@ -23,7 +27,14 @@ export const getAllAuthors = async (_req: Request, res: Response) => {
 export const getOneAuthor = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const oneAuthor = await Author.findOneBy({ id: parseInt(id) });
+    const oneAuthor = await Author.findOne({
+      where: {
+        id: parseInt(id),
+      },
+      relations: {
+        article: { section: true },
+      },
+    });
 
     if (!oneAuthor)
       return res.status(404).json({ message: "Author not found" });

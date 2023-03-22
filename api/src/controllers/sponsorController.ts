@@ -26,8 +26,14 @@ export const getAllSponsor = async (_req: Request, res: Response) => {
 export const getOneSponsor = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const oneSponsor = await Sponsor.findOneBy({
-      id: parseInt(id),
+
+    const oneSponsor = await Sponsor.findOne({
+      where: {
+        id: parseInt(id),
+      },
+      relations: {
+        publicities: true,
+      },
     });
 
     if (!oneSponsor)

@@ -7,7 +7,11 @@ type sectionType = {
 
 export const getAllSections = async (_req: Request, res: Response) => {
   try {
-    const allSections = await Section.find();
+    const allSections = await Section.find({
+      relations: {
+        article: true,
+      },
+    });
     return res.status(200).json(allSections);
   } catch (error) {
     if (error instanceof Error) {
@@ -21,7 +25,14 @@ export const getAllSections = async (_req: Request, res: Response) => {
 export const getOneSection = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const oneSection = await Section.findOneBy({ id: parseInt(id) });
+    const oneSection = await Section.findOne({
+      where: {
+        id: parseInt(id),
+      },
+      relations: {
+        article: { author: true },
+      },
+    });
 
     if (!oneSection)
       return res.status(404).json({ message: "Section not found" });
