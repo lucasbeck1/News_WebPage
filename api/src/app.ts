@@ -7,6 +7,8 @@ import statusRouter from "./routes/statusRoutes";
 import articlesRouter from "./routes/articlesRoutes";
 import authorRoutes from "./routes/authorRoutes";
 import sectionRoutes from "./routes/sectionRoutes";
+import sponsorRotes from "./routes/sponsorRoutes";
+import publicityRoutes from "./routes/publicityRoutes";
 
 // Express and midlewares
 const app = express();
@@ -19,6 +21,8 @@ app.use("/status", statusRouter);
 app.use("/articles", articlesRouter);
 app.use("/authors", authorRoutes);
 app.use("/sections", sectionRoutes);
+app.use("/sponsors", sponsorRotes);
+app.use("/publicities", publicityRoutes);
 
 // Exports
 export default app;

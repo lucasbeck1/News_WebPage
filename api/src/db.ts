@@ -2,6 +2,8 @@ import { DataSource } from "typeorm";
 import { Article } from "./entities/articleEntity";
 import { Author } from "./entities/authorEntity";
 import { Section } from "./entities/sectionEntity";
+import { Sponsor } from "./entities/sponsorEntity";
+import { Publicity } from "./entities/publicityEntity";
 
 export const AppDataSource = new DataSource({
   type: "mysql",
@@ -11,7 +13,7 @@ export const AppDataSource = new DataSource({
   password: "root123456",
   database: "rocky_db",
   synchronize: true,
-  entities: [Article, Author, Section],
+  entities: [Article, Author, Section, Sponsor, Publicity],
   // logging: true,
   // entities: ["entities/*.ts"],
 });
