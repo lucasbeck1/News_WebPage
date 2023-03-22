@@ -4,7 +4,7 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import statusRouter from "./routes/statusRoutes";
-import articlesRouter from "./routes/articlesRoutes";
+import articlesRouter from "./routes/articleRoutes";
 import authorRoutes from "./routes/authorRoutes";
 import sectionRoutes from "./routes/sectionRoutes";
 import sponsorRotes from "./routes/sponsorRoutes";

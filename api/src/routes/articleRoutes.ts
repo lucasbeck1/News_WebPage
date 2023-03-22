@@ -5,7 +5,7 @@ import {
   createArticle,
   updateArticle,
   deleteArticle,
-} from "../controllers/articlesController";
+} from "../controllers/articleController";
 
 const router = Router();
 
