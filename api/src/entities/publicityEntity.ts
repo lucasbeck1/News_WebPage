@@ -17,8 +17,11 @@ export class Publicity extends BaseEntity {
   @Column()
   image: string;
 
-  @Column()
+  @Column({ default: true })
   active: boolean;
+
+  @Column({ default: false })
+  finished: boolean;
 
   @Column({ type: "json" })
   payment: JSON;

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   getAllPublicity,
+  getActivePublicity,
   getOnePublicity,
   createPublicity,
   updatePublicity,
@@ -10,6 +11,8 @@ import {
 const router = Router();
 
 router.get("/", getAllPublicity);
+
+router.get("/active", getActivePublicity);
 
 router.get("/:id", getOnePublicity);
 

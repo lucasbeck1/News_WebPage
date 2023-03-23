@@ -29,6 +29,24 @@ export const getAllPublicity = async (_req: Request, res: Response) => {
   }
 };
 
+export const getActivePublicity = async (_req: Request, res: Response) => {
+  try {
+    const allPublicity = await Publicity.find({
+      where: {
+        active: true,
+      },
+    });
+
+    return res.status(200).json(allPublicity);
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({ message: error.message });
+    } else {
+      return res.status(500).json({ message: "Response Error" });
+    }
+  }
+};
+
 export const getOnePublicity = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
