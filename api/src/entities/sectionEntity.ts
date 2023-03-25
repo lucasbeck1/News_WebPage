@@ -18,5 +18,5 @@ export class Section extends BaseEntity {
   name: string;
 
   @OneToMany(() => Article, (article) => article.section)
-  article: Article[];
+  articles: Article[];
 }

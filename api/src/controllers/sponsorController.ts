@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import { Sponsor } from "../entities/sponsorEntity";
 
 type sponsorType = {
+  name: string;
   mail: string;
-  password: string;
 };
 
 export const getAllSponsor = async (_req: Request, res: Response) => {
@@ -54,10 +54,10 @@ export const createSponsor = async (
   res: Response
 ) => {
   try {
-    const { mail, password } = req.body;
+    const { name, mail } = req.body;
     const sponsorNew = new Sponsor();
+    sponsorNew.mail = name;
     sponsorNew.mail = mail;
-    sponsorNew.password = password;
     await sponsorNew.save();
 
     return res.status(201).json(sponsorNew);

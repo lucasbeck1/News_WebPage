@@ -9,7 +9,7 @@ export const getAllSections = async (_req: Request, res: Response) => {
   try {
     const allSections = await Section.find({
       relations: {
-        article: true,
+        articles: true,
       },
     });
     return res.status(200).json(allSections);
@@ -30,7 +30,7 @@ export const getOneSection = async (req: Request, res: Response) => {
         id: parseInt(id),
       },
       relations: {
-        article: { author: true },
+        articles: { author: true },
       },
     });
 

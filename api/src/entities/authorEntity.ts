@@ -24,5 +24,5 @@ export class Author extends BaseEntity {
   password: string;
 
   @OneToMany(() => Article, (article) => article.author)
-  article: Article[];
+  articles: Article[];
 }

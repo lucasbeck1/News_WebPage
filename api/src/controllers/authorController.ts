@@ -11,7 +11,7 @@ export const getAllAuthors = async (_req: Request, res: Response) => {
   try {
     const allAuthors = await Author.find({
       relations: {
-        article: true,
+        articles: true,
       },
     });
     return res.status(200).json(allAuthors);
@@ -32,7 +32,7 @@ export const getOneAuthor = async (req: Request, res: Response) => {
         id: parseInt(id),
       },
       relations: {
-        article: { section: true },
+        articles: { section: true },
       },
     });
 

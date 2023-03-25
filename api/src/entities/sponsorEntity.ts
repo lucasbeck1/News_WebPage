@@ -15,10 +15,10 @@ export class Sponsor extends BaseEntity {
   id: number;
 
   @Column()
-  mail: string;
+  name: string;
 
   @Column()
-  password: string;
+  mail: string;
 
   @OneToMany(() => Publicity, (publicity) => publicity.sponsor)
   publicities: Publicity[];

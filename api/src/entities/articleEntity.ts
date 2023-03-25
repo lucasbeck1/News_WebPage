@@ -20,10 +20,10 @@ export class Article extends BaseEntity {
   @Column()
   headline: string;
 
-  @Column()
+  @Column({ type: "text" })
   drophead: string;
 
-  @Column()
+  @Column({ type: "text" })
   body: string;
 
   @Column()
@@ -35,9 +35,9 @@ export class Article extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Author, (author) => author.article)
+  @ManyToOne(() => Author, (author) => author.articles)
   author: Author;
 
-  @ManyToOne(() => Section, (section) => section.article)
+  @ManyToOne(() => Section, (section) => section.articles)
   section: Section;
 }
