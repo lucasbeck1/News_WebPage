@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
+import { NavLink } from "react-router-dom";
 
 interface ArticleData {
   article: {
@@ -24,42 +25,44 @@ interface ArticleData {
 }
 
 export default function CardArticle(props: ArticleData) {
-  const { headline, drophead, image, createdAt } = props.article;
+  const { id, headline, drophead, image, createdAt } = props.article;
 
   return (
     <>
-      <Grid
-        container
-        direction="column"
-        alignItems="center"
-        /* spacing={0} */
-        /* justifyContent="center" */
-        /* style={{ minHeight: "100vh" }} */
-      >
-        <Card
-          sx={{
-            maxWidth: 900,
-          }}
+      <NavLink to={`/detail/${id}`}>
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          /* spacing={0} */
+          /* justifyContent="center" */
+          /* style={{ minHeight: "100vh" }} */
         >
-          <CardActionArea>
-            <CardHeader title={headline} subheader={createdAt}></CardHeader>
-            <CardMedia
-              component="img"
-              height="300"
-              image={image}
-              alt="article loading"
-            />
-            <CardContent>
-              {/*   <Typography gutterBottom variant="h5" component="div">
+          <Card
+            sx={{
+              maxWidth: 900,
+            }}
+          >
+            <CardActionArea>
+              <CardHeader title={headline} subheader={createdAt}></CardHeader>
+              <CardMedia
+                component="img"
+                height="300"
+                image={image}
+                alt="article loading"
+              />
+              <CardContent>
+                {/*   <Typography gutterBottom variant="h5" component="div">
                 Lizard
               </Typography> */}
-              <Typography variant="body2" color="text.secondary">
-                {drophead}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      </Grid>
+                <Typography variant="body2" color="text.secondary">
+                  {drophead}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+      </NavLink>
 
       {/* <br></br>
       <br></br>

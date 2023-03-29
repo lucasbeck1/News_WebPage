@@ -1,9 +1,7 @@
 import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
+import { NavLink } from "react-router-dom";
 
 interface HeaderProps {
   sections: ReadonlyArray<{
@@ -26,7 +24,8 @@ function Header(props: HeaderProps) {
           noWrap
           sx={{ flex: 1 }}
         >
-          Rocky News
+          {" "}
+          <NavLink to={`/`}>Rocky News</NavLink>
         </Typography>
       </Toolbar>
       <Toolbar
