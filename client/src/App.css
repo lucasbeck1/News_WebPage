@@ -39,3 +39,8 @@
   padding: 2em;
 }
 */
+
+body {
+  margin: 0px;
+  background-color: rgb(30, 31, 44);
+}

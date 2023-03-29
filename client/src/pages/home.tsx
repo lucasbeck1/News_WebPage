@@ -3,6 +3,7 @@ import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import Header from "../components/header";
 import CardArticle from "../components/card";
 import Footer from "../components/footer";
+import articles from "../dataExamples/articles.json";
 
 const sections = [
   { title: "Technology", url: "#" },
@@ -23,7 +24,8 @@ function Home() {
       <Container maxWidth="lg">
         <ScopedCssBaseline enableColorScheme>
           <Header sections={sections} />
-          <CardArticle />
+          {articles &&
+            articles.map((article) => <CardArticle article={article} />)}
           <Footer />
         </ScopedCssBaseline>
       </Container>

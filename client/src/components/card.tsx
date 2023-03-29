@@ -4,12 +4,28 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import CardHeader from "@mui/material/CardHeader";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 
-export default function CardArticle() {
+interface ArticleData {
+  article: {
+    id: number;
+    headline: string;
+    drophead: string;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+    author: string;
+    section: string;
+    body: string;
+  };
+}
+
+export default function CardArticle(props: ArticleData) {
+  const { headline, drophead, image, createdAt } = props.article;
+
   return (
     <>
       <Grid
@@ -26,23 +42,19 @@ export default function CardArticle() {
           }}
         >
           <CardActionArea>
-            <CardHeader
-              title="Article Title"
-              subheader="September 14, 2016"
-            ></CardHeader>
+            <CardHeader title={headline} subheader={createdAt}></CardHeader>
             <CardMedia
               component="img"
               height="300"
-              image="https://cdn.pixabay.com/photo/2019/07/23/13/51/shepherd-dog-4357790_960_720.jpg"
-              alt="green iguana"
+              image={image}
+              alt="article loading"
             />
             <CardContent>
               {/*   <Typography gutterBottom variant="h5" component="div">
                 Lizard
               </Typography> */}
               <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over
-                6,000 species, ranging across all continents except Antarctica
+                {drophead}
               </Typography>
             </CardContent>
           </CardActionArea>
