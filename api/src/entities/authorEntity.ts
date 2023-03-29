@@ -11,8 +11,8 @@ import { Article } from "./articleEntity";
 
 @Entity()
 export class Author extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column()
   name: string;
@@ -22,6 +22,9 @@ export class Author extends BaseEntity {
 
   @Column()
   password: string;
+
+  @Column()
+  admin: boolean;
 
   @OneToMany(() => Article, (article) => article.author)
   articles: Article[];
