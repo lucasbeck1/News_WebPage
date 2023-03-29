@@ -1,7 +1,8 @@
 import Container from "@mui/material/Container";
+import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import Header from "../components/header";
 import CardArticle from "../components/card";
-import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
+import Footer from "../components/footer";
 
 const sections = [
   { title: "Technology", url: "#" },
@@ -23,6 +24,7 @@ function Home() {
         <ScopedCssBaseline enableColorScheme>
           <Header sections={sections} />
           <CardArticle />
+          <Footer />
         </ScopedCssBaseline>
       </Container>
     </>
