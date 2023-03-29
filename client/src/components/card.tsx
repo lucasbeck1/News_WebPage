@@ -12,10 +12,13 @@ import Box from "@mui/material/Box";
 export default function CardArticle() {
   return (
     <>
-      {/* <Grid
+      <Grid
         container
         direction="column"
         alignItems="center"
+        /* spacing={0} */
+        /* justifyContent="center" */
+        /* style={{ minHeight: "100vh" }} */
       >
         <Card
           sx={{
@@ -34,9 +37,9 @@ export default function CardArticle() {
               alt="green iguana"
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              {/*   <Typography gutterBottom variant="h5" component="div">
                 Lizard
-              </Typography>
+              </Typography> */}
               <Typography variant="body2" color="text.secondary">
                 Lizards are a widespread group of squamate reptiles, with over
                 6,000 species, ranging across all continents except Antarctica
@@ -46,17 +49,10 @@ export default function CardArticle() {
         </Card>
       </Grid>
 
+      {/* <br></br>
       <br></br>
-      <br></br> */}
 
-      <Grid
-        container
-        direction="column"
-        alignItems="center"
-        /* spacing={0} */
-        /* justifyContent="center" */
-        /* style={{ minHeight: "100vh" }} */
-      >
+      <Grid container direction="column" alignItems="center">
         <Card sx={{ maxWidth: 825 }}>
           <CardActionArea>
             <CardHeader
@@ -74,9 +70,9 @@ export default function CardArticle() {
                 backgroundPosition: "center",
                 backgroundImage: `url(https://cdn.pixabay.com/photo/2019/07/23/13/51/shepherd-dog-4357790_960_720.jpg)`,
               }}
-            >
-              {/* Increase the priority of the hero background image */}
-              {
+            > */}
+      {/* Increase the priority of the hero background image */}
+      {/* {
                 <img
                   style={{ display: "none" }}
                   src={
@@ -121,7 +117,7 @@ export default function CardArticle() {
         </Card>
       </Grid>
       <br></br>
-      <br></br>
+      <br></br> */}
     </>
   );
 }
