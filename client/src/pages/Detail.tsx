@@ -6,19 +6,6 @@ import Footer from "../components/footer";
 import articles from "../dataExamples/articles.json";
 import { useParams } from "react-router-dom";
 
-const sections = [
-  { title: "Technology", url: "#" },
-  { title: "Design", url: "#" },
-  { title: "Culture", url: "#" },
-  { title: "Business", url: "#" },
-  { title: "Politics", url: "#" },
-  { title: "Opinion", url: "#" },
-  { title: "Science", url: "#" },
-  { title: "Health", url: "#" },
-  { title: "Style", url: "#" },
-  { title: "Travel", url: "#" },
-];
-
 function Detail() {
   const { id } = useParams();
   const selectedArricle = articles.find(
@@ -29,7 +16,7 @@ function Detail() {
     <>
       <Container maxWidth="lg">
         <ScopedCssBaseline enableColorScheme>
-          <Header sections={sections} />
+          <Header />
           <h1>{selectedArricle?.headline}</h1>
           <img src={selectedArricle?.image} alt="article loading" />
           <h4>{selectedArricle?.drophead}</h4>

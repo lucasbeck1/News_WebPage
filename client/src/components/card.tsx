@@ -29,20 +29,20 @@ export default function CardArticle(props: ArticleData) {
 
   return (
     <>
-      <NavLink to={`/detail/${id}`}>
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-          /* spacing={0} */
-          /* justifyContent="center" */
-          /* style={{ minHeight: "100vh" }} */
+      <Grid
+        container
+        direction="column"
+        alignItems="center"
+        /* spacing={0} */
+        /* justifyContent="center" */
+        /* style={{ minHeight: "100vh" }} */
+      >
+        <Card
+          sx={{
+            maxWidth: 900,
+          }}
         >
-          <Card
-            sx={{
-              maxWidth: 900,
-            }}
-          >
+          <NavLink to={`/detail/${id}`}>
             <CardActionArea>
               <CardHeader title={headline} subheader={createdAt}></CardHeader>
               <CardMedia
@@ -52,17 +52,19 @@ export default function CardArticle(props: ArticleData) {
                 alt="article loading"
               />
               <CardContent>
-                {/*   <Typography gutterBottom variant="h5" component="div">
-                Lizard
-              </Typography> */}
+                {/*   
+                <Typography gutterBottom variant="h5" component="div">
+                  Lizard
+                </Typography> 
+                */}
                 <Typography variant="body2" color="text.secondary">
                   {drophead}
                 </Typography>
               </CardContent>
             </CardActionArea>
-          </Card>
-        </Grid>
-      </NavLink>
+          </NavLink>
+        </Card>
+      </Grid>
 
       {/* <br></br>
       <br></br>

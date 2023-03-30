@@ -2,17 +2,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { NavLink } from "react-router-dom";
+import Sections from "../dataExamples/sections.json";
 
-interface HeaderProps {
-  sections: ReadonlyArray<{
-    title: string;
-    url: string;
-  }>;
-}
-
-function Header(props: HeaderProps) {
-  const { sections } = props;
-
+function Header() {
   return (
     <>
       <Toolbar sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -24,7 +16,6 @@ function Header(props: HeaderProps) {
           noWrap
           sx={{ flex: 1 }}
         >
-          {" "}
           <NavLink to={`/`}>Rocky News</NavLink>
         </Typography>
       </Toolbar>
@@ -33,16 +24,16 @@ function Header(props: HeaderProps) {
         variant="dense"
         sx={{ justifyContent: "space-between", overflowX: "auto" }}
       >
-        {sections.map((section) => (
+        {Sections.map((section) => (
           <Link
             color="inherit"
             noWrap
-            key={section.title}
+            key={section}
             variant="body2"
-            href={section.url}
+            href={`/#/section/${section}`}
             sx={{ p: 1, flexShrink: 0 }}
           >
-            {section.title}
+            {section}
           </Link>
         ))}
       </Toolbar>

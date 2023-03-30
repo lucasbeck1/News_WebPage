@@ -4,15 +4,22 @@ import Header from "../components/header";
 import CardArticle from "../components/card";
 import Footer from "../components/footer";
 import articles from "../dataExamples/articles.json";
+import { useParams } from "react-router-dom";
 
-function Home() {
+function Section() {
+  const { sectionName } = useParams();
+  const sectionArticles = articles.filter(
+    (article) => article.section === sectionName
+  );
+
   return (
     <>
       <Container maxWidth="lg">
         <ScopedCssBaseline enableColorScheme>
           <Header />
-          {articles &&
-            articles.map((article) => <CardArticle article={article} />)}
+          <h1>{sectionName}</h1>
+          {sectionArticles &&
+            sectionArticles.map((article) => <CardArticle article={article} />)}
           <Footer />
         </ScopedCssBaseline>
       </Container>
@@ -20,4 +27,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Section;
