@@ -16,7 +16,12 @@ function Header() {
           noWrap
           sx={{ flex: 1 }}
         >
-          <NavLink to={`/`}>Rocky News</NavLink>
+          <NavLink
+            style={{ textDecoration: "none", color: "inherit" }}
+            to={`/`}
+          >
+            Rocky News
+          </NavLink>
         </Typography>
       </Toolbar>
       <Toolbar
@@ -25,16 +30,19 @@ function Header() {
         sx={{ justifyContent: "space-between", overflowX: "auto" }}
       >
         {Sections.map((section) => (
-          <Link
+          <Typography
+            key={section}
             color="inherit"
             noWrap
-            key={section}
-            variant="body2"
-            href={`/#/${section}`}
             sx={{ p: 1, flexShrink: 0 }}
           >
-            {section}
-          </Link>
+            <NavLink
+              style={{ textDecoration: "none", color: "inherit" }}
+              to={`/${section}`}
+            >
+              {section}
+            </NavLink>
+          </Typography>
         ))}
       </Toolbar>
     </>

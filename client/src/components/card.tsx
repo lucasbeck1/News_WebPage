@@ -42,7 +42,10 @@ export default function CardArticle(props: ArticleData) {
             maxWidth: 900,
           }}
         >
-          <NavLink to={`/detail/${id}`}>
+          <NavLink
+            style={{ textDecoration: "none", color: "inherit" }}
+            to={`/detail/${id}`}
+          >
             <CardActionArea>
               <CardHeader title={headline} subheader={createdAt}></CardHeader>
               <CardMedia
