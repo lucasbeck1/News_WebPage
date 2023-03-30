@@ -4,6 +4,8 @@ import Header from "../components/header";
 import CardArticle from "../components/card";
 import Footer from "../components/footer";
 import articles from "../dataExamples/articles.json";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 function Home() {
   return (
@@ -11,10 +13,18 @@ function Home() {
       <Container maxWidth="lg" sx={{ p: 0 }}>
         <ScopedCssBaseline enableColorScheme>
           <Header />
-          {articles &&
-            articles.map((article) => (
-              <CardArticle key={article.id} article={article} />
-            ))}
+
+          <Box sx={{ flexGrow: 1, p: 4 }}>
+            <Grid container spacing={4}>
+              {articles &&
+                articles.map((article) => (
+                  <Grid item xs={12}>
+                    <CardArticle key={article.id} article={article} />
+                  </Grid>
+                ))}
+            </Grid>
+          </Box>
+
           <Footer />
         </ScopedCssBaseline>
       </Container>
