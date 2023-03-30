@@ -14,7 +14,7 @@ function Detail() {
 
   return (
     <>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ p: 0 }}>
         <ScopedCssBaseline enableColorScheme>
           <Header />
           <h1>{selectedArricle?.headline}</h1>

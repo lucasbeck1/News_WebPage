@@ -14,7 +14,7 @@ function Section() {
 
   return (
     <>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ p: 0 }}>
         <ScopedCssBaseline enableColorScheme>
           <Header />
           <h1>{sectionName}</h1>

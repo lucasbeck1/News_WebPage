@@ -12,7 +12,9 @@ function Home() {
         <ScopedCssBaseline enableColorScheme>
           <Header />
           {articles &&
-            articles.map((article) => <CardArticle article={article} />)}
+            articles.map((article) => (
+              <CardArticle key={article.id} article={article} />
+            ))}
           <Footer />
         </ScopedCssBaseline>
       </Container>
