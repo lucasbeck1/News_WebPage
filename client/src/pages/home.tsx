@@ -8,7 +8,7 @@ import articles from "../dataExamples/articles.json";
 function Home() {
   return (
     <>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ p: 0 }}>
         <ScopedCssBaseline enableColorScheme>
           <Header />
           {articles &&

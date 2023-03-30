@@ -30,7 +30,7 @@ function Header() {
             noWrap
             key={section}
             variant="body2"
-            href={`/#/section/${section}`}
+            href={`/#/${section}`}
             sx={{ p: 1, flexShrink: 0 }}
           >
             {section}
