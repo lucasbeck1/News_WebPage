@@ -7,6 +7,7 @@ import articles from "../dataExamples/articles.json";
 import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import CardsContainer from "../components/cardsContainer";
 
 function Section() {
   const { sectionName } = useParams();
@@ -20,16 +21,8 @@ function Section() {
         <ScopedCssBaseline enableColorScheme>
           <Header />
           <h1>{sectionName}</h1>
-          <Box sx={{ flexGrow: 1, p: 4 }}>
-            <Grid container spacing={4}>
-              {sectionArticles &&
-                sectionArticles.map((article) => (
-                  <Grid item xs={12}>
-                    <CardArticle key={article.id} article={article} />
-                  </Grid>
-                ))}
-            </Grid>
-          </Box>
+          <CardsContainer articles={sectionArticles} />
+          <Footer />
         </ScopedCssBaseline>
       </Container>
     </>
