@@ -28,7 +28,12 @@ function Detail() {
               src={selectedArricle?.image}
               alt="article loading"
               width={"100%"}
-              style={{ objectFit: "contain", maxHeight: "20rem" }}
+              style={{
+                objectFit: "contain",
+                maxHeight: "20rem",
+                backgroundColor: "#dfdfdf ",
+                borderRadius: 5,
+              }}
             />
             <p>{selectedArricle?.body}</p>
             <p style={{ display: "flex", justifyContent: "flex-start" }}>
