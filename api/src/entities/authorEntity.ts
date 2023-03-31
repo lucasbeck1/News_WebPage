@@ -23,7 +23,7 @@ export class Author extends BaseEntity {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ default: false })
   admin: boolean;
 
   @OneToMany(() => Article, (article) => article.author)
