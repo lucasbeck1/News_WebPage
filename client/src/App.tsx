@@ -3,8 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import Home from "./pages/home";
-import Detail from "./pages/Detail";
-import Section from "./pages/Section";
+import Detail from "./pages/detail";
+import Section from "./pages/section";
 
 function App() {
   return (
