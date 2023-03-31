@@ -27,9 +27,10 @@ export const getAllAuthors = async (_req: Request, res: Response) => {
 export const getOneAuthor = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+
     const oneAuthor = await Author.findOne({
       where: {
-        id: parseInt(id),
+        id: id,
       },
       relations: {
         articles: { section: true },
@@ -75,10 +76,10 @@ export const updateAuthor = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const author = await Author.findOneBy({ id: parseInt(id) });
+    const author = await Author.findOneBy({ id: id });
     if (!author) return res.status(404).json({ message: "Not author found" });
 
-    await Author.update({ id: parseInt(id) }, req.body);
+    await Author.update({ id: id }, req.body);
 
     //return res.sendStatus(204);
     return res.status(201).json({ message: "Update succesfull" });
@@ -95,7 +96,7 @@ export const deleteAuthor = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const result = await Author.delete({ id: parseInt(id) });
+    const result = await Author.delete({ id: id });
     if (result.affected === 0) {
       return res.status(404).json({ message: "Author not found" });
     }
