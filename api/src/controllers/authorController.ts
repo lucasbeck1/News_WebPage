@@ -1,10 +1,19 @@
 import { Request, Response } from "express";
 import { Author } from "../entities/authorEntity";
+import { saltRounds } from "../config";
+import bcrypt from "bcrypt";
 
 type authorType = {
   name: string;
   mail: string;
   password: string;
+};
+
+type authorUpdateType = {
+  name?: string;
+  mail?: string;
+  password?: string;
+  admin?: boolean;
 };
 
 export const getAllAuthors = async (_req: Request, res: Response) => {
@@ -59,7 +68,10 @@ export const createAuthor = async (
     const authorCreation = new Author();
     authorCreation.name = name;
     authorCreation.mail = mail;
-    authorCreation.password = password;
+
+    const salt: string = await bcrypt.genSalt(saltRounds);
+    const hash: string = await bcrypt.hash(password, salt);
+    authorCreation.password = hash;
 
     await authorCreation.save();
     return res.status(201).json(authorCreation);
@@ -79,7 +91,37 @@ export const updateAuthor = async (req: Request, res: Response) => {
     const author = await Author.findOneBy({ id: id });
     if (!author) return res.status(404).json({ message: "Not author found" });
 
-    await Author.update({ id: id }, req.body);
+    const { name, mail, admin, oldPassword, newPassword } = req.body;
+
+    const propertiesUpdated: authorUpdateType = {};
+
+    if (name) {
+      propertiesUpdated.name = name;
+    }
+    if (mail) {
+      propertiesUpdated.mail = mail;
+    }
+    if (admin) {
+      propertiesUpdated.admin = admin;
+    }
+
+    if (oldPassword && newPassword) {
+      const checkPass: boolean = await bcrypt.compare(
+        oldPassword,
+        author.password
+      );
+
+      if (checkPass) {
+        const salt: string = await bcrypt.genSalt(saltRounds);
+        const hash: string = await bcrypt.hash(newPassword, salt);
+        const hashPassword: string = hash;
+        propertiesUpdated.password = hashPassword;
+      } else {
+        return res.status(400).json({ message: "Invalid Request" });
+      }
+    }
+
+    await Author.update({ id: id }, propertiesUpdated);
 
     //return res.sendStatus(204);
     return res.status(201).json({ message: "Update succesfull" });
