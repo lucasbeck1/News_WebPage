@@ -31,7 +31,7 @@ function Detail() {
               style={{
                 objectFit: "contain",
                 maxHeight: "20rem",
-                backgroundColor: "#dfdfdf ",
+                backgroundColor: "#dfdfdf",
                 borderRadius: 5,
               }}
             />

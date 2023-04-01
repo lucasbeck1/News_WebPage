@@ -7,6 +7,7 @@ import articles from "../dataExamples/articles.json";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import CardsContainer from "../components/cardsContainer";
+import CarouselContainer from "../components/carouselContainer";
 
 function Home() {
   return (
@@ -15,6 +16,7 @@ function Home() {
         <ScopedCssBaseline enableColorScheme>
           <Header />
           <CardsContainer articles={articles} />
+          <CarouselContainer />
           <Footer />
         </ScopedCssBaseline>
       </Container>
