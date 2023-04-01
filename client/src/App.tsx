@@ -5,11 +5,13 @@ import "./App.css";
 import Home from "./pages/home";
 import Detail from "./pages/detail";
 import Section from "./pages/section";
+import Admin from "./pages/admin";
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <Admin />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />
