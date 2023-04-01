@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
+import { NavLink } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -13,7 +14,16 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import * as React from "react";
 
-const options = ["Home", "Manage", "Metrics"];
+type optionsType = {
+  section: string;
+  url: string;
+};
+
+const options: optionsType[] = [
+  { section: "Home", url: "/" },
+  { section: "Manage", url: "/manage" },
+  { section: "Metrics", url: "/metrics" },
+];
 
 const ITEM_HEIGHT = 48;
 
@@ -65,20 +75,22 @@ function Admin() {
                 >
                   {options.map((option) => (
                     <MenuItem
-                      key={option}
-                      selected={option === "Pyxis"}
+                      key={option.section}
+                      selected={option.section === "Pyxis"}
                       onClick={handleClose}
                     >
-                      {option}
+                      <NavLink
+                        style={{ textDecoration: "none", color: "inherit" }}
+                        to={option.url}
+                      >
+                        {option.section}
+                      </NavLink>
                     </MenuItem>
                   ))}
                 </Menu>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                   News
                 </Typography>
-                <Link to="/">
-                  <Button color="inherit">Home</Button>
-                </Link>
                 <Button color="inherit">Login</Button>
               </Toolbar>
             </AppBar>
