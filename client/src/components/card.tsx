@@ -46,7 +46,7 @@ export default function CardArticle(props: ArticleData) {
               height="300"
               image={image}
               alt="article loading"
-              style={{ borderRadius: 5 }}
+              style={{ borderRadius: 5, objectPosition: "center" }}
             />
           </CardActionArea>
         </NavLink>

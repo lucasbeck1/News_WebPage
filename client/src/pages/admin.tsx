@@ -74,18 +74,18 @@ function Admin() {
                   }}
                 >
                   {options.map((option) => (
-                    <MenuItem
-                      key={option.section}
-                      selected={option.section === "Pyxis"}
-                      onClick={handleClose}
+                    <NavLink
+                      style={{ textDecoration: "none", color: "inherit" }}
+                      to={option.url}
                     >
-                      <NavLink
-                        style={{ textDecoration: "none", color: "inherit" }}
-                        to={option.url}
+                      <MenuItem
+                        key={option.section}
+                        selected={option.section === "Pyxis"}
+                        onClick={handleClose}
                       >
                         {option.section}
-                      </NavLink>
-                    </MenuItem>
+                      </MenuItem>
+                    </NavLink>
                   ))}
                 </Menu>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
