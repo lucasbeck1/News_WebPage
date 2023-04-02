@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import CardsContainer from "../components/cardsContainer";
 import CarouselContainer from "../components/carouselContainer";
+import Swip from "../components/swipeableContainer";
 
 function Home() {
   return (
@@ -17,6 +18,9 @@ function Home() {
           <Header />
           <CardsContainer articles={articles} />
           <CarouselContainer />
+          <hr />
+          <Swip />
+          <hr />
           <Footer />
         </ScopedCssBaseline>
       </Container>
