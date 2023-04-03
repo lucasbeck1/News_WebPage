@@ -56,7 +56,7 @@ export const createSponsor = async (
   try {
     const { name, mail } = req.body;
     const sponsorNew = new Sponsor();
-    sponsorNew.mail = name;
+    sponsorNew.name = name;
     sponsorNew.mail = mail;
     await sponsorNew.save();
 
