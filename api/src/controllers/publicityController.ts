@@ -77,10 +77,21 @@ export const createPublicity = async (
   res: Response
 ) => {
   try {
-    const { image, active, start, finish, payment, sponsorId } = req.body;
+    const { image, start, finish, payment, sponsorId } = req.body;
+
+    if (!image || !start || !finish || !payment || !sponsorId) {
+      return res.status(404).json({ message: "More data is required" });
+    }
+
     const publicityNew = new Publicity();
+
+    if (start) {
+      publicityNew.active = true;
+    } else {
+      publicityNew.active = false;
+    }
+
     publicityNew.image = image;
-    publicityNew.active = active;
     publicityNew.start = start;
     publicityNew.finish = finish;
     publicityNew.payment = payment;

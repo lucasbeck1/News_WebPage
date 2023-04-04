@@ -70,14 +70,18 @@ export const createArticle = async (
 
     const findAuthor = await Author.findOneBy({ name: author });
     const findSection = await Section.findOneBy({ name: section });
-
-    if (findAuthor) {
-      articleNew.author = findAuthor;
+    if (!headline || !drophead || !body || !image || !author || !section) {
+      return res.status(404).json({ message: "More data is required" });
+    }
+    if (!findAuthor) {
+      return res.status(404).json({ message: "No author found" });
+    }
+    if (!findSection) {
+      return res.status(404).json({ message: "No section found" });
     }
 
-    if (findSection) {
-      articleNew.section = findSection;
-    }
+    articleNew.author = findAuthor;
+    articleNew.section = findSection;
 
     await articleNew.save();
     //await dataSource.manager.save(articleNew);

@@ -17,7 +17,7 @@ export class Publicity extends BaseEntity {
   @Column()
   image: string;
 
-  @Column({ default: true })
+  @Column({ default: false })
   active: boolean;
 
   @Column({ default: false })

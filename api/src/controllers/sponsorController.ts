@@ -55,9 +55,14 @@ export const createSponsor = async (
 ) => {
   try {
     const { name, mail } = req.body;
+
+    if (!name || !mail) {
+      return res.status(404).json({ message: "More data is required" });
+    }
+
     const sponsorNew = new Sponsor();
-    sponsorNew.name = name;
-    sponsorNew.mail = mail;
+    sponsorNew.mail = name;
+    sponsorNew.name = mail;
     await sponsorNew.save();
 
     return res.status(201).json(sponsorNew);

@@ -65,6 +65,9 @@ export const createAuthor = async (
 ) => {
   try {
     const { name, mail, password } = req.body;
+    if (!name || !mail || !password) {
+      return res.status(404).json({ message: "More data is required" });
+    }
     const authorCreation = new Author();
     authorCreation.name = name;
     authorCreation.mail = mail;

@@ -53,6 +53,11 @@ export const createSection = async (
 ) => {
   try {
     const { name } = req.body;
+
+    if (!name) {
+      return res.status(404).json({ message: "More data is required" });
+    }
+
     const sectionCreation = new Section();
     sectionCreation.name = name;
 
