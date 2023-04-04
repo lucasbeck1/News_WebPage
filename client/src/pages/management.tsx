@@ -1,6 +1,4 @@
 import React from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import PhoneIcon from "@mui/icons-material/Phone";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
@@ -18,6 +16,39 @@ import Footer from "../components/footer";
 import articles from "../dataExamples/articles.json";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import SwipeableViews from "react-swipeable-views";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import AppBar from "@mui/material/AppBar";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
+
+interface TabPanelProps {
+  children?: React.ReactNode;
+  dir?: string;
+  index: number;
+  value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
 function Management() {
   const [value, setValue] = React.useState(0);
@@ -27,14 +58,23 @@ function Management() {
     console.log(event);
   };
 
+  const handleChangeIndex = (index: number) => {
+    setValue(index);
+  };
+
+  const theme = useTheme();
+
   return (
     <Container maxWidth="lg" sx={{ p: 0 }}>
       <ScopedCssBaseline enableColorScheme>
         <Tabs
           value={value}
           onChange={handleChange}
-          aria-label="icon label tabs example"
           centered
+          indicatorColor="secondary"
+          textColor="inherit"
+          variant="fullWidth"
+          aria-label="full width tabs example"
         >
           <Tab icon={<AssignmentIndIcon />} label="Authors" />
           <Tab icon={<ArticleIcon />} label="Articles" />
@@ -42,6 +82,29 @@ function Management() {
           <Tab icon={<GroupIcon />} label="Sponsors" />
           <Tab icon={<StorefrontIcon />} label="Publicities" />
         </Tabs>
+
+        <SwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={value}
+          onChangeIndex={handleChangeIndex}
+        >
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            Item One
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            Item Two
+          </TabPanel>
+          <TabPanel value={value} index={2} dir={theme.direction}>
+            Item Three
+          </TabPanel>
+          <TabPanel value={value} index={3} dir={theme.direction}>
+            Item Four
+          </TabPanel>
+          <TabPanel value={value} index={4} dir={theme.direction}>
+            Item Five
+          </TabPanel>
+        </SwipeableViews>
+
         <Footer />
       </ScopedCssBaseline>
     </Container>
