@@ -9,17 +9,18 @@ import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
 import authors from "../dataExamples/authors.json";
-import { Button, IconButton } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
 import ManageDelete from "./manageDelete";
+import ManageModify from "./manageModify";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "rgb(18,109,162)",
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -55,7 +56,7 @@ function ManageAuthors() {
   return (
     <>
       <Paper sx={{ width: "100%" }}>
-        <TableContainer component={Paper} sx={{ maxHeight: 440, height: 370 }}>
+        <TableContainer component={Paper} sx={{ minHeight: 410 }}>
           <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
             <TableHead>
               <TableRow>
@@ -92,40 +93,43 @@ function ManageAuthors() {
                           sx={{ p: 0, m: 0 }}
                           size="small"
                           aria-label="modify"
-                          color="primary"
+                          color="default"
                         >
                           <ClearIcon />
                         </IconButton>
                       )}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      <IconButton
-                        sx={{ p: 0, m: 0 }}
-                        size="small"
-                        aria-label="modify"
-                        color="primary"
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton aria-label="delete" color="warning">
-                        <ManageDelete />
-                      </IconButton>
-                      <IconButton></IconButton>
+                      <ManageModify />
+                      <ManageDelete />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={authors.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            p: 1,
+            m: 1,
+            bgcolor: "background.paper",
+            borderRadius: 1,
+          }}
+        >
+          <Button>ADD +</Button>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={authors.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Box>
       </Paper>
     </>
   );
