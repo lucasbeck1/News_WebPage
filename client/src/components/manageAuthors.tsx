@@ -17,6 +17,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
 import ManageDelete from "./manageDelete";
 import ManageModify from "./manageModify";
+import ManageCreate from "./manageCreate";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -100,7 +101,7 @@ function ManageAuthors() {
                       )}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      <ManageModify />
+                      <ManageModify user={row} />
                       <ManageDelete />
                     </StyledTableCell>
                   </StyledTableRow>
@@ -119,7 +120,7 @@ function ManageAuthors() {
             borderRadius: 1,
           }}
         >
-          <Button>ADD +</Button>
+          <ManageCreate />
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"

@@ -14,15 +14,9 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
-interface User {
-  user: {
-    name: string;
-    mail: string;
-  };
-}
-
-function ManageModify({ user }: User) {
+function ManageCreate() {
   const [open, setOpen] = useState(false);
 
   function handleOpen() {
@@ -35,21 +29,21 @@ function ManageModify({ user }: User) {
 
   return (
     <>
-      <IconButton
+      <Button
         sx={{ p: 0, m: 0 }}
         size="small"
         aria-label="modify"
         color="primary"
         onClick={handleOpen}
+        variant="outlined"
+        endIcon={<AddCircleIcon />}
       >
-        <EditIcon />
-      </IconButton>
+        ADD
+      </Button>
       <Dialog open={open} onClose={handleClose} maxWidth="md">
-        <DialogTitle>Edit User</DialogTitle>
+        <DialogTitle>Create User</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Fill the fields you want to change
-          </DialogContentText>
+          <DialogContentText>Fill all the fields</DialogContentText>
           <TextField
             autoFocus
             margin="dense"
@@ -75,12 +69,27 @@ function ManageModify({ user }: User) {
             type="text"
             fullWidth
             variant="outlined"
-            /*
+            /*   
             value={input.email}
             onChange={(e)=>inputChange(e)}
             error={error.email}
             helperText={error.email} 
             */
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="password"
+            name="password"
+            label="Password"
+            type="text"
+            fullWidth
+            variant="outlined"
+            /*   
+            value={input.password}
+            onChange={(e)=>inputChange(e)}
+            error={error.password}
+            helperText={error.password} */
           />
           <FormControl>
             <FormLabel id="radio-group-label-1">Type</FormLabel>
@@ -88,7 +97,7 @@ function ManageModify({ user }: User) {
               row
               aria-labelledby="radio-group-label-1"
               name="typebook"
-              /*
+              /*  
               onChange={e=>inputChange(e)}
               value={input.role} 
               */
@@ -118,4 +127,4 @@ function ManageModify({ user }: User) {
   );
 }
 
-export default ManageModify;
+export default ManageCreate;
