@@ -9,22 +9,26 @@ function ManageDelete() {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "rgb(18,109,162)",
+      cancelButtonColor: "grey",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        Swal.fire("Deleted!", "The author has been deleted.", "success");
       }
     });
   };
 
   return (
-    <div>
-      <IconButton aria-label="delete" color="warning" onClick={handleClickOpen}>
-        <DeleteIcon />
-      </IconButton>
-    </div>
+    <IconButton
+      sx={{ p: 0, m: 0 }}
+      size="small"
+      aria-label="delete"
+      color="default"
+      onClick={handleClickOpen}
+    >
+      <DeleteIcon />
+    </IconButton>
   );
 }
 
