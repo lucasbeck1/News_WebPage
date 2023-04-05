@@ -15,6 +15,7 @@ import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
+import ManageDelete from "./manageDelete";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -107,7 +108,7 @@ function ManageAuthors() {
                         <EditIcon />
                       </IconButton>
                       <IconButton aria-label="delete" color="warning">
-                        <DeleteIcon />
+                        <ManageDelete />
                       </IconButton>
                       <IconButton></IconButton>
                     </StyledTableCell>
