@@ -1,0 +1,58 @@
+[
+  {
+    "name": "jonh doe",
+    "mail": "jonh@mail.com",
+    "admin": false
+  },
+  {
+    "name": "lucas wow",
+    "mail": "lucas@mail.com",
+    "admin": true
+  },
+  {
+    "name": "susan barr",
+    "mail": "susan@mail.com",
+    "admin": false
+  },
+
+  {
+    "name": "max sum",
+    "mail": "max@mail.com",
+    "admin": false
+  },
+  {
+    "name": "desmond jah",
+    "mail": "desjakito@mail.com",
+    "admin": true
+  },
+  {
+    "name": "miles kur",
+    "mail": "mailito@mail.com",
+    "admin": false
+  },
+  {
+    "name": "kernan jokanyguijs",
+    "mail": "jokan@mail.com",
+    "admin": false
+  },
+  {
+    "name": "hernan humbertonsin",
+    "mail": "hernin45@mail.com",
+    "admin": false
+  },
+  {
+    "name": "kyle guarnision",
+    "mail": "kylealomas12@mail.com",
+    "admin": false
+  },
+  {
+    "name": "habermus jeyiss",
+    "mail": "managealgo@mail.com",
+    "admin": false
+  },
+  {
+    "name": "jacinto perezonzi",
+    "mail": "mynameisjacinto@mail.com",
+    "admin": false
+  }
+]

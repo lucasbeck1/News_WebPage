@@ -22,6 +22,7 @@ import Tab from "@mui/material/Tab";
 import AppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
+import ManageAuthors from "../components/manageAuthors";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -89,7 +90,7 @@ function Management() {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            Item One
+            <ManageAuthors />
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
             Item Two
