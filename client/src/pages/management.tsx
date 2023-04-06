@@ -24,6 +24,7 @@ import { useTheme } from "@mui/material/styles";
 import ManageAuthors from "../components/manage/authors/manageAuthors";
 import ManageArticles from "../components/manage/articles/manageArticles";
 import ManageSections from "../components/manage/sections/manageSections";
+import ManageSponsors from "../components/manage/sponsors/manageSponsors";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -100,7 +101,7 @@ function Management() {
             <ManageSections />
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
-            Item Four
+            <ManageSponsors />
           </TabPanel>
           <TabPanel value={value} index={4} dir={theme.direction}>
             Item Five
