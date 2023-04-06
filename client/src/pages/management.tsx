@@ -23,6 +23,7 @@ import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import ManageAuthors from "../components/manage/authors/manageAuthors";
 import ManageArticles from "../components/manage/articles/manageArticles";
+import ManageSections from "../components/manage/sections/manageSections";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -96,7 +97,7 @@ function Management() {
             <ManageArticles />
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            Item Three
+            <ManageSections />
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
             Item Four
