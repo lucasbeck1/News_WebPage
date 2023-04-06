@@ -8,8 +8,8 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
-import authors from "../../dataExamples/authors.json";
-import articles from "../../dataExamples/articles.json";
+import authors from "../../../dataExamples/authors.json";
+import articles from "../../../dataExamples/articles.json";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Box, Button, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -17,9 +17,6 @@ import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
-import ManageDelete from "./manageDelete";
-import ManageModify from "./manageModify";
-import ManageCreate from "./manageCreate";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

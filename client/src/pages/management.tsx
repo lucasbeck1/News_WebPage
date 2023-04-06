@@ -21,8 +21,8 @@ import Tab from "@mui/material/Tab";
 import AppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import ManageAuthors from "../components/manage/manageAuthors";
-import ManageArticles from "../components/manage/manageArticles";
+import ManageAuthors from "../components/manage/authors/manageAuthors";
+import ManageArticles from "../components/manage/articles/manageArticles";
 
 interface TabPanelProps {
   children?: React.ReactNode;
