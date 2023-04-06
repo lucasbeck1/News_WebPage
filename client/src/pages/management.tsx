@@ -25,6 +25,7 @@ import ManageAuthors from "../components/manage/authors/manageAuthors";
 import ManageArticles from "../components/manage/articles/manageArticles";
 import ManageSections from "../components/manage/sections/manageSections";
 import ManageSponsors from "../components/manage/sponsors/manageSponsors";
+import ManagePublicities from "../components/manage/publicities/managePublicities";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -104,7 +105,7 @@ function Management() {
             <ManageSponsors />
           </TabPanel>
           <TabPanel value={value} index={4} dir={theme.direction}>
-            Item Five
+            <ManagePublicities />
           </TabPanel>
         </SwipeableViews>
 

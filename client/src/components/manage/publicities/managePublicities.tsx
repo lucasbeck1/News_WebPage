@@ -8,7 +8,8 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
-import sections from "../../../dataExamples/sections.json";
+import authors from "../../../dataExamples/authors.json";
+import articles from "../../../dataExamples/articles.json";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Box, Button, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -16,6 +17,7 @@ import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
+import InfoIcon from "@mui/icons-material/Info";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -37,7 +39,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function ManageSections() {
+function ManagePublicities() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -59,26 +61,42 @@ function ManageSections() {
           <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
             <TableHead>
               <TableRow>
-                <StyledTableCell>Section</StyledTableCell>
-                <StyledTableCell align="right">Articles</StyledTableCell>
+                <StyledTableCell>Owner</StyledTableCell>
+                <StyledTableCell align="right">Start</StyledTableCell>
+                <StyledTableCell align="right">Finish</StyledTableCell>
+                <StyledTableCell align="right">Active</StyledTableCell>
                 <StyledTableCell align="right">Actions</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {sections
+              {articles
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
                   <StyledTableRow
-                    key={row}
+                    key={row.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <StyledTableCell component="th" scope="row">
-                      {row}
+                      Computer Technology LTD
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {Math.round(Math.random() * 50 + 10)}
+                      {row.createdAt}
                     </StyledTableCell>
                     <StyledTableCell align="right">
+                      {row.updatedAt}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <CheckIcon />
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      <IconButton
+                        sx={{ p: 0, m: 0 }}
+                        size="small"
+                        aria-label="modify"
+                        color="secondary"
+                      >
+                        <InfoIcon />
+                      </IconButton>
                       <IconButton
                         sx={{ p: 0, m: 0 }}
                         size="small"
@@ -125,7 +143,7 @@ function ManageSections() {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={sections.length}
+            count={articles.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -137,4 +155,4 @@ function ManageSections() {
   );
 }
 
-export default ManageSections;
+export default ManagePublicities;

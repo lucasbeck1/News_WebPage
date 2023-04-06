@@ -79,7 +79,9 @@ function ManageSponsors() {
                       {row.name}
                     </StyledTableCell>
                     <StyledTableCell align="right">{row.mail}</StyledTableCell>
-                    <StyledTableCell align="right">2</StyledTableCell>
+                    <StyledTableCell align="right">
+                      {Math.round(Math.random() * 10)}
+                    </StyledTableCell>
                     <StyledTableCell align="right">
                       <ManageModify user={row} />
                       <ManageDelete />
