@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
-import Header from "../components/header";
-import Footer from "../components/footer";
+import Header from "../components/public/header";
+import Footer from "../components/public/footer";
 import articles from "../dataExamples/articles.json";
 import { useParams } from "react-router-dom";
 import Box from "@mui/material/Box";

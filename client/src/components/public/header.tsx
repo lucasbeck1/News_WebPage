@@ -2,7 +2,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { NavLink } from "react-router-dom";
-import Sections from "../dataExamples/sections.json";
+import Sections from "../../dataExamples/sections.json";
 
 function Header() {
   return (

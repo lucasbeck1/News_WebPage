@@ -10,9 +10,8 @@ import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import StoreIcon from "@mui/icons-material/Store";
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
-import Header from "../components/header";
-import CardArticle from "../components/card";
-import Footer from "../components/footer";
+import CardArticle from "../components/public/card";
+import Footer from "../components/public/footer";
 import articles from "../dataExamples/articles.json";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -22,7 +21,7 @@ import Tab from "@mui/material/Tab";
 import AppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import ManageAuthors from "../components/manageAuthors";
+import ManageAuthors from "../components/manage/manageAuthors";
 
 interface TabPanelProps {
   children?: React.ReactNode;

@@ -8,7 +8,7 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
-import authors from "../dataExamples/authors.json";
+import authors from "../../dataExamples/authors.json";
 import { Box, Button, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";

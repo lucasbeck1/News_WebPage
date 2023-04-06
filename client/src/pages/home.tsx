@@ -1,14 +1,14 @@
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
-import Header from "../components/header";
-import CardArticle from "../components/card";
-import Footer from "../components/footer";
+import Header from "../components/public/header";
+import CardArticle from "../components/public/card";
+import Footer from "../components/public/footer";
 import articles from "../dataExamples/articles.json";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import CardsContainer from "../components/cardsContainer";
-import CarouselContainer from "../components/carouselContainer";
-import Swip from "../components/swipeableContainer";
+import CardsContainer from "../components/public/cardsContainer";
+import CarouselContainer from "../components/public/carouselContainer";
+import Swip from "../components/public/swipeableContainer";
 
 function Home() {
   return (
