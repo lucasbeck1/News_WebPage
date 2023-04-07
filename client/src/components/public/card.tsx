@@ -22,31 +22,29 @@ interface ArticleData {
 }
 
 export default function CardArticle(props: ArticleData) {
-  const { id, headline, drophead, image, createdAt } = props.article;
+  const { id, headline, drophead, image } = props.article;
 
   return (
     <>
-      <Grid
-        direction="column"
-        alignItems="center"
-        item
-        xs={12}
-        /* spacing={0} */
-        /* justifyContent="center" */
-        /* style={{ minHeight: "100vh" }} */
-      >
+      <Grid direction="column" alignItems="center" item xs={12}>
         <NavLink
           style={{ textDecoration: "none", color: "inherit" }}
           to={`/detail/${id}`}
         >
           <CardActionArea>
-            <CardHeader title={headline} subheader={drophead}></CardHeader>
+            <CardHeader title={headline} subheader={drophead} />
             <CardMedia
               component="img"
-              height="300"
               image={image}
               alt="article loading"
-              style={{ borderRadius: 5, objectPosition: "center" }}
+              style={{
+                borderRadius: 5,
+                objectPosition: "center",
+                objectFit: "cover",
+                width: "100%",
+                maxHeight: "32vh",
+                aspectRatio: "16/9",
+              }}
             />
           </CardActionArea>
         </NavLink>
