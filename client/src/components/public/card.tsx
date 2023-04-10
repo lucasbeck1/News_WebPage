@@ -42,8 +42,7 @@ export default function CardArticle(props: ArticleData) {
                 objectPosition: "center",
                 objectFit: "cover",
                 width: "100%",
-                maxHeight: "32vh",
-                aspectRatio: "16/9",
+                aspectRatio: "28/9",
               }}
             />
           </CardActionArea>
