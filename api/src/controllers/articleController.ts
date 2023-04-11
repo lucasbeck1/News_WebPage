@@ -19,6 +19,11 @@ export const getAllArticles = async (_req: Request, res: Response) => {
         author: true,
         section: true,
       },
+      skip: 0,
+      take: 100,
+      order: {
+        createdAt: "DESC",
+      },
     });
     return res.status(200).json(allArticles);
   } catch (error) {

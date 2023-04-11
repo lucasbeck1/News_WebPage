@@ -18,11 +18,7 @@ type authorUpdateType = {
 
 export const getAllAuthors = async (_req: Request, res: Response) => {
   try {
-    const allAuthors = await Author.find({
-      relations: {
-        articles: true,
-      },
-    });
+    const allAuthors = await Author.find();
     return res.status(200).json(allAuthors);
   } catch (error) {
     if (error instanceof Error) {

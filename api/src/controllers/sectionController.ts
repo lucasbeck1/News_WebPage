@@ -1,17 +1,28 @@
 import { Request, Response } from "express";
 import { Section } from "../entities/sectionEntity";
+import { Article } from "../entities/articleEntity";
+
+type createSectionType = {
+  name: string;
+};
 
 type sectionType = {
+  id: number;
   name: string;
+  quantity?: number;
 };
 
 export const getAllSections = async (_req: Request, res: Response) => {
   try {
-    const allSections = await Section.find({
-      relations: {
-        articles: true,
-      },
-    });
+    const allSections: sectionType[] = await Section.find();
+
+    for (let i = 0; i < allSections.length; i++) {
+      const articlesBySection = await Article.count({
+        where: { section: { name: allSections[i].name } },
+      });
+      allSections[i].quantity = articlesBySection;
+    }
+
     return res.status(200).json(allSections);
   } catch (error) {
     if (error instanceof Error) {
@@ -48,7 +59,7 @@ export const getOneSection = async (req: Request, res: Response) => {
 };
 
 export const createSection = async (
-  req: Request<unknown, unknown, sectionType>,
+  req: Request<unknown, unknown, createSectionType>,
   res: Response
 ) => {
   try {
