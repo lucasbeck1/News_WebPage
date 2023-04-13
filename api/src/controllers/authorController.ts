@@ -144,6 +144,10 @@ export const updateAuthor = async (req: Request, res: Response) => {
       }
 
       checkPass = true;
+
+      if (checkPass && admin) {
+        propertiesUpdated.admin = admin;
+      }
     } else {
       return res.status(400).json({ message: "Invalid Request" });
     }
@@ -153,9 +157,6 @@ export const updateAuthor = async (req: Request, res: Response) => {
     }
     if (checkPass && mail) {
       propertiesUpdated.mail = mail;
-    }
-    if (admin) {
-      propertiesUpdated.admin = admin;
     }
 
     if (checkPass && oldPassword && newPassword) {
