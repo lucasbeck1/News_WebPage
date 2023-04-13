@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   getAllArticles,
+  getArticlesByAuthor,
   getOneArticle,
   createArticle,
   updateArticle,
@@ -10,6 +11,8 @@ import {
 const router = Router();
 
 router.get("/", getAllArticles);
+
+router.get("/author", getArticlesByAuthor);
 
 router.get("/:id", getOneArticle);
 

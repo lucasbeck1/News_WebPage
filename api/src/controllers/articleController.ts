@@ -12,6 +12,12 @@ type articleType = {
   section: string;
 };
 
+type searchArticle = {
+  author?: {
+    name: string;
+  };
+};
+
 export const getAllArticles = async (_req: Request, res: Response) => {
   try {
     const allArticles = await Article.find({
@@ -29,6 +35,41 @@ export const getAllArticles = async (_req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });
+    } else {
+      return res.status(500).json({ message: "Response Error" });
+    }
+  }
+};
+
+export const getArticlesByAuthor = async (req: Request, res: Response) => {
+  try {
+    const { name } = req.query;
+    const search: searchArticle = {};
+
+    if (name) {
+      search.author = {
+        name: name.toString(),
+      };
+    } else {
+      return res.status(404).json({ message: "Response Error" });
+    }
+
+    const allArticles = await Article.find({
+      where: search,
+      relations: {
+        author: true,
+        section: true,
+      },
+      skip: 0,
+      take: 100,
+      order: {
+        createdAt: "DESC",
+      },
+    });
+    return res.status(200).json(allArticles);
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({ message: error.message || "Error" });
     } else {
       return res.status(500).json({ message: "Response Error" });
     }
