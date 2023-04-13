@@ -17,7 +17,7 @@ export class Author extends BaseEntity {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   mail: string;
 
   @Column()
