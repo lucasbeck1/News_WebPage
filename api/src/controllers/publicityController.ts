@@ -11,6 +11,8 @@ type publicityType = {
   sponsorId: number;
 };
 
+// ------------------------------------------------------------------
+
 export const getAllPublicity = async (_req: Request, res: Response) => {
   try {
     const allPublicity = await Publicity.find({
@@ -29,6 +31,8 @@ export const getAllPublicity = async (_req: Request, res: Response) => {
   }
 };
 
+// ------------------------------------------------------------------
+
 export const getActivePublicity = async (_req: Request, res: Response) => {
   try {
     const allPublicity = await Publicity.find({
@@ -46,6 +50,8 @@ export const getActivePublicity = async (_req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const getOnePublicity = async (req: Request, res: Response) => {
   try {
@@ -71,6 +77,8 @@ export const getOnePublicity = async (req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const createPublicity = async (
   req: Request<unknown, unknown, publicityType>,
@@ -112,6 +120,8 @@ export const createPublicity = async (
   }
 };
 
+// ------------------------------------------------------------------
+
 export const updatePublicity = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -132,6 +142,8 @@ export const updatePublicity = async (req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const deletePublicity = async (req: Request, res: Response) => {
   const { id } = req.params;

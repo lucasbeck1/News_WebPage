@@ -12,6 +12,8 @@ type sectionType = {
   quantity?: number;
 };
 
+// ------------------------------------------------------------------
+
 export const getAllSections = async (_req: Request, res: Response) => {
   try {
     const allSections: sectionType[] = await Section.find();
@@ -32,6 +34,8 @@ export const getAllSections = async (_req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const getOneSection = async (req: Request, res: Response) => {
   try {
@@ -58,6 +62,8 @@ export const getOneSection = async (req: Request, res: Response) => {
   }
 };
 
+// ------------------------------------------------------------------
+
 export const createSection = async (
   req: Request<unknown, unknown, createSectionType>,
   res: Response
@@ -83,6 +89,8 @@ export const createSection = async (
   }
 };
 
+// ------------------------------------------------------------------
+
 export const updateSection = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -102,6 +110,8 @@ export const updateSection = async (req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const deleteSection = async (req: Request, res: Response) => {
   const { id } = req.params;

@@ -6,6 +6,8 @@ type sponsorType = {
   mail: string;
 };
 
+// ------------------------------------------------------------------
+
 export const getAllSponsor = async (_req: Request, res: Response) => {
   try {
     const allSponsor = await Sponsor.find({
@@ -22,6 +24,8 @@ export const getAllSponsor = async (_req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const getOneSponsor = async (req: Request, res: Response) => {
   try {
@@ -49,6 +53,8 @@ export const getOneSponsor = async (req: Request, res: Response) => {
   }
 };
 
+// ------------------------------------------------------------------
+
 export const createSponsor = async (
   req: Request<unknown, unknown, sponsorType>,
   res: Response
@@ -75,6 +81,8 @@ export const createSponsor = async (
   }
 };
 
+// ------------------------------------------------------------------
+
 export const updateSponsor = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -94,6 +102,8 @@ export const updateSponsor = async (req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const deleteSponsor = async (req: Request, res: Response) => {
   const { id } = req.params;

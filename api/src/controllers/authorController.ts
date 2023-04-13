@@ -17,6 +17,8 @@ type authorUpdateType = {
   admin?: boolean;
 };
 
+// ------------------------------------------------------------------
+
 export const getAllAuthors = async (_req: Request, res: Response) => {
   try {
     const allAuthors = await Author.find({
@@ -34,6 +36,8 @@ export const getAllAuthors = async (_req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const getOneAuthor = async (req: Request, res: Response) => {
   try {
@@ -61,6 +65,8 @@ export const getOneAuthor = async (req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const createAuthor = async (
   req: Request<unknown, unknown, authorCreateType>,
@@ -105,6 +111,8 @@ export const createAuthor = async (
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const updateAuthor = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -168,6 +176,8 @@ export const updateAuthor = async (req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const deleteAuthor = async (req: Request, res: Response) => {
   const { id } = req.params;

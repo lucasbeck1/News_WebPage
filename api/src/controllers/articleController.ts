@@ -18,6 +18,8 @@ type searchArticle = {
   };
 };
 
+// ------------------------------------------------------------------
+
 export const getAllArticles = async (_req: Request, res: Response) => {
   try {
     const allArticles = await Article.find({
@@ -40,6 +42,8 @@ export const getAllArticles = async (_req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const getArticlesByAuthor = async (req: Request, res: Response) => {
   try {
@@ -76,6 +80,8 @@ export const getArticlesByAuthor = async (req: Request, res: Response) => {
   }
 };
 
+// ------------------------------------------------------------------
+
 export const getOneArticle = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -101,6 +107,8 @@ export const getOneArticle = async (req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const createArticle = async (
   req: Request<unknown, unknown, articleType>,
@@ -142,6 +150,8 @@ export const createArticle = async (
   }
 };
 
+// ------------------------------------------------------------------
+
 export const updateArticle = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -161,6 +171,8 @@ export const updateArticle = async (req: Request, res: Response) => {
     }
   }
 };
+
+// ------------------------------------------------------------------
 
 export const deleteArticle = async (req: Request, res: Response) => {
   const { id } = req.params;
