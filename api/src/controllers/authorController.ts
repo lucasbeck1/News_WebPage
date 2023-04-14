@@ -25,6 +25,7 @@ export const getAllAuthors = async (_req: Request, res: Response) => {
       select: {
         name: true,
         mail: true,
+        admin: true,
       },
     });
     return res.status(200).json(allAuthors);
@@ -50,6 +51,7 @@ export const getOneAuthor = async (req: Request, res: Response) => {
       select: {
         name: true,
         mail: true,
+        admin: true,
       },
     });
 
