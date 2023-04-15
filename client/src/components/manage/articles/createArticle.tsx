@@ -137,7 +137,7 @@ function CreateArticle() {
           </Box>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>Modify</Button>
+            <Button onClick={handleClose}>Create</Button>
             {/* {initialDataJson === inputJson || Object.keys(error).length ? (<Button disabled onClick={modifyUserById}>Modify</Button>) : (<Button onClick={modifyUserById}>Modify</Button>)} */}
           </DialogActions>
         </DialogContent>
