@@ -27,6 +27,17 @@ export const getAllArticles = async (_req: Request, res: Response) => {
         author: true,
         section: true,
       },
+      select: {
+        id: true,
+        headline: true,
+        drophead: true,
+        body: true,
+        image: true,
+        createdAt: true,
+        updatedAt: true,
+        author: { name: true },
+        section: { name: true },
+      },
       skip: 0,
       take: 100,
       order: {
@@ -63,6 +74,17 @@ export const getArticlesByAuthor = async (req: Request, res: Response) => {
       relations: {
         author: true,
         section: true,
+      },
+      select: {
+        id: true,
+        headline: true,
+        drophead: true,
+        body: true,
+        image: true,
+        createdAt: true,
+        updatedAt: true,
+        author: { name: true },
+        section: { name: true },
       },
       skip: 0,
       take: 100,
@@ -140,7 +162,7 @@ export const createArticle = async (
     await articleNew.save();
     //await dataSource.manager.save(articleNew);
 
-    return res.status(201).json(articleNew);
+    return res.status(201).json({ message: "Create succesfull" });
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });
