@@ -17,6 +17,7 @@ import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
+import CreateArticle from "./createArticle";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -117,16 +118,7 @@ function ManageArticles() {
             borderRadius: 1,
           }}
         >
-          <Button
-            sx={{ p: 0, m: 0 }}
-            size="small"
-            aria-label="modify"
-            color="primary"
-            variant="outlined"
-            endIcon={<AddCircleIcon />}
-          >
-            ADD
-          </Button>
+          <CreateArticle />
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
