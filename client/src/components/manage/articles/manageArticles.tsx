@@ -18,6 +18,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
 import CreateArticle from "./createArticle";
+import DeleteArticle from "./deleteArticle";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -93,14 +94,7 @@ function ManageArticles() {
                       >
                         <EditIcon />
                       </IconButton>
-                      <IconButton
-                        sx={{ p: 0, m: 0 }}
-                        size="small"
-                        aria-label="delete"
-                        color="default"
-                      >
-                        <DeleteIcon />
-                      </IconButton>
+                      <DeleteArticle />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
