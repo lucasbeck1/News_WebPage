@@ -17,6 +17,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
 import CreateSection from "./createSections";
+import ModifySection from "./modifySections";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -80,14 +81,7 @@ function ManageSections() {
                       {Math.round(Math.random() * 50 + 10)}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      <IconButton
-                        sx={{ p: 0, m: 0 }}
-                        size="small"
-                        aria-label="modify"
-                        color="primary"
-                      >
-                        <EditIcon />
-                      </IconButton>
+                      <ModifySection sectionName={row.toString()} />
                       <IconButton
                         sx={{ p: 0, m: 0 }}
                         size="small"
