@@ -13,12 +13,12 @@ interface ArticleData {
   id: number;
   headline: string;
   drophead: string;
+  body: string;
   image: string;
   createdAt: string;
   updatedAt: string;
-  author: string;
-  section: string;
-  body: string;
+  author: { name: string };
+  section: { name: string };
 }
 
 function CardsContainer(props: { articles: ArticleData[] }) {

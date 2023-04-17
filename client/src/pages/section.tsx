@@ -12,7 +12,7 @@ import CardsContainer from "../components/public/cardsContainer";
 function Section() {
   const { sectionName } = useParams();
   const sectionArticles = articles.filter(
-    (article) => article.section === sectionName
+    (article) => article.section.name === sectionName
   );
 
   return (

@@ -81,10 +81,10 @@ function ManageArticles() {
                       {row.headline}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.section}
+                      {row.section.name}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.createdAt}
+                      {row.createdAt.slice(0, 10)}
                     </StyledTableCell>
                     <StyledTableCell align="right">
                       <ModifyArticle />

@@ -1,10 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface UserState {
-  articles: string[];
+interface Article {
+  id: number;
+  headline: string;
+  drophead: string;
+  body: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+  author: { name: string };
+  section: { name: string };
 }
 
-const initialState: UserState = {
+interface ArticleState {
+  articles: Article[];
+}
+
+const initialState: ArticleState = {
   articles: [],
 };
 
@@ -12,12 +24,15 @@ const articleSlice = createSlice({
   name: "article",
   initialState,
   reducers: {
-    addArticle(state, action: PayloadAction<string>) {
+    addArticle(state, action: PayloadAction<Article>) {
       state.articles.push(action.payload);
+    },
+    getArticles(state, action: PayloadAction<Article[]>) {
+      state.articles = action.payload;
     },
   },
 });
 
-export const { addArticle } = articleSlice.actions;
+export const { addArticle, getArticles } = articleSlice.actions;
 
 export default articleSlice.reducer;
