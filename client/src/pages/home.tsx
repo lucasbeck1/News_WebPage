@@ -22,7 +22,6 @@ function Home() {
   }, []);
 
   const AllArticles = useSelector((state: RootState) => state.article.articles);
-  console.log(AllArticles);
 
   return (
     <>
