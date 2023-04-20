@@ -70,19 +70,19 @@ function ManageSections() {
             <TableBody>
               {sections
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
+                .map((section) => (
                   <StyledTableRow
-                    key={row}
+                    key={section.name}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <StyledTableCell component="th" scope="row">
-                      {row}
+                      {section.name}
                     </StyledTableCell>
                     <StyledTableCell align="right">
                       {Math.round(Math.random() * 50 + 10)}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      <ModifySection sectionName={row.toString()} />
+                      <ModifySection sectionName={section.name} />
                       <DeleteSection />
                     </StyledTableCell>
                   </StyledTableRow>

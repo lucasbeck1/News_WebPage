@@ -1,12 +1,52 @@
 [
-  "Technology",
-  "Design",
-  "Culture",
-  "Business",
-  "Politics",
-  "Opinion",
-  "Science",
-  "Health",
-  "Style",
-  "Travel"
+  {
+    "id": 1,
+    "name": "Technology",
+    "quantity": 1
+  },
+  {
+    "id": 2,
+    "name": "Design",
+    "quantity": 1
+  },
+  {
+    "id": 3,
+    "name": "Culture",
+    "quantity": 1
+  },
+  {
+    "id": 4,
+    "name": "Business",
+    "quantity": 1
+  },
+  {
+    "id": 5,
+    "name": "Politics",
+    "quantity": 1
+  },
+  {
+    "id": 6,
+    "name": "Opinion",
+    "quantity": 1
+  },
+  {
+    "id": 7,
+    "name": "Science",
+    "quantity": 1
+  },
+  {
+    "id": 8,
+    "name": "Health",
+    "quantity": 1
+  },
+  {
+    "id": 9,
+    "name": "Style",
+    "quantity": 1
+  },
+  {
+    "id": 10,
+    "name": "Travel",
+    "quantity": 1
+  }
 ]

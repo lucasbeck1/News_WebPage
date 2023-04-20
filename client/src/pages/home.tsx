@@ -21,14 +21,14 @@ function Home() {
     getArticles(dispatch);
   }, []);
 
-  const AllArticles = useSelector((state: RootState) => state.article.articles);
+  const allArticles = useSelector((state: RootState) => state.article.articles);
 
   return (
     <>
       <Container maxWidth="lg" sx={{ p: 0 }}>
         <ScopedCssBaseline enableColorScheme>
           <Header />
-          <CardsContainer articles={AllArticles} />
+          <CardsContainer articles={allArticles} />
           <CarouselContainer />
           <hr />
           <Swip />
