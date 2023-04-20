@@ -18,6 +18,9 @@ function getApiArticles(): Promise<Article[]> {
     .get(localhost + "/articles")
     .then((req) => {
       return req.data;
+    })
+    .catch(() => {
+      return [];
     });
   return request;
 }
