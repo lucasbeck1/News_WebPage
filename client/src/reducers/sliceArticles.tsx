@@ -27,12 +27,12 @@ const articleSlice = createSlice({
     addArticle(state, action: PayloadAction<Article>) {
       state.articles.push(action.payload);
     },
-    getArticles(state, action: PayloadAction<Article[]>) {
-      state.articles = action.payload;
+    storeArticles(state, action: PayloadAction<Article[]>) {
+      state.articles = state.articles.concat(action.payload);
     },
   },
 });
 
-export const { addArticle, getArticles } = articleSlice.actions;
+export const { addArticle, storeArticles } = articleSlice.actions;
 
 export default articleSlice.reducer;

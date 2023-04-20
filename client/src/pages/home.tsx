@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import CardsContainer from "../components/public/cardsContainer";
 import CarouselContainer from "../components/public/carouselContainer";
 import Swip from "../components/public/swipeableContainer";
-import { getAllArticles } from "../services/articles";
+import { apiArticles } from "../services/articles";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 
@@ -18,7 +18,7 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getAllArticles(dispatch);
+    apiArticles(dispatch);
   }, []);
 
   const AllArticles = useSelector((state: RootState) => state.article.articles);

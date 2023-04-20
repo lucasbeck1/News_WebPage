@@ -6,7 +6,7 @@ import Footer from "../components/public/footer";
 import articles from "../dataExamples/articles.json";
 import { useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
-import { getAllArticles } from "../services/articles";
+import { apiArticles } from "../services/articles";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 
@@ -15,7 +15,7 @@ function Detail() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    getAllArticles(dispatch);
+    apiArticles(dispatch);
   }, []);
 
   const AllArticles = useSelector((state: RootState) => state.article.articles);

@@ -1,18 +1,33 @@
 import axios from "axios";
 import articles from "../dataExamples/articles.json";
-import { getArticles } from "../reducers/sliceArticles";
+import { storeArticles } from "../reducers/sliceArticles";
 import { AppDispatch } from "../store";
 import { localhost } from "./url";
 
-function getAllArticles(dispatch: AppDispatch) {
-  axios
+type Article = {
+  id: number;
+  headline: string;
+  drophead: string;
+  body: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+  author: { name: string };
+  section: { name: string };
+};
+
+function apiArticles(
+  dispatch: AppDispatch
+): Promise<{ payload: Article[]; type: "article/storeArticles" }> {
+  let art = axios
     .get(localhost + "/articles")
     .then((arts) => {
-      dispatch(getArticles(arts.data));
+      return dispatch(storeArticles(arts.data));
     })
     .catch((error) => {
-      dispatch(getArticles(articles));
+      return dispatch(storeArticles(articles));
     });
+  return art;
 }
 
-export { getAllArticles };
+export { apiArticles };
