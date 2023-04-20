@@ -28,7 +28,7 @@ const articleSlice = createSlice({
       state.articles.push(action.payload);
     },
     storeArticles(state, action: PayloadAction<Article[]>) {
-      state.articles = state.articles.concat(action.payload);
+      state.articles = action.payload;
     },
   },
 });
