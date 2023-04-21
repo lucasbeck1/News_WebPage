@@ -46,7 +46,7 @@ function CreateArticle() {
         ADD
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth="md">
-        <DialogTitle>Create User</DialogTitle>
+        <DialogTitle>Create Article</DialogTitle>
         <DialogContent>
           <DialogContentText>Fill all the fields</DialogContentText>
           <TextField

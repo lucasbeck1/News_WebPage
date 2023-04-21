@@ -1,4 +1,14 @@
 import React from "react";
+import { useEffect } from "react";
+import { getArticles } from "../../../services/articles/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import CreateArticle from "./createArticle";
+import DeleteArticle from "./deleteArticle";
+import ModifyArticle from "./modifyArticle";
+
+import articles from "../../../dataExamples/articles.json";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
@@ -8,17 +18,7 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
-import articles from "../../../dataExamples/articles.json";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Box, Button, IconButton } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ClearIcon from "@mui/icons-material/Clear";
-import CheckIcon from "@mui/icons-material/Check";
-import CreateArticle from "./createArticle";
-import DeleteArticle from "./deleteArticle";
-import ModifyArticle from "./modifyArticle";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,6 +41,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function ManageArticles() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getArticles(dispatch);
+  }, []);
+
+  const allArticles = useSelector((state: RootState) => state.article.articles);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -69,7 +77,7 @@ function ManageArticles() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {articles
+              {allArticles
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
                   <StyledTableRow
