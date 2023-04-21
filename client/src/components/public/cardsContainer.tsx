@@ -1,13 +1,13 @@
+import CardArticle from "./card";
+import CardLoader from "./cardLoader";
+
+import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
-import Header from "./header";
-import CardArticle from "./card";
-import Footer from "./footer";
 import articles from "../../dataExamples/articles.json";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 
 interface ArticleData {
   id: number;
@@ -24,6 +24,8 @@ interface ArticleData {
 function CardsContainer(props: { articles: ArticleData[] }) {
   const { articles } = props;
 
+  const load = articles.length ? true : false;
+
   const theme = useTheme();
   const smWith = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -39,12 +41,21 @@ function CardsContainer(props: { articles: ArticleData[] }) {
         }}
       >
         <Grid container spacing={4}>
-          {articles &&
+          {load &&
             articles.map((article) => (
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <CardArticle key={article.id} article={article} />
               </Grid>
             ))}
+          {!load && (
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+              <CardLoader />
+              <CardLoader />
+              <CardLoader />
+              <CardLoader />
+              <CardLoader />
+            </Grid>
+          )}
         </Grid>
       </Box>
     </>

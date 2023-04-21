@@ -2,9 +2,7 @@ import { useEffect } from "react";
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import Header from "../components/public/header";
-import CardArticle from "../components/public/card";
 import Footer from "../components/public/footer";
-import articles from "../dataExamples/articles.json";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import CardsContainer from "../components/public/cardsContainer";
@@ -13,6 +11,7 @@ import Swip from "../components/public/swipeableContainer";
 import { getArticles } from "../services/articles/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
+import CardLoader from "../components/public/cardLoader";
 
 function Home() {
   const dispatch = useDispatch();
@@ -29,6 +28,7 @@ function Home() {
         <ScopedCssBaseline enableColorScheme>
           <Header />
           <CardsContainer articles={allArticles} />
+          <hr />
           <CarouselContainer />
           <hr />
           <Swip />
