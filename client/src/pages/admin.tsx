@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import { NavLink } from "react-router-dom";
 
+import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,7 +12,9 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import PersonIcon from "@mui/icons-material/Person";
+import { deepOrange, green } from "@mui/material/colors";
 
 type optionsType = {
   section: string;
@@ -91,7 +93,10 @@ function Admin() {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                   News
                 </Typography>
-                <Button color="inherit">Login</Button>
+                <Avatar sx={{ width: 24, height: 24, p: 0, m: 0 }} alt="avatar">
+                  <PersonIcon />
+                </Avatar>
+                <Button color="inherit">Logout</Button>
               </Toolbar>
             </AppBar>
           </Box>
