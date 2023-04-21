@@ -8,6 +8,7 @@ import Section from "./pages/section";
 import Admin from "./pages/admin";
 import Management from "./pages/management";
 import Metrics from "./pages/metrics";
+import Login from "./pages/login";
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/:sectionName" element={<Section />} />
           <Route path="/manage" element={<Management />} />
           <Route path="/metrics" element={<Metrics />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/:sectionName" element={<Section />} />
         </Routes>
       </Router>
     </div>

@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
+import { NavLink } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -43,6 +44,14 @@ export default function Footer() {
           <Typography variant="body1">
             Information and Technology articles.
           </Typography>
+
+          <NavLink
+            style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.60)" }}
+            to={`/login`}
+          >
+            Login
+          </NavLink>
+
           <Copyright />
         </Container>
       </Box>
