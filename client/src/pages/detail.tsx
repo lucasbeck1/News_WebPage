@@ -18,7 +18,7 @@ function Detail() {
     getArticles(dispatch);
   }, []);
 
-  const AllArticles = useSelector((state: RootState) => state.article.articles);
+  const AllArticles = useSelector((state: RootState) => state.articles);
 
   const selectedArricle = AllArticles.find(
     (article) => article.id.toString() === id

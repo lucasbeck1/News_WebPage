@@ -17,7 +17,7 @@ function Home() {
     getArticles(dispatch);
   }, []);
 
-  const allArticles = useSelector((state: RootState) => state.article.articles);
+  const allArticles = useSelector((state: RootState) => state.articles);
 
   return (
     <>

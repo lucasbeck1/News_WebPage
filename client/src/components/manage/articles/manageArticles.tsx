@@ -47,7 +47,7 @@ function ManageArticles() {
     getArticles(dispatch);
   }, []);
 
-  const allArticles = useSelector((state: RootState) => state.article.articles);
+  const allArticles = useSelector((state: RootState) => state.articles);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

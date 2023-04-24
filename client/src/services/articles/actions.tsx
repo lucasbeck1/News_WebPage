@@ -17,7 +17,7 @@ type Article = {
 
 async function getArticles(dispatch: AppDispatch): Promise<{
   payload: Article[];
-  type: "article/storeArticles";
+  type: "articles/storeArticles";
 }> {
   let getArts: Article[] = await getApiArticles();
 

@@ -12,23 +12,17 @@ interface Article {
   section: { name: string };
 }
 
-interface ArticleState {
-  articles: Article[];
-}
-
-const initialState: ArticleState = {
-  articles: [],
-};
+const initialState: Article[] = [];
 
 const articleSlice = createSlice({
-  name: "article",
+  name: "articles",
   initialState,
   reducers: {
     addArticle(state, action: PayloadAction<Article>) {
-      state.articles.push(action.payload);
+      state.push(action.payload);
     },
     storeArticles(state, action: PayloadAction<Article[]>) {
-      state.articles = action.payload;
+      return (state = action.payload);
     },
   },
 });
