@@ -6,10 +6,6 @@ interface Section {
   quantity: number;
 }
 
-interface SectionState {
-  sections: Section[];
-}
-
 const initialState: Section[] = [];
 
 const sectionSlice = createSlice({
