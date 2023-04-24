@@ -15,7 +15,7 @@ function Header() {
     getSections(dispatch);
   }, []);
 
-  const allSections = useSelector((state: RootState) => state.section.sections);
+  const allSections = useSelector((state: RootState) => state.sections);
 
   return (
     <>

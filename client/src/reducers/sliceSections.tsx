@@ -10,19 +10,17 @@ interface SectionState {
   sections: Section[];
 }
 
-const initialState: SectionState = {
-  sections: [],
-};
+const initialState: Section[] = [];
 
 const sectionSlice = createSlice({
-  name: "section",
+  name: "sections",
   initialState,
   reducers: {
     addSection(state, action: PayloadAction<Section>) {
-      state.sections.push(action.payload);
+      state.push(action.payload);
     },
     storeSections(state, action: PayloadAction<Section[]>) {
-      state.sections = action.payload;
+      return (state = action.payload);
     },
   },
 });

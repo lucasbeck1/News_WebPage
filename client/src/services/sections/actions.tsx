@@ -11,7 +11,7 @@ type Section = {
 
 async function getSections(dispatch: AppDispatch): Promise<{
   payload: Section[];
-  type: "section/storeSections";
+  type: "sections/storeSections";
 }> {
   let getSec: Section[] = await getApiSections();
 

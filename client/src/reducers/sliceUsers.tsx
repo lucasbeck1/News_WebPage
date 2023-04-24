@@ -4,16 +4,14 @@ interface UserState {
   users: string[];
 }
 
-const initialState: UserState = {
-  users: [],
-};
+const initialState: UserState[] = [];
 
 const userSlice = createSlice({
-  name: "user",
+  name: "users",
   initialState,
   reducers: {
-    addUser(state, action: PayloadAction<string>) {
-      state.users.push(action.payload);
+    addUser(state, action: PayloadAction<UserState>) {
+      state.push(action.payload);
     },
   },
 });

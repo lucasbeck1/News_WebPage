@@ -4,9 +4,9 @@ import articleReducer from "./sliceArticles";
 import sectionReducer from "./sliceSections";
 
 const rootReducer = combineReducers({
-  user: userReducer,
+  users: userReducer,
   articles: articleReducer,
-  section: sectionReducer,
+  sections: sectionReducer,
 });
 
 export default rootReducer;
