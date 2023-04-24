@@ -13,6 +13,15 @@ type Article = {
   section: { name: string };
 };
 
+type ArticleCreation = {
+  headline: string;
+  drophead: string;
+  body: string;
+  image: string;
+  author: string;
+  section: string;
+};
+
 function getApiArticles(): Promise<Article[]> {
   const request: Promise<Article[]> = axios
     .get(localhost + "/articles")
@@ -25,4 +34,16 @@ function getApiArticles(): Promise<Article[]> {
   return request;
 }
 
-export { getApiArticles };
+function createApiArticle(data: ArticleCreation): Promise<{ message: string }> {
+  const request: Promise<{ message: string }> = axios
+    .post(localhost + "/articles", data)
+    .then((res) => {
+      return res.data;
+    })
+    .catch(() => {
+      return { message: "REQUEST ERROR" };
+    });
+  return request;
+}
+
+export { getApiArticles, createApiArticle };
