@@ -1,5 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { RootState } from "../../../store";
+import { getSections } from "../../../services/sections/actions";
+import { createArticle } from "../../../services/articles/actions";
+
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -8,6 +14,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -16,21 +23,205 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Box from "@mui/material/Box";
 import Swal from "sweetalert2";
 
+type ArticleCreation = {
+  headline: string;
+  drophead: string;
+  body: string;
+  image: string;
+  author: string;
+  section: string;
+};
+
+type Input = {
+  headline?: string;
+  drophead?: string;
+  body?: string;
+  image?: string;
+  author?: string;
+  section?: string;
+};
+
+enum InputProp {
+  headline = "headline",
+  drophead = "drophead",
+  body = "body",
+  image = "image",
+  section = "section",
+}
+
 function CreateArticle() {
+  //****************************
+  // **** Global Variables ****
+  //****************************
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getSections(dispatch);
+  }, []);
+
+  const allSections = useSelector((state: RootState) => state.sections);
+
+  const tempAuthors = [
+    {
+      name: "Desmond Jachi",
+      mail: "desjakito@mail.com",
+      admin: false,
+    },
+    {
+      name: "lucas becfor",
+      mail: "lucas@mail.com",
+      admin: true,
+    },
+    {
+      name: "Sosana Guterlom",
+      mail: "sosgm1@mail.com",
+      admin: false,
+    },
+    {
+      name: "Maximo Sum",
+      mail: "max256@mail.com",
+      admin: false,
+    },
+    {
+      name: "Lucas Becord",
+      mail: "admin@mail.com",
+      admin: false,
+    },
+    {
+      name: "Jonh Doe",
+      mail: "jonh@mail.com",
+      admin: false,
+    },
+    {
+      name: "Tusan barr",
+      mail: "tusan@mail.com",
+      admin: false,
+    },
+  ];
+
+  //****************************
+  // **** Local Variables ****
+  //****************************
   const [open, setOpen] = useState(false);
-  const [section, setSection] = React.useState("");
+
+  const [input, setInput] = useState({
+    headline: "",
+    drophead: "",
+    body: "",
+    image: "",
+    author: tempAuthors[0].name,
+    section: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const initialDataJson = JSON.stringify({
+    headline: "",
+    drophead: "",
+    body: "",
+    image: "",
+    author: "",
+    section: "",
+  });
+  const inputJson = JSON.stringify(input);
+
+  //****************************
+  // **** Functions ****
+  //****************************
+
+  function changeInput(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    name: string
+  ) {
+    setInput({
+      ...input,
+      [name]: e.target.value,
+    });
+    setErrors(
+      verifyInput({
+        ...input,
+        [name]: e.target.value,
+      })
+    );
+  }
+
+  function changeSelect(e: SelectChangeEvent<string>, name: string) {
+    setInput({
+      ...input,
+      [name]: e.target.value,
+    });
+    setErrors(
+      verifyInput({
+        ...input,
+        [name]: e.target.value,
+      })
+    );
+  }
+
+  function verifyInput(input: Input) {
+    let err: Input = {};
+    // ** headline **
+    if (!input.headline) {
+      err.headline = "Headline required";
+    } else if (input.headline.length > 100) {
+      err.headline = "The headline is too long";
+    }
+    // ** drophead **
+    else if (!input.drophead) {
+      err.drophead = "Drophead required";
+    } else if (input.drophead.length > 500) {
+      err.drophead = "The drophead is too long";
+    }
+    // ** body **
+    else if (!input.body) {
+      err.body = "Body required";
+    } else if (input.body.length > 50000) {
+      err.body = "The body is too long";
+    }
+    // ** section **
+    else if (!input.section) {
+      err.section = "Select section required";
+    }
+    return err;
+  }
 
   function handleOpen() {
     setOpen(true);
   }
 
   function handleClose() {
+    setInput({
+      headline: "",
+      drophead: "",
+      body: "",
+      image: "",
+      author: "Tusan barr",
+      section: "",
+    });
+    setErrors({});
     setOpen(false);
   }
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setSection(event.target.value as string);
-  };
+  function comprobe(errors: Input, name: InputProp): boolean {
+    if (errors[name]) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function errorExplain(errors: Input, name: InputProp) {
+    if (errors[name]) {
+      return errors[name];
+    }
+  }
+
+  async function submit() {
+    const msg = await createArticle(input);
+    alert(msg.message);
+    handleClose();
+  }
 
   return (
     <>
@@ -45,6 +236,7 @@ function CreateArticle() {
       >
         ADD
       </Button>
+
       <Dialog open={open} onClose={handleClose} maxWidth="md">
         <DialogTitle>Create Article</DialogTitle>
         <DialogContent>
@@ -58,13 +250,12 @@ function CreateArticle() {
             type="text"
             fullWidth
             variant="outlined"
-            /* 
             value={input.headline}
-            onChange={(e)=>inputChange(e)}
-            error={error.headline}
-            helperText={error.headline} 
-            */
+            onChange={(e) => changeInput(e, "headline")}
+            error={comprobe(errors, InputProp.headline)}
+            helperText={errorExplain(errors, InputProp.headline)}
           />
+
           <TextField
             autoFocus
             margin="dense"
@@ -74,12 +265,10 @@ function CreateArticle() {
             type="text"
             fullWidth
             variant="outlined"
-            /* 
             value={input.drophead}
-            onChange={(e)=>inputChange(e)}
-            error={error.drophead}
-            helperText={error.drophead} 
-            */
+            onChange={(e) => changeInput(e, "drophead")}
+            error={comprobe(errors, InputProp.drophead)}
+            helperText={errorExplain(errors, InputProp.drophead)}
           />
           <TextField
             autoFocus
@@ -90,55 +279,73 @@ function CreateArticle() {
             type="text"
             fullWidth
             variant="outlined"
-            /*   
             value={input.body}
-            onChange={(e)=>inputChange(e)}
-            error={error.body}
-            helperText={error.body} 
-            */
+            onChange={(e) => changeInput(e, "body")}
+            error={comprobe(errors, InputProp.body)}
+            helperText={errorExplain(errors, InputProp.body)}
           />
           <TextField
             autoFocus
             margin="dense"
             id="image"
             name="image"
-            label=""
-            type="file"
+            label="Image"
+            type="text"
             fullWidth
             variant="outlined"
-            /*   
             value={input.image}
-            onChange={(e)=>inputChange(e)}
-            error={error.image}
-            helperText={error.image} 
-            */
+            onChange={(e) => changeInput(e, "image")}
+            error={comprobe(errors, InputProp.image)}
+            helperText={errorExplain(errors, InputProp.image)}
+            /* 
+            type="file"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">Image</InputAdornment>
               ),
-            }}
+            }} 
+            */
           />
           <Box sx={{ mt: 1 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Section</InputLabel>
+            <FormControl fullWidth error={comprobe(errors, InputProp.section)}>
+              <InputLabel id="simple-select-label">Section</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId="simple-select-label"
+                id="simple-select"
                 label="Section"
-                name={"section"}
-                onChange={handleChange}
-                value={section}
+                name="section"
+                onChange={(e) => changeSelect(e, "section")}
+                value={input.section}
               >
-                <MenuItem value={10}>sport</MenuItem>
-                <MenuItem value={20}>bussines</MenuItem>
-                <MenuItem value={30}>food</MenuItem>
+                {allSections.map((section) => (
+                  <MenuItem value={section.name}>{section.name}</MenuItem>
+                ))}
               </Select>
+              <FormHelperText>
+                {errorExplain(errors, InputProp.section)}
+              </FormHelperText>
             </FormControl>
+            {comprobe(errors, InputProp.section) ? (
+              <></>
+            ) : (
+              <>
+                <br />
+              </>
+            )}
           </Box>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>Create</Button>
-            {/* {initialDataJson === inputJson || Object.keys(error).length ? (<Button disabled onClick={modifyUserById}>Modify</Button>) : (<Button onClick={modifyUserById}>Modify</Button>)} */}
+            {initialDataJson === inputJson || Object.keys(errors).length ? (
+              <Button disabled>Create</Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  submit();
+                }}
+              >
+                Create
+              </Button>
+            )}
           </DialogActions>
         </DialogContent>
       </Dialog>

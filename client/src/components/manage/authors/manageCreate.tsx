@@ -27,6 +27,8 @@ function ManageCreate() {
     setOpen(false);
   }
 
+  let RegEXP = /[`ª!@#$%^*_+=[\]{};"\\|,<>/~]/;
+
   return (
     <>
       <Button

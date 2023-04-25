@@ -1,58 +1,37 @@
 [
   {
-    "name": "jonh doe",
-    "mail": "jonh@mail.com",
+    "name": "Desmond Jachi",
+    "mail": "desjakito@mail.com",
     "admin": false
   },
   {
-    "name": "lucas wow",
+    "name": "lucas becfor",
     "mail": "lucas@mail.com",
     "admin": true
   },
   {
-    "name": "susan barr",
-    "mail": "susan@mail.com",
-    "admin": false
-  },
-
-  {
-    "name": "max sum",
-    "mail": "max@mail.com",
+    "name": "Sosana Guterlom",
+    "mail": "sosgm1@mail.com",
     "admin": false
   },
   {
-    "name": "desmond jah",
-    "mail": "desjakito@mail.com",
-    "admin": true
-  },
-  {
-    "name": "miles kur",
-    "mail": "mailito@mail.com",
+    "name": "Maximo Sum",
+    "mail": "max256@mail.com",
     "admin": false
   },
   {
-    "name": "kernan jokanyguijs",
-    "mail": "jokan@mail.com",
+    "name": "Lucas Becord",
+    "mail": "admin@mail.com",
     "admin": false
   },
   {
-    "name": "hernan humbertonsin",
-    "mail": "hernin45@mail.com",
+    "name": "Jonh Doe",
+    "mail": "jonh@mail.com",
     "admin": false
   },
   {
-    "name": "kyle guarnision",
-    "mail": "kylealomas12@mail.com",
-    "admin": false
-  },
-  {
-    "name": "habermus jeyiss",
-    "mail": "managealgo@mail.com",
-    "admin": false
-  },
-  {
-    "name": "jacinto perezonzi",
-    "mail": "mynameisjacinto@mail.com",
+    "name": "Tusan barr",
+    "mail": "tusan@mail.com",
     "admin": false
   }
 ]

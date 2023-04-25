@@ -59,7 +59,6 @@ function Management() {
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    console.log(event);
   };
 
   const handleChangeIndex = (index: number) => {
