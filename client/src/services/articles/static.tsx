@@ -21,7 +21,7 @@ type ArticleCreation = {
   section: string;
 };
 
-const allArticles: Article[] = articles;
+let allArticles: Article[] = articles;
 
 function getStaticArticles(): Article[] {
   return allArticles;
@@ -56,7 +56,8 @@ function createStaticArticle(data: ArticleCreation) {
     section: { name: data.section },
   };
 
-  allArticles.push(newArticle);
+  const newArticlesArray = [newArticle].concat(allArticles);
+  allArticles = newArticlesArray;
 
   return { message: "Create succesfull" };
 }

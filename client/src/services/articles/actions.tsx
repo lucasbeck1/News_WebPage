@@ -45,6 +45,7 @@ async function createArticle(
   if (createArt.message === "REQUEST ERROR") {
     createArt = createStaticArticle(data);
   }
+
   return createArt;
 }
 
