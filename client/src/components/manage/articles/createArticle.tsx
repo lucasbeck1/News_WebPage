@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { getSections } from "../../../services/sections/actions";
 import { createArticle } from "../../../services/articles/actions";
+import UploadInput from "./uploadInput";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -332,6 +333,8 @@ function CreateArticle() {
                 <br />
               </>
             )}
+
+            <UploadInput />
           </Box>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
