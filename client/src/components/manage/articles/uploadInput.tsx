@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { RootState } from "../../../store";
 
-import { getArticles } from "../../../services/articles/actions";
+import { uploadImage } from "../../../services/images/actions";
 
 import TextField from "@mui/material/TextField";
 import { InputAdornment } from "@mui/material";
@@ -19,28 +19,11 @@ function UploadInput() {
       return;
     }
 
-    try {
-      const formData = new FormData();
-      formData.append("image", selectedFile);
+    const formData: FormData = new FormData();
+    formData.append("image", selectedFile);
 
-      const response = await axios.post(
-        "http://localhost:3001/images",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      // console.log("Imagen subida correctamente");
-      // Hacer algo con la respuesta si es necesario
-      alert(response.data.message);
-    } catch (error) {
-      // console.error("Error al subir la imagen", error);
-      // Manejar el error si es necesario
-      alert(error);
-    }
+    const req = await uploadImage(formData);
+    alert(req.message);
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
