@@ -9,6 +9,7 @@ import authorRoutes from "./routes/authorRoutes";
 import sectionRoutes from "./routes/sectionRoutes";
 import sponsorRotes from "./routes/sponsorRoutes";
 import publicityRoutes from "./routes/publicityRoutes";
+import imageRoutes from "./routes/imageRoutes";
 
 // Express and midlewares
 const app = express();
@@ -23,6 +24,7 @@ app.use("/authors", authorRoutes);
 app.use("/sections", sectionRoutes);
 app.use("/sponsors", sponsorRotes);
 app.use("/publicities", publicityRoutes);
+app.use("/images", imageRoutes);
 
 // Exports
 export default app;
