@@ -226,7 +226,6 @@ function CreateArticle() {
   }
 
   const handleImageData = (status: string, imageName: string): void => {
-    console.log("STATUS " + status);
     if (status === "Upload Ok") {
       setInput({
         ...input,

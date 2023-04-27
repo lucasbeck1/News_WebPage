@@ -14,7 +14,7 @@ interface ChildProps {
 }
 
 function UploadInput(props: ChildProps) {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  /* const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevenir el envío del formulario por defecto
@@ -34,42 +34,69 @@ function UploadInput(props: ChildProps) {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     setSelectedFile(file);
+  }; */
+
+  const selectAndSubmmitFile = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    event.preventDefault();
+    const file = event.target.files?.[0] || null;
+
+    if (file === null) {
+      return;
+    }
+
+    const formData: FormData = new FormData();
+    formData.append("image", file);
+
+    const res = await uploadImage(formData);
+    props.sendData(res.message, file.name);
+    alert(res.message);
   };
 
   return (
     <>
       <hr />
+      {/*
+      <TextField
+        autoFocus
+        fullWidth
+        margin="dense"
+        id="image"
+        label=""
+        variant="outlined"
+        type="file"
+        name="image"
+        onChange={handleFileChange}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">Image</InputAdornment>
+          ),
+        }}
+        error={comprobe(errors, InputProp.image)}
+        helperText={errorExplain(errors, InputProp.image)}
+      /> 
+      */}
+
+      {/*   
       <form onSubmit={handleSubmit}>
         <input
           type="file"
           accept=".png, .jpg, .jpeg"
           name="image"
           onChange={handleFileChange}
-        />
-
-        {/*  <TextField
-          autoFocus
-          fullWidth
-          margin="dense"
-          id="image"
-          label=""
-          variant="outlined"
-          type="file"
-          name="image"
-          onChange={handleFileChange}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">Image</InputAdornment>
-            ),
-          }}
-          
-          error={comprobe(errors, InputProp.image)}
-          helperText={errorExplain(errors, InputProp.image)}
-          
-        /> */}
-
+        /> 
         <button type="submit">Upload</button>
-      </form>
+      </form> 
+      */}
+
+      <input
+        type="file"
+        accept=".png, .jpg, .jpeg"
+        name="image"
+        onChange={selectAndSubmmitFile}
+      />
+
       <hr />
     </>
   );
