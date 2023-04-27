@@ -50,7 +50,7 @@ function UploadInput(props: ChildProps) {
     formData.append("image", file);
 
     const res = await uploadImage(formData);
-    props.sendData(res.message, file.name);
+    props.sendData(res.message, res.fileName);
     alert(res.message);
   };
 
