@@ -100,6 +100,7 @@ function CreateArticle() {
       admin: false,
     },
   ];
+  const tempRandomAuthor = tempAuthors[Math.round(Math.random() * 6)];
 
   //****************************
   // **** Local Variables ****
@@ -111,7 +112,7 @@ function CreateArticle() {
     drophead: "",
     body: "",
     image: "",
-    author: tempAuthors[0].name,
+    author: tempRandomAuthor.name,
     section: "",
   });
 
@@ -122,7 +123,7 @@ function CreateArticle() {
     drophead: "",
     body: "",
     image: "",
-    author: "",
+    author: tempRandomAuthor.name,
     section: "",
   });
   const inputJson = JSON.stringify(input);
@@ -223,6 +224,26 @@ function CreateArticle() {
     alert(msg.message);
     handleClose();
   }
+
+  const handleImageData = (status: string, imageName: string): void => {
+    console.log("STATUS " + status);
+    if (status === "Upload Ok") {
+      setInput({
+        ...input,
+        image: imageName,
+      });
+      setErrors(
+        verifyInput({
+          ...input,
+          image: imageName,
+        })
+      );
+    } else {
+      return;
+    }
+  };
+
+  console.log(input);
 
   return (
     <>
@@ -334,7 +355,7 @@ function CreateArticle() {
               </>
             )}
 
-            <UploadInput />
+            <UploadInput sendData={handleImageData} />
           </Box>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>

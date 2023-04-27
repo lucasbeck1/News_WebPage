@@ -9,7 +9,11 @@ import { uploadImage } from "../../../services/images/actions";
 import TextField from "@mui/material/TextField";
 import { InputAdornment } from "@mui/material";
 
-function UploadInput() {
+interface ChildProps {
+  sendData: (data: string, name: string) => void;
+}
+
+function UploadInput(props: ChildProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -22,8 +26,9 @@ function UploadInput() {
     const formData: FormData = new FormData();
     formData.append("image", selectedFile);
 
-    const req = await uploadImage(formData);
-    alert(req.message);
+    const res = await uploadImage(formData);
+    props.sendData(res.message, selectedFile.name);
+    alert(res.message);
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
