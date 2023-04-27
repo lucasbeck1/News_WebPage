@@ -95,8 +95,10 @@ function UploadInput(props: ChildProps) {
       /> 
       */}
 
-      {/*   
-      <form onSubmit={handleSubmit}>
+      {/*  
+      <form 
+      encType="multipart/form-data"
+      onSubmit={handleSubmit}>
         <input
           type="file"
           accept=".png, .jpg, .jpeg"

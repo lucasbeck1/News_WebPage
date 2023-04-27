@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { getSections } from "../../../services/sections/actions";
 import { createArticle } from "../../../services/articles/actions";
+import { localhost } from "../../../services/url";
 import UploadInput from "./uploadInput";
 
 import Button from "@mui/material/Button";
@@ -347,6 +348,23 @@ function CreateArticle() {
               >
                 {errorExplain(errors, InputProp.image)}
               </Typography>
+            ) : (
+              <></>
+            )}
+
+            {input.image ? (
+              <Box
+                sx={{
+                  height: "100px",
+                  padding: "10px",
+                }}
+              >
+                <img
+                  src={localhost + "/images/" + input.image}
+                  alt="img"
+                  height={"100px"}
+                />
+              </Box>
             ) : (
               <></>
             )}
