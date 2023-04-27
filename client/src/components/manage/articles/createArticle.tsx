@@ -343,7 +343,7 @@ function CreateArticle() {
             {comprobe(errors, InputProp.image) ? (
               <Typography
                 variant="body2"
-                style={{ paddingLeft: "10px", color: "red" }}
+                style={{ paddingTop: "5px", paddingLeft: "10px", color: "red" }}
               >
                 {errorExplain(errors, InputProp.image)}
               </Typography>

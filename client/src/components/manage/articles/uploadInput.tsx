@@ -8,6 +8,11 @@ import { uploadImage } from "../../../services/images/actions";
 
 import TextField from "@mui/material/TextField";
 import { InputAdornment } from "@mui/material";
+import Box from "@mui/material/Box";
+import Fade from "@mui/material/Fade";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Typography from "@mui/material/Typography";
 
 interface ChildProps {
   sendData: (data: string, name: string) => void;
@@ -36,6 +41,9 @@ function UploadInput(props: ChildProps) {
     setSelectedFile(file);
   }; */
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
   const selectAndSubmmitFile = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -46,12 +54,21 @@ function UploadInput(props: ChildProps) {
       return;
     }
 
+    setLoading(true);
+
     const formData: FormData = new FormData();
     formData.append("image", file);
 
     const res = await uploadImage(formData);
     props.sendData(res.message, res.fileName);
-    alert(res.message);
+
+    setLoading(false);
+
+    if (res.message === "Upload Ok") {
+      setError(false);
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -104,8 +121,15 @@ function UploadInput(props: ChildProps) {
         onChange={selectAndSubmmitFile}
       />
 
-      <br />
-      <br />
+      {loading && <CircularProgress size={"1rem"} color={"primary"} />}
+      {error && (
+        <Typography
+          variant="body2"
+          style={{ paddingTop: "10px", paddingLeft: "10px", color: "red" }}
+        >
+          Error on upload image, please select it again
+        </Typography>
+      )}
     </>
   );
 }
