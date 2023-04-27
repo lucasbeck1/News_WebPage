@@ -4,8 +4,25 @@ import path from "path";
 
 // ------------------------------------------------------------------
 
+export const getOneImage = async (req: Request, res: Response) => {
+  try {
+    const { name } = req.params;
+
+    const filePath = path.join(__dirname, "../", "uploads", name);
+    return res.sendFile(filePath);
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({ message: error.message });
+    } else {
+      return res.status(500).json({ message: "Response Error" });
+    }
+  }
+};
+
+// ------------------------------------------------------------------
+
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, "../../uploads"),
+  destination: path.join(__dirname, "../uploads"),
   filename: (_req, file, cb) => {
     const date = new Date();
     const fileName = date.toISOString() + "_" + file.originalname;
@@ -24,7 +41,7 @@ export const uploadImage = async (req: Request, res: Response) => {
       console.log(err);
       return res.status(500).json({ message: err.message });
     }
-    console.log(req.file);
+    //console.log(req.file);
     return res
       .status(200)
       .json({ message: "Upload Ok", fileName: req.file?.filename });
