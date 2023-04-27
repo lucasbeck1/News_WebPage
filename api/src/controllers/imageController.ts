@@ -21,21 +21,21 @@ export const getOneImage = async (req: Request, res: Response) => {
 
 // ------------------------------------------------------------------
 
-const storage = multer.diskStorage({
-  destination: path.join(__dirname, "../uploads"),
-  filename: (_req, file, cb) => {
-    const date = new Date();
-    const fileName = date.toISOString() + "_" + file.originalname;
-    cb(null, fileName);
-  },
-});
-
-const uploadOptions = multer({
-  storage,
-  limits: { fileSize: 10000000 },
-}).single("image");
-
 export const uploadImage = async (req: Request, res: Response) => {
+  const storage = multer.diskStorage({
+    destination: path.join(__dirname, "../uploads"),
+    filename: (_req, file, cb) => {
+      const date = new Date();
+      const fileName = date.toISOString() + "_" + file.originalname;
+      cb(null, fileName);
+    },
+  });
+
+  const uploadOptions = multer({
+    storage,
+    limits: { fileSize: 10000000 },
+  }).single("image");
+
   uploadOptions(req, res, (err) => {
     if (err) {
       console.log(err);
