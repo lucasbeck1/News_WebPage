@@ -23,6 +23,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import InputAdornment from "@mui/material/InputAdornment";
 import Box from "@mui/material/Box";
 import Swal from "sweetalert2";
+import { Typography } from "@mui/material";
 
 type ArticleCreation = {
   headline: string;
@@ -185,6 +186,10 @@ function CreateArticle() {
     else if (!input.section) {
       err.section = "Select section required";
     }
+    // ** section **
+    else if (!input.image) {
+      err.image = "No image uploaded";
+    }
     return err;
   }
 
@@ -305,28 +310,7 @@ function CreateArticle() {
             error={comprobe(errors, InputProp.body)}
             helperText={errorExplain(errors, InputProp.body)}
           />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="image"
-            name="image"
-            label="Image"
-            type="text"
-            fullWidth
-            variant="outlined"
-            value={input.image}
-            onChange={(e) => changeInput(e, "image")}
-            error={comprobe(errors, InputProp.image)}
-            helperText={errorExplain(errors, InputProp.image)}
-            /* 
-            type="file"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">Image</InputAdornment>
-              ),
-            }} 
-            */
-          />
+
           <Box sx={{ mt: 1 }}>
             <FormControl fullWidth error={comprobe(errors, InputProp.section)}>
               <InputLabel id="simple-select-label">Section</InputLabel>
@@ -355,6 +339,17 @@ function CreateArticle() {
             )}
 
             <UploadInput sendData={handleImageData} />
+
+            {comprobe(errors, InputProp.image) ? (
+              <Typography
+                variant="body2"
+                style={{ paddingLeft: "10px", color: "red" }}
+              >
+                {errorExplain(errors, InputProp.image)}
+              </Typography>
+            ) : (
+              <></>
+            )}
           </Box>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>

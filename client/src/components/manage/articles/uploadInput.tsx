@@ -56,7 +56,7 @@ function UploadInput(props: ChildProps) {
 
   return (
     <>
-      <hr />
+      <br />
       {/*
       <TextField
         autoFocus
@@ -90,14 +90,22 @@ function UploadInput(props: ChildProps) {
       </form> 
       */}
 
+      <label
+        htmlFor="inputImage"
+        style={{ color: "rgba(0, 0, 0, 0.6)", paddingLeft: "10px" }}
+      >
+        Image{" | "}
+      </label>
       <input
+        id="inputImage"
         type="file"
         accept=".png, .jpg, .jpeg"
         name="image"
         onChange={selectAndSubmmitFile}
       />
 
-      <hr />
+      <br />
+      <br />
     </>
   );
 }
