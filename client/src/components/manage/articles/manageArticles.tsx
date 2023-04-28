@@ -95,7 +95,7 @@ function ManageArticles() {
                       {row.createdAt.slice(0, 10)}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      <ModifyArticle />
+                      <ModifyArticle data={row} />
                       <DeleteArticle />
                     </StyledTableCell>
                   </StyledTableRow>
