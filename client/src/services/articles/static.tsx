@@ -21,6 +21,16 @@ type ArticleCreation = {
   section: string;
 };
 
+type dataUpdate = {
+  id: number;
+  headline?: string;
+  drophead?: string;
+  body?: string;
+  image?: string;
+  updatedAt?: string;
+  section?: string;
+};
+
 let allArticles: Article[] = articles;
 
 function getStaticArticles(): Article[] {
@@ -62,4 +72,39 @@ function createStaticArticle(data: ArticleCreation) {
   return { message: "Create succesfull" };
 }
 
-export { getStaticArticles, createStaticArticle };
+function updateStaticArticle(data: dataUpdate) {
+  const articleToUpdate = allArticles.find((article) => article.id === data.id);
+
+  if (!articleToUpdate) {
+    return { message: "Not article found" };
+  }
+
+  const index = allArticles.findIndex((article) => article.id === data.id);
+
+  const actualDate: Date = new Date();
+  let year: string = actualDate.getFullYear().toString();
+  let month: string = (actualDate.getMonth() + 1).toString();
+  let day: string = actualDate.getDate().toString();
+  if (month.length === 1) {
+    month = "0" + month;
+  }
+  const dateStorage: string = year + "-" + month + "-" + day;
+
+  const newArticle: Article = {
+    id: articleToUpdate.id,
+    headline: data.headline || articleToUpdate.headline,
+    drophead: data.drophead || articleToUpdate.drophead,
+    body: data.body || articleToUpdate.body,
+    image: data.image || articleToUpdate.image,
+    createdAt: articleToUpdate.createdAt,
+    updatedAt: dateStorage,
+    section: { name: data.section || articleToUpdate.section.name },
+    author: { name: articleToUpdate.author.name },
+  };
+
+  allArticles[index] = newArticle;
+
+  return { message: "Update succesfull" };
+}
+
+export { getStaticArticles, createStaticArticle, updateStaticArticle };

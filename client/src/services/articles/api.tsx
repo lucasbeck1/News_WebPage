@@ -22,6 +22,16 @@ type ArticleCreation = {
   section: string;
 };
 
+type dataUpdate = {
+  id: number;
+  headline?: string;
+  drophead?: string;
+  body?: string;
+  image?: string;
+  updatedAt?: string;
+  section?: string;
+};
+
 function getApiArticles(): Promise<Article[]> {
   const request: Promise<Article[]> = axios
     .get(localhost + "/articles")
@@ -46,4 +56,16 @@ function createApiArticle(data: ArticleCreation): Promise<{ message: string }> {
   return request;
 }
 
-export { getApiArticles, createApiArticle };
+function updateApiArticle(data: dataUpdate): Promise<{ message: string }> {
+  const request: Promise<{ message: string }> = axios
+    .put(localhost + "/articles/" + data.id.toString(), data)
+    .then((res) => {
+      return res.data;
+    })
+    .catch(() => {
+      return { message: "REQUEST ERROR" };
+    });
+  return request;
+}
+
+export { getApiArticles, createApiArticle, updateApiArticle };

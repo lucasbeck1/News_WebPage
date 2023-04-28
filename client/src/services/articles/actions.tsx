@@ -1,7 +1,11 @@
 import { storeArticles } from "../../reducers/sliceArticles";
 import { AppDispatch } from "../../store";
-import { getApiArticles, createApiArticle } from "./api";
-import { getStaticArticles, createStaticArticle } from "./static";
+import { getApiArticles, createApiArticle, updateApiArticle } from "./api";
+import {
+  getStaticArticles,
+  createStaticArticle,
+  updateStaticArticle,
+} from "./static";
 
 type Article = {
   id: number;
@@ -22,6 +26,16 @@ type ArticleCreation = {
   image: string;
   author: string;
   section: string;
+};
+
+type dataUpdate = {
+  id: number;
+  headline?: string;
+  drophead?: string;
+  body?: string;
+  image?: string;
+  updatedAt?: string;
+  section?: string;
 };
 
 async function getArticles(dispatch: AppDispatch): Promise<{
@@ -49,4 +63,14 @@ async function createArticle(
   return createArt;
 }
 
-export { getArticles, createArticle };
+async function updateArticle(data: dataUpdate): Promise<{ message: string }> {
+  let createArt: { message: string } = await updateApiArticle(data);
+
+  if (createArt.message === "REQUEST ERROR") {
+    createArt = updateStaticArticle(data);
+  }
+
+  return createArt;
+}
+
+export { getArticles, createArticle, updateArticle };
