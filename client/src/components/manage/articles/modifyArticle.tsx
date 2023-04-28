@@ -340,7 +340,7 @@ function ModifyArticle(props: { data: Article }) {
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
             {initialDataJson === inputJson || Object.keys(errors).length ? (
-              <Button disabled>Create</Button>
+              <Button disabled>Update</Button>
             ) : (
               <Button
                 onClick={() => {

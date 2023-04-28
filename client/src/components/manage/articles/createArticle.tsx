@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 import { RootState } from "../../../store";
 import { getSections } from "../../../services/sections/actions";
@@ -21,10 +22,9 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import InputAdornment from "@mui/material/InputAdornment";
 import Box from "@mui/material/Box";
-import Swal from "sweetalert2";
 import { Typography } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
 
 type ArticleCreation = {
   headline: string;
@@ -187,9 +187,20 @@ function CreateArticle() {
     else if (!input.section) {
       err.section = "Select section required";
     }
-    // ** section **
+    // ** image **
     else if (!input.image) {
       err.image = "No image uploaded";
+    } else if (
+      input.image.slice(-3) !== "bmp" &&
+      input.image.slice(-3) !== "jpg" &&
+      input.image.slice(-4) !== "jpeg" &&
+      input.image.slice(-3) !== "jpg" &&
+      input.image.slice(-3) !== "tif" &&
+      input.image.slice(-4) !== "tiff" &&
+      input.image.slice(-3) !== "png" &&
+      input.image.slice(-3) !== "svg"
+    ) {
+      err.image = "Not a valid image";
     }
     return err;
   }
@@ -235,12 +246,12 @@ function CreateArticle() {
     if (status === "Upload Ok") {
       setInput({
         ...input,
-        image: imageName,
+        image: localhost + "/images/" + imageName,
       });
       setErrors(
         verifyInput({
           ...input,
-          image: imageName,
+          image: localhost + "/images/" + imageName,
         })
       );
     } else {
@@ -359,11 +370,7 @@ function CreateArticle() {
                   padding: "10px",
                 }}
               >
-                <img
-                  src={localhost + "/images/" + input.image}
-                  alt="img"
-                  height={"100px"}
-                />
+                <img src={input.image} alt="img" height={"100px"} />
               </Box>
             ) : (
               <></>
