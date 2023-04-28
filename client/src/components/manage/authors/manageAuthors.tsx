@@ -1,4 +1,9 @@
 import React from "react";
+
+import ManageDelete from "./manageDelete";
+import ManageModify from "./manageModify";
+import ManageCreate from "./manageCreate";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
@@ -10,14 +15,11 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
 import authors from "../../../dataExamples/authors.json";
 import { Box, Button, IconButton } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
+import CheckIcon from "@mui/icons-material/Check";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ClearIcon from "@mui/icons-material/Clear";
-import CheckIcon from "@mui/icons-material/Check";
-import ManageDelete from "./manageDelete";
-import ManageModify from "./manageModify";
-import ManageCreate from "./manageCreate";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {

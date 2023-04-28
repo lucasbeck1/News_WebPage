@@ -1,4 +1,13 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
+
+import { getSections } from "../../../services/sections/actions";
+import CreateSection from "./createSections";
+import ModifySection from "./modifySections";
+import DeleteSection from "./deleteSections";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
@@ -8,17 +17,13 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
-import sections from "../../../dataExamples/sections.json";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Box, Button, IconButton } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
-import CreateSection from "./createSections";
-import ModifySection from "./modifySections";
-import DeleteSection from "./deleteSections";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,6 +46,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function ManageSections() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getSections(dispatch);
+  }, []);
+
+  const allSections = useSelector((state: RootState) => state.sections);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -68,7 +81,7 @@ function ManageSections() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {sections
+              {allSections
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((section) => (
                   <StyledTableRow
@@ -79,7 +92,7 @@ function ManageSections() {
                       {section.name}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {Math.round(Math.random() * 50 + 10)}
+                      {section.quantity}
                     </StyledTableCell>
                     <StyledTableCell align="right">
                       <ModifySection sectionName={section.name} />
@@ -105,7 +118,7 @@ function ManageSections() {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={sections.length}
+            count={allSections.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
