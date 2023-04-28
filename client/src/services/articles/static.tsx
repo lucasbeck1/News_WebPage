@@ -22,12 +22,10 @@ type ArticleCreation = {
 };
 
 type dataUpdate = {
-  id: number;
   headline?: string;
   drophead?: string;
   body?: string;
   image?: string;
-  updatedAt?: string;
   section?: string;
 };
 
@@ -72,14 +70,14 @@ function createStaticArticle(data: ArticleCreation) {
   return { message: "Create succesfull" };
 }
 
-function updateStaticArticle(data: dataUpdate) {
-  const articleToUpdate = allArticles.find((article) => article.id === data.id);
+function updateStaticArticle(data: dataUpdate, id: number) {
+  const articleToUpdate = allArticles.find((article) => article.id === id);
 
   if (!articleToUpdate) {
     return { message: "Not article found" };
   }
 
-  const index = allArticles.findIndex((article) => article.id === data.id);
+  const index = allArticles.findIndex((article) => article.id === id);
 
   const actualDate: Date = new Date();
   let year: string = actualDate.getFullYear().toString();

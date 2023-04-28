@@ -23,12 +23,10 @@ type ArticleCreation = {
 };
 
 type dataUpdate = {
-  id: number;
   headline?: string;
   drophead?: string;
   body?: string;
   image?: string;
-  updatedAt?: string;
   section?: string;
 };
 
@@ -56,9 +54,12 @@ function createApiArticle(data: ArticleCreation): Promise<{ message: string }> {
   return request;
 }
 
-function updateApiArticle(data: dataUpdate): Promise<{ message: string }> {
+function updateApiArticle(
+  data: dataUpdate,
+  id: number
+): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .put(localhost + "/articles/" + data.id.toString(), data)
+    .put(localhost + "/articles/" + id.toString(), data)
     .then((res) => {
       return res.data;
     })

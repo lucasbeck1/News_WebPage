@@ -29,12 +29,10 @@ type ArticleCreation = {
 };
 
 type dataUpdate = {
-  id: number;
   headline?: string;
   drophead?: string;
   body?: string;
   image?: string;
-  updatedAt?: string;
   section?: string;
 };
 
@@ -63,11 +61,14 @@ async function createArticle(
   return createArt;
 }
 
-async function updateArticle(data: dataUpdate): Promise<{ message: string }> {
-  let createArt: { message: string } = await updateApiArticle(data);
+async function updateArticle(
+  data: dataUpdate,
+  id: number
+): Promise<{ message: string }> {
+  let createArt: { message: string } = await updateApiArticle(data, id);
 
   if (createArt.message === "REQUEST ERROR") {
-    createArt = updateStaticArticle(data);
+    createArt = updateStaticArticle(data, id);
   }
 
   return createArt;
