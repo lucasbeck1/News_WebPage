@@ -21,6 +21,10 @@ export const getOneImage = async (req: Request, res: Response) => {
 
 // ------------------------------------------------------------------
 
+// Mimetypes: npm package that can obtain the extension of the file
+// import mimeTypes from "mime-types"
+// const fileName = date.toISOString() + "_" + mimeTypes.extension(file.mimetype);
+
 export const uploadImage = async (req: Request, res: Response) => {
   const storage = multer.diskStorage({
     destination: path.join(__dirname, "../uploads"),

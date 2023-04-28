@@ -18,6 +18,14 @@ type searchArticle = {
   };
 };
 
+type dataUpdate = {
+  headline?: string;
+  drophead?: string;
+  body?: string;
+  image?: string;
+  section?: Section;
+};
+
 // ------------------------------------------------------------------
 
 export const getAllArticles = async (_req: Request, res: Response) => {
@@ -181,7 +189,35 @@ export const updateArticle = async (req: Request, res: Response) => {
     const article = await Article.findOneBy({ id: parseInt(id) });
     if (!article) return res.status(404).json({ message: "Not article found" });
 
-    await Article.update({ id: parseInt(id) }, req.body);
+    const { headline, drophead, body, image, section } = req.body;
+
+    const newProperties: dataUpdate = {};
+
+    if (headline) {
+      newProperties.headline = headline;
+    }
+
+    if (drophead) {
+      newProperties.drophead = drophead;
+    }
+
+    if (body) {
+      newProperties.body = body;
+    }
+
+    if (image) {
+      newProperties.image = image;
+    }
+
+    if (section) {
+      const findSection = await Section.findOneBy({ name: section });
+      if (!findSection) {
+        return res.status(404).json({ message: "No section found" });
+      }
+      newProperties.section = findSection;
+    }
+
+    await Article.update({ id: parseInt(id) }, newProperties);
 
     //return res.sendStatus(204);
     return res.status(201).json({ message: "Update succesfull" });
