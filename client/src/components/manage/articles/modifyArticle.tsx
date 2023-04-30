@@ -220,8 +220,6 @@ function ModifyArticle(props: { data: Article }) {
     }
   };
 
-  console.log(input);
-
   return (
     <>
       <IconButton

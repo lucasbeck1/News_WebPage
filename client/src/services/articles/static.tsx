@@ -112,9 +112,11 @@ function deleteStaticArticle(id: number) {
     return { message: "Not article found" };
   }
 
-  allArticles.splice(index, 1);
+  const allArticlesCopy = allArticles.slice();
+  allArticlesCopy.splice(index, 1);
+  allArticles = allArticlesCopy;
 
-  return { message: "Update succesfull" };
+  return { message: "Delete succesfull" };
 }
 
 export {

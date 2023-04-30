@@ -259,8 +259,6 @@ function CreateArticle() {
     }
   };
 
-  console.log(input);
-
   return (
     <>
       <Button

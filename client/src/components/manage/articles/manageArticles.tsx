@@ -96,7 +96,7 @@ function ManageArticles() {
                     </StyledTableCell>
                     <StyledTableCell align="right">
                       <ModifyArticle data={row} />
-                      <DeleteArticle />
+                      <DeleteArticle data={row} />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
