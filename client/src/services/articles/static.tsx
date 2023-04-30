@@ -105,4 +105,21 @@ function updateStaticArticle(data: dataUpdate, id: number) {
   return { message: "Update succesfull" };
 }
 
-export { getStaticArticles, createStaticArticle, updateStaticArticle };
+function deleteStaticArticle(id: number) {
+  const index = allArticles.findIndex((article) => article.id === id);
+
+  if (index < 0) {
+    return { message: "Not article found" };
+  }
+
+  allArticles.splice(index, 1);
+
+  return { message: "Update succesfull" };
+}
+
+export {
+  getStaticArticles,
+  createStaticArticle,
+  updateStaticArticle,
+  deleteStaticArticle,
+};

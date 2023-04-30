@@ -69,4 +69,16 @@ function updateApiArticle(
   return request;
 }
 
-export { getApiArticles, createApiArticle, updateApiArticle };
+function deleteApiArticle(id: number): Promise<{ message: string }> {
+  const request: Promise<{ message: string }> = axios
+    .delete(localhost + "/articles/" + id.toString())
+    .then((res) => {
+      return res.data;
+    })
+    .catch(() => {
+      return { message: "REQUEST ERROR" };
+    });
+  return request;
+}
+
+export { getApiArticles, createApiArticle, updateApiArticle, deleteApiArticle };

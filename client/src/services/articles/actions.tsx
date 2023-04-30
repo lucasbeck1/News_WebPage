@@ -1,10 +1,16 @@
 import { storeArticles } from "../../reducers/sliceArticles";
 import { AppDispatch } from "../../store";
-import { getApiArticles, createApiArticle, updateApiArticle } from "./api";
+import {
+  getApiArticles,
+  createApiArticle,
+  updateApiArticle,
+  deleteApiArticle,
+} from "./api";
 import {
   getStaticArticles,
   createStaticArticle,
   updateStaticArticle,
+  deleteStaticArticle,
 } from "./static";
 
 type Article = {
@@ -74,4 +80,14 @@ async function updateArticle(
   return createArt;
 }
 
-export { getArticles, createArticle, updateArticle };
+async function deleteArticle(id: number): Promise<{ message: string }> {
+  let createArt: { message: string } = await deleteApiArticle(id);
+
+  if (createArt.message === "REQUEST ERROR") {
+    createArt = deleteStaticArticle(id);
+  }
+
+  return createArt;
+}
+
+export { getArticles, createArticle, updateArticle, deleteArticle };
