@@ -79,7 +79,7 @@ export const createSection = async (
     sectionCreation.name = name;
 
     await sectionCreation.save();
-    return res.status(201).json(sectionCreation);
+    return res.status(201).json({ message: "Create succesfull" });
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });
