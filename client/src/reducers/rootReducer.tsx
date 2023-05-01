@@ -4,8 +4,8 @@ import articleReducer from "./sliceArticles";
 import sectionReducer from "./sliceSections";
 
 const rootReducer = combineReducers({
-  users: userReducer,
   articles: articleReducer,
+  authors: userReducer,
   sections: sectionReducer,
 });
 

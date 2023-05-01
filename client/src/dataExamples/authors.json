@@ -1,35 +1,42 @@
 [
   {
+    "id": "1",
     "name": "Desmond Jachi",
     "mail": "desjakito@mail.com",
     "admin": false
   },
   {
+    "id": "2",
     "name": "lucas becfor",
     "mail": "lucas@mail.com",
     "admin": true
   },
   {
+    "id": "3",
     "name": "Sosana Guterlom",
     "mail": "sosgm1@mail.com",
     "admin": false
   },
   {
+    "id": "4",
     "name": "Maximo Sum",
     "mail": "max256@mail.com",
     "admin": false
   },
   {
+    "id": "5",
     "name": "Lucas Becord",
     "mail": "admin@mail.com",
     "admin": false
   },
   {
+    "id": "6",
     "name": "Jonh Doe",
     "mail": "jonh@mail.com",
     "admin": false
   },
   {
+    "id": "7",
     "name": "Tusan barr",
     "mail": "tusan@mail.com",
     "admin": false
