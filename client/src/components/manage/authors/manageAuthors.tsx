@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
 
+import { getAuthors } from "../../../services/authors/actions";
 import ManageDelete from "./manageDelete";
 import ManageModify from "./manageModify";
 import ManageCreate from "./manageCreate";
@@ -13,13 +16,9 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
-import authors from "../../../dataExamples/authors.json";
 import { Box, Button, IconButton } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
-import EditIcon from "@mui/icons-material/Edit";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -42,8 +41,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function ManageAuthors() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getAuthors(dispatch);
+  }, []);
+
+  const allAuthors = useSelector((state: RootState) => state.authors);
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -70,7 +77,7 @@ function ManageAuthors() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {authors
+              {allAuthors
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
                   <StyledTableRow
@@ -126,7 +133,7 @@ function ManageAuthors() {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={authors.length}
+            count={allAuthors.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

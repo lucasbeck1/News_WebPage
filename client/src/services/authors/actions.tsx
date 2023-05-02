@@ -39,7 +39,7 @@ type authorUpdate = {
   newPassword?: string;
 };
 
-async function getArticles(dispatch: AppDispatch): Promise<{
+async function getAuthors(dispatch: AppDispatch): Promise<{
   payload: Author[];
   type: "authors/storeAuthors";
 }> {
@@ -52,7 +52,7 @@ async function getArticles(dispatch: AppDispatch): Promise<{
   return dispatch(storeAuthors(getArts));
 }
 
-async function createArticle(
+async function createAuthor(
   data: authorCreation
 ): Promise<{ message: string }> {
   let createArt: { message: string } = await createApiAuthor(data);
@@ -64,7 +64,7 @@ async function createArticle(
   return createArt;
 }
 
-async function updateArticle(data: authorUpdate): Promise<{ message: string }> {
+async function updateAuthor(data: authorUpdate): Promise<{ message: string }> {
   let createArt: { message: string } = await updateApiAuthor(data);
 
   if (createArt.message === "REQUEST ERROR") {
@@ -74,7 +74,7 @@ async function updateArticle(data: authorUpdate): Promise<{ message: string }> {
   return createArt;
 }
 
-async function deleteArticle(
+async function deleteAuthor(
   id: string,
   adminKey: string
 ): Promise<{ message: string }> {
@@ -87,4 +87,4 @@ async function deleteArticle(
   return createArt;
 }
 
-export { getArticles, createArticle, updateArticle, deleteArticle };
+export { getAuthors, createAuthor, updateAuthor, deleteAuthor };
