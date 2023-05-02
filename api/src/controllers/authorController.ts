@@ -23,6 +23,7 @@ export const getAllAuthors = async (_req: Request, res: Response) => {
   try {
     const allAuthors = await Author.find({
       select: {
+        id: true,
         name: true,
         mail: true,
         admin: true,
@@ -49,6 +50,7 @@ export const getOneAuthor = async (req: Request, res: Response) => {
         id: id,
       },
       select: {
+        id: true,
         name: true,
         mail: true,
         admin: true,
