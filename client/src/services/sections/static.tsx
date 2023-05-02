@@ -32,8 +32,14 @@ function updateStaticSection(id: number, name: string) {
   }
   const index = allSections.findIndex((section) => section.id === id);
 
+  const newArticle: Section = {
+    id,
+    name,
+    quantity: sectionToUpdate.quantity,
+  };
+
   const sectionsCopy = allSections.slice();
-  sectionsCopy[index].name = name;
+  sectionsCopy[index] = newArticle;
   allSections = sectionsCopy;
 
   return { message: "Update succesfull" };

@@ -21,7 +21,7 @@ function getApiSections(): Promise<Section[]> {
 
 function createApiSection(data: string): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(localhost + "/section", data)
+    .post(localhost + "/sections", { name: data })
     .then((res) => {
       return res.data;
     })
@@ -36,7 +36,7 @@ function updateApiArticle(
   name: string
 ): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .put(localhost + "/section/" + id.toString(), { name })
+    .put(localhost + "/sections/" + id.toString(), { name })
     .then((res) => {
       return res.data;
     })
@@ -48,7 +48,7 @@ function updateApiArticle(
 
 function deleteApiArticle(id: number): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .delete(localhost + "/section/" + id.toString())
+    .delete(localhost + "/sections/" + id.toString())
     .then((res) => {
       return res.data;
     })

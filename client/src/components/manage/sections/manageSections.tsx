@@ -95,8 +95,8 @@ function ManageSections() {
                       {section.quantity}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      <ModifySection sectionName={section.name} />
-                      <DeleteSection />
+                      <ModifySection section={section} />
+                      <DeleteSection section={section} />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
