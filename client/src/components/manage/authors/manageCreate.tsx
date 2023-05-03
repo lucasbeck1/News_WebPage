@@ -54,7 +54,6 @@ function ManageCreate() {
     password: "",
     adminKey: admin?.id || "",
   });
-  console.log(input);
   const [error, setError] = useState({});
   const initialDataJson = JSON.stringify({
     admin: false,

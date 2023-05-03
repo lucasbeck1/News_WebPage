@@ -22,8 +22,6 @@ function ManageDelete(props: { author: Author }) {
   const admin = allAuthors.find((u) => u.admin === true);
   const adminKey = admin?.id || "";
 
-  console.log(id, adminKey);
-
   const handleClickOpen = () => {
     Swal.fire({
       title: "Are you sure?",
