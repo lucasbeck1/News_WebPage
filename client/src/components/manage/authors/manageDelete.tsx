@@ -45,14 +45,14 @@ function ManageDelete(props: { author: Author }) {
           });
       },
     })
-      .then((result) => {
-        getAuthors(dispatch);
-        return result;
-      })
+
       .then((result) => {
         if (result.isConfirmed) {
           Swal.fire(`${name} Deleted!`, "The user has been deleted", "success");
         }
+      })
+      .then(() => {
+        getAuthors(dispatch);
       });
   };
 
