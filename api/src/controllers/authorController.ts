@@ -104,9 +104,7 @@ export const createAuthor = async (
     authorCreation.password = hash;
 
     await authorCreation.save();
-    return res
-      .status(201)
-      .json(`User ${authorCreation.name} created succesfully`);
+    return res.status(201).json({ message: "Create succesfull" });
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });
