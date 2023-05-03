@@ -20,6 +20,14 @@ import { Box, Button, IconButton } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
 
+type Author = {
+  id: string;
+  admin: boolean;
+  name: string;
+  mail: string;
+  password?: string;
+};
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "rgb(18,109,162)",
@@ -47,7 +55,7 @@ function ManageAuthors() {
     getAuthors(dispatch);
   }, []);
 
-  const allAuthors = useSelector((state: RootState) => state.authors);
+  const allAuthors: Author[] = useSelector((state: RootState) => state.authors);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -79,17 +87,17 @@ function ManageAuthors() {
             <TableBody>
               {allAuthors
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
+                .map((user) => (
                   <StyledTableRow
-                    key={row.name}
+                    key={user.name}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <StyledTableCell component="th" scope="row">
-                      {row.name}
+                      {user.name}
                     </StyledTableCell>
-                    <StyledTableCell align="right">{row.mail}</StyledTableCell>
+                    <StyledTableCell align="right">{user.mail}</StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.admin ? (
+                      {user.admin ? (
                         <IconButton
                           sx={{ p: 0, m: 0 }}
                           size="small"
@@ -110,8 +118,8 @@ function ManageAuthors() {
                       )}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      <ManageModify user={row} />
-                      <ManageDelete />
+                      <ManageModify user={user} />
+                      <ManageDelete author={user} />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}

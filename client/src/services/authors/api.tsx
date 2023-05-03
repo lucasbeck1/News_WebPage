@@ -67,14 +67,20 @@ function deleteApiAuthor(
   id: string,
   adminKey: any
 ): Promise<{ message: string }> {
-  const request: Promise<{ message: string }> = axios
-    .delete(localhost + "/authors/" + id, adminKey)
+  const request: Promise<{ message: string }> = axios({
+    method: "delete",
+    url: localhost + "/authors/" + id,
+    data: {
+      adminKey: adminKey,
+    },
+  })
     .then((res) => {
       return res.data;
     })
     .catch(() => {
       return { message: "REQUEST ERROR" };
     });
+
   return request;
 }
 
