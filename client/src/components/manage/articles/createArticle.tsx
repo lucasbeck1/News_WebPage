@@ -1,10 +1,9 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 import { RootState } from "../../../store";
-import { getSections } from "../../../services/sections/actions";
 import { createArticle } from "../../../services/articles/actions";
 import { localhost } from "../../../services/url";
 import UploadInput from "./uploadInput";
@@ -58,10 +57,6 @@ function CreateArticle() {
   //****************************
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    getSections(dispatch);
-  }, []);
 
   const allSections = useSelector((state: RootState) => state.sections);
 

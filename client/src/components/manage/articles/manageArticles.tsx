@@ -7,6 +7,7 @@ import DeleteArticle from "./deleteArticle";
 import ModifyArticle from "./modifyArticle";
 import CreateArticle from "./createArticle";
 
+import { getSections } from "../../../services/sections/actions";
 import { getArticles } from "../../../services/articles/actions";
 import articles from "../../../dataExamples/articles.json";
 
@@ -46,6 +47,7 @@ function ManageArticles() {
 
   useEffect(() => {
     getArticles(dispatch);
+    getSections(dispatch);
   }, []);
 
   const allArticles = useSelector((state: RootState) => state.articles);
