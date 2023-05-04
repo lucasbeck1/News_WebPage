@@ -13,6 +13,7 @@ import sectionRoutes from "./routes/sectionRoutes";
 import sponsorRotes from "./routes/sponsorRoutes";
 import publicityRoutes from "./routes/publicityRoutes";
 import imageRoutes from "./routes/imageRoutes";
+import authRoutes from "./routes/authRoutes";
 
 // Express and midlewares
 const app = express();
@@ -31,6 +32,7 @@ app.use("/sections", sectionRoutes);
 app.use("/sponsors", sponsorRotes);
 app.use("/publicities", publicityRoutes);
 app.use("/images", imageRoutes);
+app.use("/auth", authRoutes);
 
 // Exports
 export default app;
