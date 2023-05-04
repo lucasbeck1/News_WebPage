@@ -1,9 +1,11 @@
 // Imports
 import "reflect-metadata";
 import express from "express";
+import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import cors from "cors";
 import path from "path";
+import { cookieKey } from "./config";
 import statusRouter from "./routes/statusRoutes";
 import articlesRouter from "./routes/articleRoutes";
 import authorRoutes from "./routes/authorRoutes";
@@ -17,6 +19,7 @@ const app = express();
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json({ limit: "50mb" }));
+app.use(cookieParser(cookieKey));
 const staticPath = path.join(__dirname, "uploads");
 app.use(express.static(staticPath));
 
