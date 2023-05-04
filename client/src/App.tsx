@@ -9,8 +9,10 @@ import Admin from "./pages/admin";
 import Management from "./pages/management";
 import Metrics from "./pages/metrics";
 import Login from "./pages/login";
+import Register from "./pages/register";
 
 function App() {
+  //document.cookie = "TEST2=HOLA; “SameSite=None";
   return (
     <div className="App">
       <Router>
@@ -21,6 +23,7 @@ function App() {
           <Route path="/manage" element={<Management />} />
           <Route path="/metrics" element={<Metrics />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/:sectionName" element={<Section />} />
         </Routes>
       </Router>

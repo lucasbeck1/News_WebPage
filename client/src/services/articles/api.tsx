@@ -32,7 +32,9 @@ type dataUpdate = {
 
 function getApiArticles(): Promise<Article[]> {
   const request: Promise<Article[]> = axios
-    .get(localhost + "/articles")
+    .get(localhost + "/articles", {
+      withCredentials: true,
+    })
     .then((req) => {
       return req.data;
     })
