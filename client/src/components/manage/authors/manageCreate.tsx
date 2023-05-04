@@ -109,8 +109,9 @@ function ManageCreate() {
 
   function verifyInput(input: Input) {
     let err: Input = {};
-    let RegEXP_User = /[`ª!@#$%^*_+=[\]{};"\\|,<>/~]/;
-    let RegEXP_Mail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const RegEXP_User = /[`ª!@#$%^*_+=[\]{};'"\\|,<>/~]/;
+    const RegEXP_Mail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const RegEXP_Password = /[`'"]/;
     // ** Name **
     if (!input.name) {
       err.name = "Name required";
@@ -128,6 +129,8 @@ function ManageCreate() {
       err.password = "Password required";
     } else if (input.password.length < 4) {
       err.password = "Password minimum 4 characters";
+    } else if (RegEXP_Password.test(input.password)) {
+      err.password = "Quote characters are not allowed";
     }
     // ** AdminKey **
     else if (!input.adminKey) {

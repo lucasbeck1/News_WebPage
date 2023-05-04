@@ -122,8 +122,9 @@ function ManageModify({ user }: User) {
 
   function verifyInput(input: Input) {
     let err: Input = {};
-    let RegEXP_User = /[`ª!@#$%^*_+=[\]{};"\\|,<>/~]/;
-    let RegEXP_Mail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const RegEXP_User = /[`ª!@#$%^*_+=[\]{};'"\\|,<>/~]/;
+    const RegEXP_Mail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const RegEXP_Password = /[`'"]/;
     // ** Name **
     if (input.name && RegEXP_User.test(input.name)) {
       err.name = "Special characters are not accepted";
@@ -135,10 +136,14 @@ function ManageModify({ user }: User) {
     // ** OldPassword **
     else if (input.oldPassword && input.oldPassword.length < 4) {
       err.oldPassword = "Password minimum 4 characters";
+    } else if (input.oldPassword && RegEXP_Password.test(input.oldPassword)) {
+      err.oldPassword = "Quote characters are not allowed";
     }
     // ** NewPassword **
     else if (input.newPassword && input.newPassword.length < 4) {
       err.newPassword = "Password minimum 4 characters";
+    } else if (input.newPassword && RegEXP_Password.test(input.newPassword)) {
+      err.newPassword = "Quote characters are not allowed";
     }
     return err;
   }
