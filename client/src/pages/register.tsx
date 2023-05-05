@@ -1,7 +1,8 @@
 import * as React from "react";
+import { NavLink } from "react-router-dom";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -48,6 +49,17 @@ function Register() {
     <ThemeProvider theme={theme}>
       <Container maxWidth="lg" sx={{ p: 0 }}>
         <ScopedCssBaseline enableColorScheme>
+          <Box sx={{ pt: 5, pl: 5 }}>
+            <NavLink
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+              }}
+              to={`/`}
+            >
+              {"<-"} Go Back
+            </NavLink>
+          </Box>
           <Container component="main" maxWidth="xs">
             <Box
               sx={{
@@ -62,7 +74,7 @@ function Register() {
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign up
+                Register
               </Typography>
               <Box
                 component="form"
@@ -132,9 +144,17 @@ function Register() {
                 </Button>
                 <Grid container justifyContent="flex-end">
                   <Grid item>
-                    <Link href="#" variant="body2">
-                      Already have an account? Sign in
-                    </Link>
+                    <NavLink
+                      style={{
+                        color: "#1976d2",
+                        textDecorationColor: "rgba(25, 118, 210, 0.4)",
+                      }}
+                      to={`/login`}
+                    >
+                      <Typography component="p" variant="body2">
+                        {"Already have an account? Login"}
+                      </Typography>
+                    </NavLink>
                   </Grid>
                 </Grid>
               </Box>

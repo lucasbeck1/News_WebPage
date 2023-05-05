@@ -1,10 +1,12 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
+import { NavLink } from "react-router-dom";
+
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
-import { NavLink } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function Copyright() {
   return (
@@ -46,10 +48,27 @@ export default function Footer() {
           </Typography>
 
           <NavLink
-            style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.60)" }}
+            style={{
+              textDecoration: "none",
+              color: "rgba(0, 0, 0, 0.60)",
+            }}
             to={`/login`}
           >
-            Login
+            <Typography component="p" variant="body1">
+              {"Login"}
+            </Typography>
+          </NavLink>
+
+          <NavLink
+            style={{
+              textDecoration: "none",
+              color: "rgba(0, 0, 0, 0.60)",
+            }}
+            to={`/register`}
+          >
+            <Typography component="p" variant="body1">
+              {"Register"}
+            </Typography>
           </NavLink>
 
           <Copyright />

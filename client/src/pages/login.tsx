@@ -1,6 +1,7 @@
+import { NavLink } from "react-router-dom";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -47,6 +48,17 @@ function Login() {
     <ThemeProvider theme={theme}>
       <Container maxWidth="lg" sx={{ p: 0 }}>
         <ScopedCssBaseline enableColorScheme>
+          <Box sx={{ pt: 5, pl: 5 }}>
+            <NavLink
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+              }}
+              to={`/`}
+            >
+              {"<-"} Go Back
+            </NavLink>
+          </Box>
           <Container component="main" maxWidth="xs">
             <Box
               sx={{
@@ -103,14 +115,30 @@ function Login() {
                 </Button>
                 <Grid container>
                   <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link>
+                    <NavLink
+                      style={{
+                        color: "#1976d2",
+                        textDecorationColor: "rgba(25, 118, 210, 0.4)",
+                      }}
+                      to={`/`}
+                    >
+                      <Typography component="p" variant="body2">
+                        {"Forgot password?"}
+                      </Typography>
+                    </NavLink>
                   </Grid>
                   <Grid item>
-                    <Link href="#" variant="body2">
-                      {"Don't have an account? Sign Up"}
-                    </Link>
+                    <NavLink
+                      style={{
+                        color: "#1976d2",
+                        textDecorationColor: "rgba(25, 118, 210, 0.4)",
+                      }}
+                      to={`/register`}
+                    >
+                      <Typography component="p" variant="body2">
+                        {"Don't have an account? Sign Up"}
+                      </Typography>
+                    </NavLink>
                   </Grid>
                 </Grid>
               </Box>
