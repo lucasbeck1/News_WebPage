@@ -27,7 +27,7 @@ export const login = async (
 
     const checkPass: boolean = await bcrypt.compare(password, author.password);
     if (checkPass) {
-      res.cookie("id", author.id, { signed: true });
+      res.cookie("id", author.id, { signed: true, sameSite: "lax" });
       return res.status(200).json({ message: "OK" });
     } else {
       return res.status(404).json({ message: "Invalid Request" });
