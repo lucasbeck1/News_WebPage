@@ -12,9 +12,13 @@ type registerRequest = {
   password: string;
 };
 
+// axios.defaults.withCredentials = true;
+
 function loginApi(data: loginRequest): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(localhost + "/auth/login", data)
+    .post(localhost + "/auth/login", data, {
+      withCredentials: true,
+    })
     .then((req) => {
       return req.data;
     })

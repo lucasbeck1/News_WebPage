@@ -1,4 +1,10 @@
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
+import { login } from "../services/auth/actions";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -13,6 +19,16 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
+
+type Input = {
+  mail?: string;
+  password?: string;
+};
+
+enum InputProp {
+  mail = "mail",
+  password = "password",
+}
 
 function Copyright(props: any) {
   return (
@@ -35,14 +51,77 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 function Login() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [input, setInput] = useState({
+    mail: "",
+    password: "",
+  });
+
+  const [error, setError] = useState({});
+
+  function changeInput(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    name: string
+  ) {
+    setInput({
+      ...input,
+      [name]: e.target.value,
     });
-  };
+    setError(
+      verifyInput({
+        ...input,
+        [name]: e.target.value,
+      })
+    );
+  }
+
+  function verifyInput(input: Input) {
+    let err: Input = {};
+    const RegEXP_Mail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const RegEXP_Password = /[`'"]/;
+    // ** mail **
+    if (!input.mail) {
+      err.mail = "Mail required";
+    } else if (input.mail.length > 80) {
+      err.mail = "The mail is too long";
+    } else if (!RegEXP_Mail.test(input.mail)) {
+      err.mail = "Invalid mail";
+    }
+    // ** password **
+    else if (!input.password) {
+      err.password = "Password required";
+    } else if (input.password.length > 150) {
+      err.password = "The password is too long";
+    } else if (!RegEXP_Password.test(input.password)) {
+      err.password = "Quote characters are not allowed";
+    }
+
+    return err;
+  }
+
+  function comprobe(errors: Input, name: InputProp): boolean {
+    if (errors[name]) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function errorExplain(errors: Input, name: InputProp) {
+    if (errors[name]) {
+      return errors[name];
+    }
+  }
+
+  async function handleSubmit() {
+    const msg = await login(input);
+    alert(msg.message);
+    if (msg.message === "OK") {
+      navigate("/");
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -77,7 +156,7 @@ function Login() {
               </Typography>
               <Box
                 component="form"
-                onSubmit={handleSubmit}
+                /* onSubmit={handleSubmit} */
                 noValidate
                 sx={{ mt: 1 }}
               >
@@ -85,11 +164,15 @@ function Login() {
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="mail"
+                  label="Mail Address"
+                  name="mail"
+                  autoComplete="mail"
                   autoFocus
+                  value={input.mail}
+                  onChange={(e) => changeInput(e, "mail")}
+                  error={comprobe(error, InputProp.mail)}
+                  helperText={errorExplain(error, InputProp.mail)}
                 />
                 <TextField
                   margin="normal"
@@ -100,13 +183,18 @@ function Login() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  value={input.password}
+                  onChange={(e) => changeInput(e, "password")}
+                  error={comprobe(error, InputProp.mail)}
+                  helperText={errorExplain(error, InputProp.mail)}
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
                   label="Remember me"
                 />
                 <Button
-                  type="submit"
+                  /* type="submit" */
+                  onClick={() => handleSubmit()}
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
