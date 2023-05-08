@@ -1,8 +1,10 @@
+import * as React from "react";
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import { NavLink } from "react-router-dom";
 
-import * as React from "react";
+import { logout } from "../services/auth/actions";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -96,7 +98,9 @@ function Admin() {
                 <Avatar sx={{ width: 24, height: 24, p: 0, m: 0 }} alt="avatar">
                   <PersonIcon />
                 </Avatar>
-                <Button color="inherit">Logout</Button>
+                <Button onClick={logout} color="inherit">
+                  Logout
+                </Button>
               </Toolbar>
             </AppBar>
           </Box>
