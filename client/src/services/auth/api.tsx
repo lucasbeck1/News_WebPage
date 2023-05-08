@@ -30,7 +30,9 @@ function loginApi(data: loginRequest): Promise<{ message: string }> {
 
 function logoutApi(): Promise<number> {
   const request: Promise<number> = axios
-    .get(localhost + "/auth/logout")
+    .get(localhost + "/auth/logout", {
+      withCredentials: true,
+    })
     .then((req) => {
       return req.status;
     });

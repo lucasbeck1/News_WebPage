@@ -1,7 +1,7 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { logout } from "../services/auth/actions";
 
@@ -29,9 +29,10 @@ const options: optionsType[] = [
   { section: "Metrics", url: "/metrics" },
 ];
 
-const ITEM_HEIGHT = 48;
-
 function Admin() {
+  const ITEM_HEIGHT = 48;
+  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -40,6 +41,11 @@ function Admin() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  async function logoutUser() {
+    await logout();
+    navigate("/");
+  }
 
   return (
     <>
@@ -98,7 +104,7 @@ function Admin() {
                 <Avatar sx={{ width: 24, height: 24, p: 0, m: 0 }} alt="avatar">
                   <PersonIcon />
                 </Avatar>
-                <Button onClick={logout} color="inherit">
+                <Button onClick={() => logoutUser()} color="inherit">
                   Logout
                 </Button>
               </Toolbar>
