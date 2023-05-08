@@ -50,8 +50,13 @@ export const logOut = async (
   // Cookies that have been signed
   console.log("Signed Cookies: ", req.signedCookies);
 
-  res.clearCookie("id");
-  return res.redirect("/");
+  try {
+    res.clearCookie("id", { signed: true, sameSite: "lax" });
+    return res.send("OK");
+  } catch (error) {
+    console.log(error);
+    return res.send(error);
+  }
 };
 
 export const register = async (
