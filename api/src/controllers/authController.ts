@@ -27,7 +27,9 @@ export const login = async (
 
     const checkPass: boolean = await bcrypt.compare(password, author.password);
     if (checkPass) {
-      res.cookie("id", author.id, { signed: true, sameSite: "lax" });
+      res.cookie("id", author.id, { signed: true, sameSite: "strict" });
+      res.cookie("name", author.name, { signed: false, sameSite: "strict" });
+      res.cookie("admin", author.admin, { signed: false, sameSite: "strict" });
       return res.status(200).json({ message: "OK" });
     } else {
       return res.status(404).json({ message: "Invalid Request" });
@@ -51,7 +53,9 @@ export const logOut = async (
   console.log("Signed Cookies: ", req.signedCookies);
 
   try {
-    res.clearCookie("id", { signed: true, sameSite: "lax" });
+    res.clearCookie("id", { signed: true, sameSite: "strict" });
+    res.clearCookie("name", { signed: false, sameSite: "strict" });
+    res.clearCookie("admin", { signed: false, sameSite: "strict" });
     return res.send("OK");
   } catch (error) {
     console.log(error);
