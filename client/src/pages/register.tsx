@@ -1,5 +1,7 @@
-import * as React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -36,6 +38,8 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 function Register() {
+  const user = useSelector((state: RootState) => state.auth);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -44,6 +48,10 @@ function Register() {
       password: data.get("password"),
     });
   };
+
+  if (user.name || user.type !== "none") {
+    return <Navigate to={"/"} />;
+  }
 
   return (
     <ThemeProvider theme={theme}>

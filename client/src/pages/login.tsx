@@ -1,9 +1,9 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
+import { RootState } from "../store";
 import { login } from "../services/auth/actions";
 
 import Avatar from "@mui/material/Avatar";
@@ -53,6 +53,7 @@ const theme = createTheme();
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.auth);
 
   const [input, setInput] = useState({
     mail: "",
@@ -128,6 +129,10 @@ function Login() {
     } else {
       Swal.fire("Error", msg.message, "error");
     }
+  }
+
+  if (user.name || user.type !== "none") {
+    return <Navigate to={"/"} />;
   }
 
   return (
