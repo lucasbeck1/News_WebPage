@@ -31,7 +31,6 @@ async function login(
   } else {
     dispatch(clearState());
   }
-  console.log(cookies);
 
   return request;
 }

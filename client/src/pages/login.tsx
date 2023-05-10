@@ -59,6 +59,12 @@ function Login() {
     password: "",
   });
 
+  const initialDataJson = JSON.stringify({
+    mail: "",
+    password: "",
+  });
+  const inputJson = JSON.stringify(input);
+
   const [error, setError] = useState({});
 
   function changeInput(
@@ -94,7 +100,7 @@ function Login() {
       err.password = "Password required";
     } else if (input.password.length > 150) {
       err.password = "The password is too long";
-    } else if (!RegEXP_Password.test(input.password)) {
+    } else if (RegEXP_Password.test(input.password)) {
       err.password = "Quote characters are not allowed";
     }
 
@@ -117,9 +123,10 @@ function Login() {
 
   async function handleSubmit() {
     const msg = await login(input, dispatch);
-    alert(msg.message);
     if (msg.message === "OK") {
       navigate("/");
+    } else {
+      Swal.fire("Error", msg.message, "error");
     }
   }
 
@@ -185,22 +192,34 @@ function Login() {
                   autoComplete="current-password"
                   value={input.password}
                   onChange={(e) => changeInput(e, "password")}
-                  error={comprobe(error, InputProp.mail)}
-                  helperText={errorExplain(error, InputProp.mail)}
+                  error={comprobe(error, InputProp.password)}
+                  helperText={errorExplain(error, InputProp.password)}
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
                   label="Remember me"
                 />
-                <Button
-                  /* type="submit" */
-                  onClick={() => handleSubmit()}
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Login
-                </Button>
+
+                {initialDataJson === inputJson || Object.keys(error).length ? (
+                  <Button
+                    disabled
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Login
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => handleSubmit()}
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Login
+                  </Button>
+                )}
+
                 <Grid container>
                   <Grid item xs>
                     <NavLink

@@ -23,7 +23,7 @@ function loginApi(data: loginRequest): Promise<{ message: string }> {
       return req.data;
     })
     .catch(() => {
-      return [];
+      return { message: "Invalid credentials" };
     });
   return request;
 }
