@@ -1,6 +1,8 @@
 import { HashRouter as Router } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
+import { RootState } from "./store";
 
 import Home from "./pages/home";
 import Detail from "./pages/detail";
@@ -10,13 +12,17 @@ import Management from "./pages/management";
 import Metrics from "./pages/metrics";
 import Login from "./pages/login";
 import Register from "./pages/register";
+import { useState } from "react";
 
 function App() {
-  //document.cookie = "TEST2=HOLA; “SameSite=None";
+  const typeUser = useSelector((state: RootState) => state.auth);
+
   return (
     <div className="App">
       <Router>
-        <Admin />
+        {typeUser === "admin" ? <Admin /> : <></>}
+        {typeUser === "author" ? <Admin /> : <></>}
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />

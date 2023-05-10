@@ -116,7 +116,7 @@ function Login() {
   }
 
   async function handleSubmit() {
-    const msg = await login(input);
+    const msg = await login(input, dispatch);
     alert(msg.message);
     if (msg.message === "OK") {
       navigate("/");

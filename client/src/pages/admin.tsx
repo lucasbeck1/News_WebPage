@@ -2,6 +2,7 @@ import * as React from "react";
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { logout } from "../services/auth/actions";
 
@@ -32,6 +33,7 @@ const options: optionsType[] = [
 function Admin() {
   const ITEM_HEIGHT = 48;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -43,7 +45,7 @@ function Admin() {
   };
 
   async function logoutUser() {
-    await logout();
+    await logout(dispatch);
     navigate("/");
   }
 
