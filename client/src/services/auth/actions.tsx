@@ -1,5 +1,5 @@
 import { loginApi, logoutApi, registerApi } from "./api";
-import { authState } from "../../reducers/sliceAuth";
+import { authState, clearState } from "../../reducers/sliceAuth";
 import { AppDispatch } from "../../store";
 
 type loginRequest = {
@@ -20,29 +20,25 @@ async function login(
   let request: { message: string } = await loginApi(data);
 
   const cookies: string = document.cookie;
-  if (cookies.includes("admin=true")) {
-    dispatch(authState("admin"));
-  } else if (cookies.includes("admin=false")) {
-    dispatch(authState("author"));
+  const nameEncoded = cookies?.split("; ").find((e) => e.includes("name"));
+
+  if (cookies.includes("admin=true") && nameEncoded) {
+    const name = decodeURI(nameEncoded);
+    dispatch(authState({ type: "admin", name }));
+  } else if (cookies.includes("admin=false") && nameEncoded) {
+    const name = decodeURI(nameEncoded);
+    dispatch(authState({ type: "author", name }));
   } else {
-    dispatch(authState("none"));
+    dispatch(clearState());
   }
+  console.log(cookies);
 
   return request;
 }
 
 async function logout(dispatch: AppDispatch): Promise<number> {
   let request: number = await logoutApi();
-
-  const cookies: string = document.cookie;
-  if (cookies.includes("admin=true")) {
-    dispatch(authState("admin"));
-  } else if (cookies.includes("admin=false")) {
-    dispatch(authState("author"));
-  } else {
-    dispatch(authState("none"));
-  }
-
+  dispatch(clearState());
   return request;
 }
 

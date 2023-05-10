@@ -1,6 +1,6 @@
 import { HashRouter as Router } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "./App.css";
 import { RootState } from "./store";
 
@@ -12,10 +12,9 @@ import Management from "./pages/management";
 import Metrics from "./pages/metrics";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import { useState } from "react";
 
 function App() {
-  const typeUser = useSelector((state: RootState) => state.auth);
+  const typeUser = useSelector((state: RootState) => state.auth.type);
 
   return (
     <div className="App">
