@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ContentLoader from "react-content-loader";
 import { RootState } from "../../../store";
 
 import DeleteArticle from "./deleteArticle";
@@ -9,7 +10,6 @@ import CreateArticle from "./createArticle";
 
 import { getSections } from "../../../services/sections/actions";
 import { getArticles } from "../../../services/articles/actions";
-import articles from "../../../dataExamples/articles.json";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -70,40 +70,112 @@ function ManageArticles() {
     <>
       <Paper sx={{ width: "100%" }}>
         <TableContainer component={Paper} sx={{ minHeight: 410 }}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Title</StyledTableCell>
-                <StyledTableCell align="right">Section</StyledTableCell>
-                <StyledTableCell align="right">Create Date</StyledTableCell>
-                <StyledTableCell align="right">Actions</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {allArticles
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                  <StyledTableRow
-                    key={row.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <StyledTableCell component="th" scope="row">
-                      {row.headline}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.section.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.createdAt.slice(0, 10)}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      <ModifyArticle data={row} />
-                      <DeleteArticle data={row} />
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody>
-          </Table>
+          {allArticles.length ? (
+            <Table
+              sx={{ minWidth: 650 }}
+              size="small"
+              aria-label="a dense table"
+            >
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Title</StyledTableCell>
+                  <StyledTableCell align="right">Section</StyledTableCell>
+                  <StyledTableCell align="right">Create Date</StyledTableCell>
+                  <StyledTableCell align="right">Actions</StyledTableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {allArticles
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => (
+                    <StyledTableRow
+                      key={row.id}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <StyledTableCell component="th" scope="row">
+                        {row.headline}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.section.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.createdAt.slice(0, 10)}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        <ModifyArticle data={row} />
+                        <DeleteArticle data={row} />
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          ) : (
+            <>
+              <Table
+                sx={{ minWidth: 650 }}
+                size="small"
+                aria-label="a dense table"
+              >
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Title</StyledTableCell>
+                    <StyledTableCell align="right">Section</StyledTableCell>
+                    <StyledTableCell align="right">Create Date</StyledTableCell>
+                    <StyledTableCell align="right">Actions</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+              </Table>
+
+              <ContentLoader
+                speed={2.5}
+                backgroundColor="#d4d4d4"
+                foregroundColor="#898989"
+                viewBox="0 0 180 70"
+              >
+                <rect
+                  x="5"
+                  y="5"
+                  rx="1"
+                  ry="1"
+                  width="10.5rem"
+                  height="0.4rem"
+                />
+                <rect
+                  x="5"
+                  y="15"
+                  rx="1"
+                  ry="1"
+                  width="10.5rem"
+                  height="0.4rem"
+                />
+                <rect
+                  x="5"
+                  y="25"
+                  rx="1"
+                  ry="1"
+                  width="10.5rem"
+                  height="0.4rem"
+                />
+                <rect
+                  x="5"
+                  y="35"
+                  rx="1"
+                  ry="1"
+                  width="10.5rem"
+                  height="0.4rem"
+                />
+                <rect
+                  x="5"
+                  y="45"
+                  rx="1"
+                  ry="1"
+                  width="10.5rem"
+                  height="0.4rem"
+                />
+              </ContentLoader>
+            </>
+          )}
         </TableContainer>
         <Box
           sx={{
@@ -120,7 +192,7 @@ function ManageArticles() {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={articles.length}
+            count={allArticles.length || 0}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
