@@ -1,6 +1,6 @@
 import { HashRouter as Router } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
 import { RootState } from "./store";
 
@@ -12,8 +12,11 @@ import Management from "./pages/management";
 import Metrics from "./pages/metrics";
 import Login from "./pages/login";
 import Register from "./pages/register";
+import { checkCredentials } from "./services/auth/actions";
 
 function App() {
+  const dispatch = useDispatch();
+  checkCredentials(dispatch);
   const typeUser = useSelector((state: RootState) => state.auth.type);
 
   return (

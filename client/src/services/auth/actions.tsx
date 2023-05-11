@@ -13,12 +13,7 @@ type registerRequest = {
   password: string;
 };
 
-async function login(
-  data: loginRequest,
-  dispatch: AppDispatch
-): Promise<{ message: string }> {
-  let request: { message: string } = await loginApi(data);
-
+function checkCredentials(dispatch: AppDispatch) {
   const cookies: string = document.cookie;
   const nameEncoded = cookies?.split("; ").find((e) => e.includes("name"));
 
@@ -31,6 +26,15 @@ async function login(
   } else {
     dispatch(clearState());
   }
+}
+
+async function login(
+  data: loginRequest,
+  dispatch: AppDispatch
+): Promise<{ message: string }> {
+  let request: { message: string } = await loginApi(data);
+
+  checkCredentials(dispatch);
 
   return request;
 }
@@ -46,4 +50,4 @@ async function register(data: registerRequest): Promise<{ message: string }> {
   return request;
 }
 
-export { login, logout, register };
+export { login, logout, register, checkCredentials };
