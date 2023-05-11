@@ -39,8 +39,6 @@ function ManageCreate() {
   // **** Global Variables ****
   //****************************
   const dispatch = useDispatch();
-  const allAuthors = useSelector((state: RootState) => state.authors);
-  const admin = allAuthors.find((u) => u.admin === true);
 
   //****************************
   // **** Local Variables ****
@@ -52,7 +50,6 @@ function ManageCreate() {
     name: "",
     mail: "",
     password: "",
-    adminKey: admin?.id || "",
   });
   const [error, setError] = useState({});
   const initialDataJson = JSON.stringify({
@@ -60,7 +57,6 @@ function ManageCreate() {
     name: "",
     mail: "",
     password: "",
-    adminKey: admin?.id || "",
   });
   const inputJson = JSON.stringify(input);
 
@@ -74,7 +70,6 @@ function ManageCreate() {
       name: "",
       mail: "",
       password: "",
-      adminKey: admin?.id || "",
     });
     setOpen(true);
   }
@@ -85,7 +80,6 @@ function ManageCreate() {
       name: "",
       mail: "",
       password: "",
-      adminKey: admin?.id || "",
     });
     setError({});
     setOpen(false);

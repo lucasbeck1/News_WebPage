@@ -18,9 +18,6 @@ type Author = {
 function ManageDelete(props: { author: Author }) {
   const dispatch = useDispatch();
   const { name, id } = props.author;
-  const allAuthors = useSelector((state: RootState) => state.authors);
-  const admin = allAuthors.find((u) => u.admin === true);
-  const adminKey = admin?.id || "";
 
   const handleClickOpen = () => {
     Swal.fire({
@@ -33,7 +30,7 @@ function ManageDelete(props: { author: Author }) {
       cancelButtonColor: "grey",
       confirmButtonText: "Yes, delete it!",
       preConfirm: () => {
-        deleteAuthor(id, adminKey)
+        deleteAuthor(id)
           .then((response) => {
             if (response.message !== "Delete succesfull") {
               throw new Error(response.message);

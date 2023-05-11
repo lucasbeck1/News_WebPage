@@ -48,8 +48,7 @@ function ManageModify({ user }: User) {
   // **** Global Variables ****
   //****************************
   const dispatch = useDispatch();
-  const allAuthors = useSelector((state: RootState) => state.authors);
-  const admin = allAuthors.find((u) => u.admin === true);
+  const typeAuthor = useSelector((state: RootState) => state.auth.type);
 
   //****************************
   // **** Local Variables ****
@@ -73,7 +72,6 @@ function ManageModify({ user }: User) {
   });
   const inputJson = JSON.stringify(input);
 
-  const adminKey: string = admin?.id || "";
   const id: string = user.id;
 
   //****************************
@@ -165,7 +163,6 @@ function ManageModify({ user }: User) {
   async function submit() {
     const msg = await updateAuthor({
       ...input,
-      adminKey: adminKey,
       id: id,
     });
     if (msg.message === "Update succesfull") {
@@ -275,7 +272,7 @@ function ManageModify({ user }: User) {
             </RadioGroup>
           </FormControl>
 
-          {!adminKey && (
+          {typeAuthor !== "admin" && (
             <Typography
               variant="body2"
               style={{ paddingTop: "5px", paddingLeft: "10px", color: "red" }}

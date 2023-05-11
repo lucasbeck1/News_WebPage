@@ -25,13 +25,11 @@ type authorCreation = {
   name: string;
   mail: string;
   password: string;
-  adminKey: string;
   admin?: boolean;
 };
 
 type authorUpdate = {
   id: string;
-  adminKey: string;
   admin?: boolean;
   name?: string;
   mail?: string;
@@ -74,11 +72,8 @@ async function updateAuthor(data: authorUpdate): Promise<{ message: string }> {
   return createArt;
 }
 
-async function deleteAuthor(
-  id: string,
-  adminKey: string
-): Promise<{ message: string }> {
-  let createArt: { message: string } = await deleteApiAuthor(id, adminKey);
+async function deleteAuthor(id: string): Promise<{ message: string }> {
+  let createArt: { message: string } = await deleteApiAuthor(id);
 
   if (createArt.message === "REQUEST ERROR") {
     createArt = deleteStaticAuthor(id);

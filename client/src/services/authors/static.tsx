@@ -12,13 +12,11 @@ type authorCreation = {
   name: string;
   mail: string;
   password: string;
-  adminKey: string;
   admin?: boolean;
 };
 
 type authorUpdate = {
   id: string;
-  adminKey: string;
   admin?: boolean;
   name?: string;
   mail?: string;
@@ -50,10 +48,6 @@ function createStaticAuthor(data: authorCreation) {
 }
 
 function updateStaticAuthor(data: authorUpdate) {
-  if (!data.adminKey) {
-    return { message: "Invalid Request" };
-  }
-
   const index = allAuthors.findIndex((author) => author.id === data.id);
   const author = allAuthors.find((author) => author.id === data.id);
 

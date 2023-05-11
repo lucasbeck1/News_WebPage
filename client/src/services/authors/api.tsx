@@ -13,13 +13,11 @@ type authorCreation = {
   name: string;
   mail: string;
   password: string;
-  adminKey: string;
   admin?: boolean;
 };
 
 type authorUpdate = {
   id: string;
-  adminKey: string;
   admin?: boolean;
   name?: string;
   mail?: string;
@@ -63,16 +61,10 @@ function updateApiAuthor(data: authorUpdate): Promise<{ message: string }> {
   return request;
 }
 
-function deleteApiAuthor(
-  id: string,
-  adminKey: any
-): Promise<{ message: string }> {
+function deleteApiAuthor(id: string): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios({
     method: "delete",
     url: localhost + "/authors/" + id,
-    data: {
-      adminKey: adminKey,
-    },
   })
     .then((res) => {
       return res.data;
