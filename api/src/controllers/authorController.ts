@@ -77,21 +77,8 @@ export const createAuthor = async (
   res: Response
 ) => {
   try {
-    const { name, mail, password, adminKey } = req.body;
-    if (!name || !mail || !password || !adminKey) {
-      return res.status(404).json({ message: "Invalid Request" });
-    }
-
-    const adminUser = await Author.findOne({
-      where: {
-        id: adminKey,
-      },
-      select: {
-        admin: true,
-      },
-    });
-
-    if (!adminUser || !adminUser.admin) {
+    const { name, mail, password } = req.body;
+    if (!name || !mail || !password) {
       return res.status(404).json({ message: "Invalid Request" });
     }
 
@@ -123,7 +110,7 @@ export const updateAuthor = async (req: Request, res: Response) => {
     const author = await Author.findOneBy({ id: id });
     if (!author) return res.status(404).json({ message: "Not author found" });
 
-    const { name, mail, admin, oldPassword, newPassword, adminKey } = req.body;
+    const { name, mail, admin, oldPassword, newPassword } = req.body;
 
     const propertiesUpdated: authorUpdateType = {};
 
@@ -131,27 +118,12 @@ export const updateAuthor = async (req: Request, res: Response) => {
 
     if (oldPassword) {
       checkPass = await bcrypt.compare(oldPassword, author.password);
-    } else if (adminKey) {
-      const adminUser = await Author.findOne({
-        where: {
-          id: adminKey,
-        },
-        select: {
-          admin: true,
-        },
-      });
-
-      if (!adminUser || !adminUser.admin) {
-        return res.status(400).json({ message: "Invalid Request" });
-      }
-
-      checkPass = true;
-
-      if (checkPass && admin) {
-        propertiesUpdated.admin = admin;
-      }
     } else {
-      return res.status(400).json({ message: "Invalid Request" });
+      checkPass = false;
+    }
+
+    if (checkPass && admin) {
+      propertiesUpdated.admin = admin;
     }
 
     if (checkPass && name) {
@@ -161,7 +133,7 @@ export const updateAuthor = async (req: Request, res: Response) => {
       propertiesUpdated.mail = mail;
     }
 
-    if (checkPass && oldPassword && newPassword) {
+    if (checkPass && newPassword) {
       const salt: string = await bcrypt.genSalt(saltRounds);
       const hashPassword: string = await bcrypt.hash(newPassword, salt);
       propertiesUpdated.password = hashPassword;
@@ -184,22 +156,8 @@ export const updateAuthor = async (req: Request, res: Response) => {
 
 export const deleteAuthor = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { adminKey } = req.body;
 
   try {
-    const adminUser = await Author.findOne({
-      where: {
-        id: adminKey,
-      },
-      select: {
-        admin: true,
-      },
-    });
-
-    if (!adminUser || !adminUser.admin) {
-      return res.status(404).json({ message: "Invalid Request" });
-    }
-
     const result = await Author.delete({ id: id });
     if (result.affected === 0) {
       return res.status(404).json({ message: "Author not found" });
