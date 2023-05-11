@@ -18,7 +18,7 @@ function checkCredentials(dispatch: AppDispatch) {
   const nameEncoded = cookies?.split("; ").find((e) => e.includes("name"));
 
   if (cookies.includes("admin=true") && nameEncoded) {
-    const name = decodeURI(nameEncoded);
+    const name = decodeURI(nameEncoded.split("=")[1]);
     dispatch(authState({ type: "admin", name }));
   } else if (cookies.includes("admin=false") && nameEncoded) {
     const name = decodeURI(nameEncoded);
