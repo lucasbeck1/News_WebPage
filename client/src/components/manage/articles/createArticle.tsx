@@ -59,45 +59,7 @@ function CreateArticle() {
   const dispatch = useDispatch();
 
   const allSections = useSelector((state: RootState) => state.sections);
-
-  const tempAuthors = [
-    {
-      name: "Desmond Jachi",
-      mail: "desjakito@mail.com",
-      admin: false,
-    },
-    {
-      name: "lucas becfor",
-      mail: "lucas@mail.com",
-      admin: true,
-    },
-    {
-      name: "Sosana Guterlom",
-      mail: "sosgm1@mail.com",
-      admin: false,
-    },
-    {
-      name: "Maximo Sum",
-      mail: "max256@mail.com",
-      admin: false,
-    },
-    {
-      name: "Lucas Becord",
-      mail: "admin@mail.com",
-      admin: false,
-    },
-    {
-      name: "Jonh Doe",
-      mail: "jonh@mail.com",
-      admin: false,
-    },
-    {
-      name: "Tusan barr",
-      mail: "tusan@mail.com",
-      admin: false,
-    },
-  ];
-  const tempRandomAuthor = tempAuthors[Math.round(Math.random() * 6)];
+  const nameUser = useSelector((state: RootState) => state.auth.name);
 
   //****************************
   // **** Local Variables ****
@@ -109,7 +71,7 @@ function CreateArticle() {
     drophead: "",
     body: "",
     image: "",
-    author: tempRandomAuthor.name,
+    author: nameUser,
     section: "",
   });
 
@@ -120,7 +82,7 @@ function CreateArticle() {
     drophead: "",
     body: "",
     image: "",
-    author: tempRandomAuthor.name,
+    author: nameUser,
     section: "",
   });
   const inputJson = JSON.stringify(input);
@@ -210,7 +172,7 @@ function CreateArticle() {
       drophead: "",
       body: "",
       image: "",
-      author: "Tusan barr",
+      author: nameUser,
       section: "",
     });
     setErrors({});
@@ -233,7 +195,11 @@ function CreateArticle() {
 
   async function submit() {
     const msg = await createArticle(input);
-    alert(msg.message);
+    if (msg.message === "Create succesfull") {
+      Swal.fire("Created!", "Created succesfully", "success");
+    } else {
+      Swal.fire("Error!", msg.message, "error");
+    }
     handleClose();
   }
 
