@@ -1,4 +1,7 @@
-import * as React from "react";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { RootState } from "../store";
+
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -14,6 +17,12 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 
 function Metrics() {
+  const typeUser = useSelector((state: RootState) => state.auth.type);
+
+  if (!typeUser || typeUser !== "admin") {
+    return <Navigate to={"/"} />;
+  }
+
   return (
     <Container maxWidth="lg" sx={{ p: 0 }}>
       <ScopedCssBaseline enableColorScheme>

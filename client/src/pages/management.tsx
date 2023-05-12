@@ -1,26 +1,22 @@
 import React from "react";
-import PhoneIcon from "@mui/icons-material/Phone";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import PersonPinIcon from "@mui/icons-material/PersonPin";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { RootState } from "../store";
+
+import { useTheme } from "@mui/material/styles";
 import ArticleIcon from "@mui/icons-material/Article";
 import FolderIcon from "@mui/icons-material/Folder";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import GroupIcon from "@mui/icons-material/Group";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import StoreIcon from "@mui/icons-material/Store";
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
-import CardArticle from "../components/public/card";
 import Footer from "../components/public/footer";
-import articles from "../dataExamples/articles.json";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import SwipeableViews from "react-swipeable-views";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import AppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
 import ManageAuthors from "../components/manage/authors/manageAuthors";
 import ManageArticles from "../components/manage/articles/manageArticles";
 import ManageSections from "../components/manage/sections/manageSections";
@@ -55,6 +51,8 @@ function TabPanel(props: TabPanelProps) {
 }
 
 function Management() {
+  const typeUser = useSelector((state: RootState) => state.auth.type);
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -66,6 +64,10 @@ function Management() {
   };
 
   const theme = useTheme();
+
+  if (!typeUser || typeUser !== "admin") {
+    return <Navigate to={"/"} />;
+  }
 
   return (
     <Container maxWidth="lg" sx={{ p: 0 }}>
