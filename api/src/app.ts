@@ -6,14 +6,9 @@ import morgan from "morgan";
 import cors from "cors";
 import path from "path";
 import { cookieKey } from "./config";
-import statusRouter from "./routes/statusRoutes";
-import articlesRouter from "./routes/articleRoutes";
-import authorRoutes from "./routes/authorRoutes";
-import sectionRoutes from "./routes/sectionRoutes";
-import sponsorRotes from "./routes/sponsorRoutes";
-import publicityRoutes from "./routes/publicityRoutes";
-import imageRoutes from "./routes/imageRoutes";
-import authRoutes from "./routes/authRoutes";
+import publicRouter from "./routes/public";
+import authorRouter from "./routes/author";
+import adminRouter from "./routes/admin";
 
 // Express and midlewares
 const app = express();
@@ -39,14 +34,9 @@ app.use((_req, res, next) => {
 */
 
 // Routers
-app.use("/status", statusRouter);
-app.use("/articles", articlesRouter);
-app.use("/authors", authorRoutes);
-app.use("/sections", sectionRoutes);
-app.use("/sponsors", sponsorRotes);
-app.use("/publicities", publicityRoutes);
-app.use("/images", imageRoutes);
-app.use("/auth", authRoutes);
+app.use("/public", publicRouter);
+app.use("/author", authorRouter);
+app.use("/admin", adminRouter);
 
 // Exports
 export default app;
