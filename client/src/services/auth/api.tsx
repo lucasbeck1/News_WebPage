@@ -16,7 +16,7 @@ type registerRequest = {
 
 function loginApi(data: loginRequest): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(localhost + "/auth/login", data, {
+    .post(localhost + "/public/auth/login", data, {
       withCredentials: true,
     })
     .then((req) => {
@@ -30,7 +30,7 @@ function loginApi(data: loginRequest): Promise<{ message: string }> {
 
 function logoutApi(): Promise<number> {
   const request: Promise<number> = axios
-    .get(localhost + "/auth/logout", {
+    .get(localhost + "/public/auth/logout", {
       withCredentials: true,
     })
     .then((req) => {
@@ -41,7 +41,7 @@ function logoutApi(): Promise<number> {
 
 function registerApi(data: registerRequest): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(localhost + "/auth/register", data)
+    .post(localhost + "/public/auth/register", data)
     .then((req) => {
       return req.data;
     })

@@ -9,7 +9,7 @@ type Section = {
 
 function getApiSections(): Promise<Section[]> {
   const request: Promise<Section[]> = axios
-    .get(localhost + "/sections")
+    .get(localhost + "/public/sections")
     .then((req) => {
       return req.data;
     })
@@ -21,7 +21,7 @@ function getApiSections(): Promise<Section[]> {
 
 function createApiSection(data: string): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(localhost + "/sections", { name: data })
+    .post(localhost + "/admin/sections", { name: data })
     .then((res) => {
       return res.data;
     })
@@ -36,7 +36,7 @@ function updateApiArticle(
   name: string
 ): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .put(localhost + "/sections/" + id.toString(), { name })
+    .put(localhost + "/admin/sections/" + id.toString(), { name })
     .then((res) => {
       return res.data;
     })
@@ -48,7 +48,7 @@ function updateApiArticle(
 
 function deleteApiArticle(id: number): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .delete(localhost + "/sections/" + id.toString())
+    .delete(localhost + "/admin/sections/" + id.toString())
     .then((res) => {
       return res.data;
     })

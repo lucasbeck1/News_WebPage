@@ -32,7 +32,7 @@ type dataUpdate = {
 
 function getApiArticles(): Promise<Article[]> {
   const request: Promise<Article[]> = axios
-    .get(localhost + "/articles")
+    .get(localhost + "/public/articles")
     .then((req) => {
       return req.data;
     })
@@ -44,7 +44,9 @@ function getApiArticles(): Promise<Article[]> {
 
 function createApiArticle(data: ArticleCreation): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(localhost + "/articles", data)
+    .post(localhost + "/admin/articles", data, {
+      withCredentials: true,
+    })
     .then((res) => {
       return res.data;
     })
@@ -59,7 +61,9 @@ function updateApiArticle(
   id: number
 ): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .put(localhost + "/articles/" + id.toString(), data)
+    .put(localhost + "/admin/articles/" + id.toString(), data, {
+      withCredentials: true,
+    })
     .then((res) => {
       return res.data;
     })
@@ -71,7 +75,9 @@ function updateApiArticle(
 
 function deleteApiArticle(id: number): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .delete(localhost + "/articles/" + id.toString())
+    .delete(localhost + "/admin/articles/" + id.toString(), {
+      withCredentials: true,
+    })
     .then((res) => {
       return res.data;
     })

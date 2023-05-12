@@ -202,12 +202,12 @@ function ModifyArticle(props: { data: Article }) {
     if (status === "Upload Ok") {
       setInput({
         ...input,
-        image: localhost + "/images/" + imageName,
+        image: localhost + "/admin/images/" + imageName,
       });
       setErrors(
         verifyInput({
           ...input,
-          image: localhost + "/images/" + imageName,
+          image: localhost + "/admin/images/" + imageName,
         })
       );
     } else {

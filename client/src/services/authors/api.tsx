@@ -27,7 +27,9 @@ type authorUpdate = {
 
 function getApiAuthors(): Promise<Author[]> {
   const request: Promise<Author[]> = axios
-    .get(localhost + "/authors")
+    .get(localhost + "/admin/authors", {
+      withCredentials: true,
+    })
     .then((req) => {
       return req.data;
     })
@@ -39,7 +41,9 @@ function getApiAuthors(): Promise<Author[]> {
 
 function createApiAuthor(data: authorCreation): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(localhost + "/authors", data)
+    .post(localhost + "/admin/authors", data, {
+      withCredentials: true,
+    })
     .then((res) => {
       return res.data;
     })
@@ -51,7 +55,9 @@ function createApiAuthor(data: authorCreation): Promise<{ message: string }> {
 
 function updateApiAuthor(data: authorUpdate): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .put(localhost + "/authors/" + data.id.toString(), data)
+    .put(localhost + "/admin/authors/" + data.id.toString(), data, {
+      withCredentials: true,
+    })
     .then((res) => {
       return res.data;
     })
@@ -64,7 +70,8 @@ function updateApiAuthor(data: authorUpdate): Promise<{ message: string }> {
 function deleteApiAuthor(id: string): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios({
     method: "delete",
-    url: localhost + "/authors/" + id,
+    url: localhost + "/admin/authors/" + id,
+    withCredentials: true,
   })
     .then((res) => {
       return res.data;
