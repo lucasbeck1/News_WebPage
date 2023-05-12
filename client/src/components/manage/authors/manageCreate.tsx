@@ -24,14 +24,12 @@ type Input = {
   name?: string;
   mail?: string;
   password?: string;
-  adminKey?: string;
 };
 
 enum InputProp {
   name = "name",
   mail = "mail",
   password = "password",
-  adminKey = "adminKey",
 }
 
 function ManageCreate() {
@@ -39,6 +37,7 @@ function ManageCreate() {
   // **** Global Variables ****
   //****************************
   const dispatch = useDispatch();
+  const typeUser: string = useSelector((state: RootState) => state.auth.type);
 
   //****************************
   // **** Local Variables ****
@@ -125,10 +124,6 @@ function ManageCreate() {
       err.password = "Password minimum 4 characters";
     } else if (RegEXP_Password.test(input.password)) {
       err.password = "Quote characters are not allowed";
-    }
-    // ** AdminKey **
-    else if (!input.adminKey) {
-      err.adminKey = "You dont have admin permissions";
     }
     return err;
   }
@@ -241,19 +236,22 @@ function ManageCreate() {
               />
             </RadioGroup>
           </FormControl>
-
-          {comprobe(error, InputProp.adminKey) && (
+          {typeUser === "admin" ? (
+            <></>
+          ) : (
             <Typography
               variant="body2"
               style={{ paddingTop: "5px", paddingLeft: "10px", color: "red" }}
             >
-              {errorExplain(error, InputProp.adminKey)}
+              "You dont have admin permissions"
             </Typography>
           )}
 
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            {initialDataJson === inputJson || Object.keys(error).length ? (
+            {initialDataJson === inputJson ||
+            Object.keys(error).length ||
+            typeUser !== "admin" ? (
               <Button disabled>Create</Button>
             ) : (
               <Button
