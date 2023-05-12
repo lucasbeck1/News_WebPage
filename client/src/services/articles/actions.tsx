@@ -6,12 +6,6 @@ import {
   updateApiArticle,
   deleteApiArticle,
 } from "./api";
-import {
-  getStaticArticles,
-  createStaticArticle,
-  updateStaticArticle,
-  deleteStaticArticle,
-} from "./static";
 
 type Article = {
   id: number;
@@ -47,11 +41,6 @@ async function getArticles(dispatch: AppDispatch): Promise<{
   type: "articles/storeArticles";
 }> {
   let getArts: Article[] = await getApiArticles();
-
-  if (!getArts.length) {
-    getArts = getStaticArticles();
-  }
-
   return dispatch(storeArticles(getArts));
 }
 
@@ -59,11 +48,6 @@ async function createArticle(
   data: ArticleCreation
 ): Promise<{ message: string }> {
   let createArt: { message: string } = await createApiArticle(data);
-
-  if (createArt.message === "REQUEST ERROR") {
-    createArt = createStaticArticle(data);
-  }
-
   return createArt;
 }
 
@@ -72,21 +56,11 @@ async function updateArticle(
   id: number
 ): Promise<{ message: string }> {
   let createArt: { message: string } = await updateApiArticle(data, id);
-
-  if (createArt.message === "REQUEST ERROR") {
-    createArt = updateStaticArticle(data, id);
-  }
-
   return createArt;
 }
 
 async function deleteArticle(id: number): Promise<{ message: string }> {
   let createArt: { message: string } = await deleteApiArticle(id);
-
-  if (createArt.message === "REQUEST ERROR") {
-    createArt = deleteStaticArticle(id);
-  }
-
   return createArt;
 }
 
