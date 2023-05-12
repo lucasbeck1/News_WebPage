@@ -124,7 +124,7 @@ function Login() {
 
   async function handleSubmit() {
     const msg = await login(input, dispatch);
-    if (msg.message === "OK") {
+    if (msg.message === "Loggin Succesfull") {
       navigate("/");
     } else {
       Swal.fire("Error", msg.message, "error");

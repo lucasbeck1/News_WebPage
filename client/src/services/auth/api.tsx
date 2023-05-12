@@ -28,13 +28,16 @@ function loginApi(data: loginRequest): Promise<{ message: string }> {
   return request;
 }
 
-function logoutApi(): Promise<number> {
-  const request: Promise<number> = axios
+function logoutApi(): Promise<{ message: string }> {
+  const request: Promise<{ message: string }> = axios
     .get(localhost + "/public/auth/logout", {
       withCredentials: true,
     })
-    .then((req) => {
-      return req.status;
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error;
     });
   return request;
 }

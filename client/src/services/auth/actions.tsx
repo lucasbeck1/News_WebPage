@@ -39,8 +39,8 @@ async function login(
   return request;
 }
 
-async function logout(dispatch: AppDispatch): Promise<number> {
-  let request: number = await logoutApi();
+async function logout(dispatch: AppDispatch): Promise<{ message: string }> {
+  let request: { message: string } = await logoutApi();
   dispatch(clearState());
   return request;
 }

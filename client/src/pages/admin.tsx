@@ -3,6 +3,7 @@ import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 import { logout } from "../services/auth/actions";
 import { RootState } from "../store";
@@ -118,8 +119,12 @@ function Admin() {
   };
 
   async function logoutUser() {
-    await logout(dispatch);
+    handleClose2();
+    const logMessage = await logout(dispatch);
     navigate("/");
+    if (logMessage.message !== "Loggout Succesfull") {
+      Swal.fire("Logout Error", "Please try again", "error");
+    }
   }
 
   return (
