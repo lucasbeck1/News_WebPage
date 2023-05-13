@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ContentLoader from "react-content-loader";
 import { RootState } from "../../../store";
+import { NavLink } from "react-router-dom";
 
 import DeleteArticle from "./deleteArticle";
 import ModifyArticle from "./modifyArticle";
@@ -94,7 +95,18 @@ function ManageArticles() {
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <StyledTableCell component="th" scope="row">
-                        {row.headline}
+                        <NavLink
+                          style={{
+                            textDecoration: "none",
+                            color: "inherit",
+                          }}
+                          to={`/detail/${row.id}`}
+                          title="Go to read"
+                        >
+                          {row.headline.length > 90
+                            ? row.headline.slice(0, 90) + "..."
+                            : row.headline}
+                        </NavLink>
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {row.section.name}
