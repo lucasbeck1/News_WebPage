@@ -31,13 +31,20 @@ function checkCredentials(dispatch: AppDispatch): void {
   }
 }
 
-function loginApi(data: loginRequest): Promise<{ message: string }> {
+function loginApi(
+  data: loginRequest,
+  dispatch: AppDispatch
+): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
     .post(localhost + "/public/auth/login", data, {
       withCredentials: true,
     })
-    .then((req) => {
-      return req.data;
+    .then((res) => {
+      return res.data;
+    })
+    .then((resData) => {
+      checkCredentials(dispatch);
+      return resData;
     })
     .catch(() => {
       return { message: "Invalid credentials" };
@@ -45,7 +52,7 @@ function loginApi(data: loginRequest): Promise<{ message: string }> {
   return request;
 }
 
-function logoutApi(): Promise<{ message: string }> {
+function logoutApi(dispatch: AppDispatch): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
     .get(localhost + "/public/auth/logout", {
       withCredentials: true,
@@ -53,9 +60,11 @@ function logoutApi(): Promise<{ message: string }> {
     .then((res) => {
       return res.data;
     })
-    .catch((error) => {
-      return error;
+    .then((resData) => {
+      dispatch(clearState());
+      return resData;
     });
+
   return request;
 }
 
@@ -64,9 +73,6 @@ function registerApi(data: registerRequest): Promise<{ message: string }> {
     .post(localhost + "/public/auth/register", data)
     .then((req) => {
       return req.data;
-    })
-    .catch(() => {
-      return [];
     });
   return request;
 }

@@ -1,5 +1,7 @@
 import axios from "axios";
 import { localhost } from "../url";
+import { storeArticles } from "../../reducers/sliceArticles";
+import { AppDispatch } from "../../store";
 
 type Article = {
   id: number;
@@ -13,15 +15,14 @@ type Article = {
   section: { name: string };
 };
 
-function getApiArticles(): Promise<Article[]> {
-  const request: Promise<Article[]> = axios
-    .get(localhost + "/public/articles")
-    .then((req) => {
-      return req.data;
-    })
-    .catch(() => {
-      return [];
-    });
+function getApiArticles(dispatch: AppDispatch): Promise<{
+  payload: Article[];
+  type: "articles/storeArticles";
+}> {
+  const request = axios.get(localhost + "/public/articles").then((req) => {
+    return dispatch(storeArticles(req.data));
+  });
+
   return request;
 }
 
