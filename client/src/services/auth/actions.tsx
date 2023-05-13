@@ -21,7 +21,7 @@ function checkCredentials(dispatch: AppDispatch) {
     const name = decodeURI(nameEncoded.split("=")[1]);
     dispatch(authState({ type: "admin", name }));
   } else if (cookies.includes("admin=false") && nameEncoded) {
-    const name = decodeURI(nameEncoded);
+    const name = decodeURI(nameEncoded.split("=")[1]);
     dispatch(authState({ type: "author", name }));
   } else {
     dispatch(clearState());
