@@ -13,7 +13,7 @@ type registerRequest = {
   password: string;
 };
 
-function checkCredentials(dispatch: AppDispatch) {
+function checkCredentials(dispatch: AppDispatch): void {
   const cookies: string = document.cookie;
   const nameEncoded = cookies?.split("; ").find((e) => e.includes("name"));
 
