@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 import { RootState } from "../../store";
-import { createArticle } from "../../services/articles/actions";
+import { createApiArticle } from "../../services/author/articles";
 import { localhost } from "../../services/url";
 import UploadInput from "./uploadInput";
 
@@ -194,7 +194,7 @@ function CreateArticle() {
   }
 
   async function submit() {
-    const msg = await createArticle(input);
+    const msg = await createApiArticle(input);
     if (msg.message === "Create succesfull") {
       Swal.fire("Created!", "Created succesfully", "success");
     } else {

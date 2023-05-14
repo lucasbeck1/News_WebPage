@@ -4,7 +4,7 @@ import { NavLink, useNavigate, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import { RootState } from "../store";
-import { login } from "../services/auth/actions";
+import { loginApi } from "../services/public/auth";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -123,7 +123,7 @@ function Login() {
   }
 
   async function handleSubmit() {
-    const msg = await login(input, dispatch);
+    const msg = await loginApi(input, dispatch);
     if (msg.message === "Loggin Succesfull") {
       navigate("/");
     } else {

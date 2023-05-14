@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { getAuthors, createAuthor } from "../../../services/authors/actions";
+import {
+  getApiAuthors,
+  createApiAuthor,
+} from "../../../services/admin/authors";
 
 import Swal from "sweetalert2";
 import Button from "@mui/material/Button";
@@ -143,14 +146,14 @@ function ManageCreate() {
   }
 
   async function submit() {
-    const msg = await createAuthor(input);
+    const msg = await createApiAuthor(input);
     if (msg.message === "Create succesfull") {
       Swal.fire("Created!", `Create succesfull: ${input.name}`, "success");
     } else {
       Swal.fire("Error!", msg.message, "error");
     }
 
-    getAuthors(dispatch);
+    getApiAuthors(dispatch);
     handleClose();
   }
 

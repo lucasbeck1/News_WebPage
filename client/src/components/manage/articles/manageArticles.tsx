@@ -9,8 +9,8 @@ import DeleteArticle from "./deleteArticle";
 import ModifyArticle from "./modifyArticle";
 import CreateArticle from "./createArticle";
 
-import { getSections } from "../../../services/sections/actions";
-import { getArticles } from "../../../services/articles/actions";
+import { getApiSections } from "../../../services/admin/sections";
+import { getApiArticles } from "../../../services/admin/articles";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -47,8 +47,8 @@ function ManageArticles() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getArticles(dispatch);
-    getSections(dispatch);
+    getApiSections(dispatch);
+    getApiArticles(dispatch);
   }, []);
 
   const allArticles = useSelector((state: RootState) => state.articles);

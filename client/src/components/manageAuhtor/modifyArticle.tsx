@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 import { RootState } from "../../store";
-import { updateArticle } from "../../services/articles/actions";
+import { updateApiArticle } from "../../services/author/articles";
 import { localhost } from "../../services/url";
 import UploadInput from "./uploadInput";
 
@@ -193,7 +193,7 @@ function ModifyArticle(props: { data: Article }) {
   }
 
   async function submit() {
-    const msg = await updateArticle(input, props.data.id);
+    const msg = await updateApiArticle(input, props.data.id);
     alert(msg.message);
     handleClose();
   }

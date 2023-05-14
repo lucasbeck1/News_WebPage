@@ -6,7 +6,7 @@ import Footer from "../components/public/footer";
 import CardsContainer from "../components/public/cardsContainer";
 import CarouselContainer from "../components/public/carouselContainer";
 import Swip from "../components/public/swipeableContainer";
-import { getArticles } from "../services/articles/actions";
+import { getApiArticles } from "../services/public/articles";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 
@@ -14,7 +14,7 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getArticles(dispatch);
+    getApiArticles(dispatch);
   }, []);
 
   const allArticles = useSelector((state: RootState) => state.articles);

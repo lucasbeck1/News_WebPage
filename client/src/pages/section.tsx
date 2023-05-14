@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/public/header";
 import Footer from "../components/public/footer";
 import CardsContainer from "../components/public/cardsContainer";
-import { getArticles } from "../services/articles/actions";
+import { getApiArticles } from "../services/public/articles";
 import { RootState } from "../store";
 import { useParams } from "react-router-dom";
 import Container from "@mui/material/Container";
@@ -17,7 +17,7 @@ function Section() {
 
   if (!allArticles.length) {
     useEffect(() => {
-      getArticles(dispatch);
+      getApiArticles(dispatch);
     }, []);
   }
 

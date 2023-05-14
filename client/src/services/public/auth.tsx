@@ -77,4 +77,4 @@ function registerApi(data: registerRequest): Promise<{ message: string }> {
   return request;
 }
 
-export { loginApi, logoutApi, registerApi };
+export { loginApi, logoutApi, registerApi, checkCredentials };

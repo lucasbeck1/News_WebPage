@@ -1,7 +1,10 @@
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 
-import { deleteArticle, getArticles } from "../../services/articles/actions";
+import {
+  deleteApiArticle,
+  getApiArticles,
+} from "../../services/author/articles";
 
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -34,7 +37,7 @@ function DeleteArticle(props: { data: Article }) {
       confirmButtonText: "Yes, delete it!",
       preConfirm: () => {
         const dataId: number = articleData.id;
-        deleteArticle(dataId)
+        deleteApiArticle(dataId)
           .then((response) => {
             if (response.message !== "Delete succesfull") {
               throw new Error(response.message);
@@ -52,7 +55,7 @@ function DeleteArticle(props: { data: Article }) {
         }
       })
       .then(() => {
-        getArticles(dispatch);
+        getApiArticles(dispatch);
       });
   };
 

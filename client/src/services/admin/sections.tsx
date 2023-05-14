@@ -31,7 +31,7 @@ function createApiSection(data: string): Promise<{ message: string }> {
   return request;
 }
 
-function updateApiArticle(
+function updateApiSection(
   id: number,
   name: string
 ): Promise<{ message: string }> {
@@ -46,7 +46,7 @@ function updateApiArticle(
   return request;
 }
 
-function deleteApiArticle(id: number): Promise<{ message: string }> {
+function deleteApiSection(id: number): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
     .delete(localhost + "/admin/sections/" + id.toString())
     .then((res) => {
@@ -58,4 +58,4 @@ function deleteApiArticle(id: number): Promise<{ message: string }> {
   return request;
 }
 
-export { getApiSections, createApiSection, updateApiArticle, deleteApiArticle };
+export { getApiSections, createApiSection, updateApiSection, deleteApiSection };

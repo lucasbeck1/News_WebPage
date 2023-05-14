@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { RootState } from "../../store";
 
-import { uploadImage } from "../../services/images/actions";
+import { uploadApiImage } from "../../services/author/images";
 
 import TextField from "@mui/material/TextField";
 import { InputAdornment } from "@mui/material";
@@ -59,7 +59,7 @@ function UploadInput(props: ChildProps) {
     const formData: FormData = new FormData();
     formData.append("image", file);
 
-    const res = await uploadImage(formData);
+    const res = await uploadApiImage(formData);
     props.sendData(res.message, res.fileName);
 
     setLoading(false);

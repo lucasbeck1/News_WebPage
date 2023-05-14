@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ContentLoader from "react-content-loader";
 import { RootState } from "../../../store";
 
-import { getSections } from "../../../services/sections/actions";
+import { getApiSections } from "../../../services/admin/sections";
 import CreateSection from "./createSections";
 import ModifySection from "./modifySections";
 import DeleteSection from "./deleteSections";
@@ -50,7 +50,7 @@ function ManageSections() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getSections(dispatch);
+    getApiSections(dispatch);
   }, []);
 
   const allSections = useSelector((state: RootState) => state.sections);

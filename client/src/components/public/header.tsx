@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ContentLoader from "react-content-loader";
 
 import { RootState } from "../../store";
-import { getSections } from "../../services/sections/actions";
+import { getApiSections } from "../../services/public/sections";
 
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -13,7 +13,7 @@ function Header() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getSections(dispatch);
+    getApiSections(dispatch);
   }, []);
 
   const allSections = useSelector((state: RootState) => state.sections);

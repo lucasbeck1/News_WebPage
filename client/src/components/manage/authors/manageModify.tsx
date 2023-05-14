@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { getAuthors, updateAuthor } from "../../../services/authors/actions";
+import {
+  getApiAuthors,
+  updateApiAuthor,
+} from "../../../services/admin/authors";
 
 import Swal from "sweetalert2";
 import { IconButton } from "@mui/material";
@@ -161,7 +164,7 @@ function ManageModify({ user }: User) {
   }
 
   async function submit() {
-    const msg = await updateAuthor({
+    const msg = await updateApiAuthor({
       ...input,
       id: id,
     });
@@ -171,7 +174,7 @@ function ManageModify({ user }: User) {
       Swal.fire("Error!", msg.message, "error");
     }
 
-    getAuthors(dispatch);
+    getApiAuthors(dispatch);
     handleClose();
   }
 

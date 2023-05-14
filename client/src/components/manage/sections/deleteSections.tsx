@@ -1,6 +1,9 @@
 import { useDispatch } from "react-redux";
 
-import { deleteSection, getSections } from "../../../services/sections/actions";
+import {
+  deleteApiSection,
+  getApiSections,
+} from "../../../services/admin/sections";
 
 import Swal from "sweetalert2";
 import { IconButton } from "@mui/material";
@@ -27,7 +30,7 @@ function DeleteSection(props: { section: Section }) {
       cancelButtonColor: "grey",
       confirmButtonText: "Yes, delete it!",
       preConfirm: () => {
-        deleteSection(id)
+        deleteApiSection(id)
           .then((response) => {
             if (response.message !== "Delete succesfull") {
               throw new Error(response.message);
@@ -49,7 +52,7 @@ function DeleteSection(props: { section: Section }) {
         }
       })
       .then(() => {
-        getSections(dispatch);
+        getApiSections(dispatch);
       });
   };
 

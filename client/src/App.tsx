@@ -14,7 +14,7 @@ import MyArticles from "./components/manageAuhtor/manageArticles";
 import Metrics from "./pages/metrics";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import { checkCredentials } from "./services/auth/actions";
+import { checkCredentials } from "./services/public/auth";
 
 function App() {
   const dispatch = useDispatch();

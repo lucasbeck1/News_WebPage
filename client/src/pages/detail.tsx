@@ -3,10 +3,9 @@ import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import Header from "../components/public/header";
 import Footer from "../components/public/footer";
-import articles from "../dataExamples/articles.json";
 import { useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
-import { getArticles } from "../services/articles/actions";
+import { getApiArticles } from "../services/public/articles";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 
@@ -15,7 +14,7 @@ function Detail() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    getArticles(dispatch);
+    getApiArticles(dispatch);
   }, []);
 
   const AllArticles = useSelector((state: RootState) => state.articles);

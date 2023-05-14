@@ -6,8 +6,8 @@ import { RootState } from "../../store";
 import DeleteArticle from "./deleteArticle";
 import ModifyArticle from "./modifyArticle";
 import CreateArticle from "./createArticle";
-import { getSections } from "../../services/sections/actions";
-import { getArticles } from "../../services/articles/actions";
+import { getApiSections } from "../../services/public/sections";
+import { getApiArticles } from "../../services/author/articles";
 import Footer from "../../components/public/footer";
 import { NavLink } from "react-router-dom";
 
@@ -48,8 +48,8 @@ function ManageArticles() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getArticles(dispatch);
-    getSections(dispatch);
+    getApiArticles(dispatch);
+    getApiSections(dispatch);
   }, []);
 
   const authorName = useSelector((state: RootState) => state.auth.name);

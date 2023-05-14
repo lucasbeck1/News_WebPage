@@ -3,7 +3,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 
-import { updateSection, getSections } from "../../../services/sections/actions";
+import {
+  updateApiSection,
+  getApiSections,
+} from "../../../services/admin/sections";
 
 import Swal from "sweetalert2";
 import Button from "@mui/material/Button";
@@ -69,9 +72,9 @@ function ModifySection(props: { section: Section }) {
   }
 
   async function submit() {
-    const msg = await updateSection(id, newName);
+    const msg = await updateApiSection(id, newName);
     Swal.fire(`${name} Updated!`, msg.message, "success");
-    getSections(dispatch);
+    getApiSections(dispatch);
     handleClose();
   }
 

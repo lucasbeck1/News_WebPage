@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
-import { logout } from "../services/auth/actions";
+import { logoutApi } from "../services/public/auth";
 import { RootState } from "../store";
 
 import AppBar from "@mui/material/AppBar";
@@ -120,7 +120,7 @@ function Admin() {
 
   async function logoutUser() {
     handleClose2();
-    const logMessage = await logout(dispatch);
+    const logMessage = await logoutApi(dispatch);
     navigate("/");
     if (logMessage.message !== "Loggout Succesfull") {
       Swal.fire("Logout Error", "Please try again", "error");

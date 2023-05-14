@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { getAuthors, deleteAuthor } from "../../../services/authors/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getApiAuthors,
+  deleteApiAuthor,
+} from "../../../services/admin/authors";
 
 import Swal from "sweetalert2";
 import { IconButton } from "@mui/material";
@@ -30,7 +33,7 @@ function ManageDelete(props: { author: Author }) {
       cancelButtonColor: "grey",
       confirmButtonText: "Yes, delete it!",
       preConfirm: () => {
-        deleteAuthor(id)
+        deleteApiAuthor(id)
           .then((response) => {
             if (response.message !== "Delete succesfull") {
               throw new Error(response.message);
@@ -49,7 +52,7 @@ function ManageDelete(props: { author: Author }) {
         }
       })
       .then(() => {
-        getAuthors(dispatch);
+        getApiAuthors(dispatch);
       });
   };
 

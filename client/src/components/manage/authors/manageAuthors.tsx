@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ContentLoader from "react-content-loader";
 import { RootState } from "../../../store";
 
-import { getAuthors } from "../../../services/authors/actions";
+import { getApiAuthors } from "../../../services/admin/authors";
 import ManageDelete from "./manageDelete";
 import ManageModify from "./manageModify";
 import ManageCreate from "./manageCreate";
@@ -53,7 +53,7 @@ function ManageAuthors() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getAuthors(dispatch);
+    getApiAuthors(dispatch);
   }, []);
 
   const allAuthors: Author[] = useSelector((state: RootState) => state.authors);

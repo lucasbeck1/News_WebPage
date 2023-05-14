@@ -3,7 +3,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 
-import { createSection, getSections } from "../../../services/sections/actions";
+import {
+  createApiSection,
+  getApiSections,
+} from "../../../services/admin/sections";
 
 import Swal from "sweetalert2";
 import Button from "@mui/material/Button";
@@ -61,9 +64,9 @@ function CreateSection() {
   }
 
   async function submit() {
-    const msg = await createSection(section);
+    const msg = await createApiSection(section);
     Swal.fire("Created!", msg.message, "success");
-    getSections(dispatch);
+    getApiSections(dispatch);
     handleClose();
   }
 
