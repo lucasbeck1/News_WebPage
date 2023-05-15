@@ -32,16 +32,23 @@ type dataUpdate = {
   section?: string;
 };
 
-function getApiArticles(dispatch: AppDispatch): Promise<{
+axios.defaults.withCredentials = true;
+
+function getApiArticles(
+  dispatch: AppDispatch,
+  name: string
+): Promise<{
   payload: Article[];
   type: "articles/storeArticles";
 }> {
   const request: Promise<{
     payload: Article[];
     type: "articles/storeArticles";
-  }> = axios.get(localhost + "/public/articles").then((res) => {
-    return dispatch(storeArticles(res.data));
-  });
+  }> = axios
+    .get(localhost + "/author/articles/author?name=" + encodeURI(name))
+    .then((res) => {
+      return dispatch(storeArticles(res.data));
+    });
   return request;
 }
 

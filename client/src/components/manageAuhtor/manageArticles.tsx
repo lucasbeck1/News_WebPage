@@ -47,15 +47,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function ManageArticles() {
   const dispatch = useDispatch();
 
+  const authorName = useSelector((state: RootState) => state.auth.name);
+  const myArticles = useSelector((state: RootState) => state.articles);
+
   useEffect(() => {
-    getApiArticles(dispatch);
+    getApiArticles(dispatch, authorName);
     getApiSections(dispatch);
   }, []);
-
-  const authorName = useSelector((state: RootState) => state.auth.name);
-  const myArticles = useSelector((state: RootState) =>
-    state.articles.filter((e) => e.author.name === authorName)
-  );
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
