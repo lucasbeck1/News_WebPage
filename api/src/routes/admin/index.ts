@@ -1,5 +1,5 @@
 import { Router } from "express";
-
+import { adminVerification } from "../../middlewares/auth.middleware";
 import articlesRouter from "./articleAdmin";
 import authorRouter from "./authorAdmin";
 import sectionRouter from "./sectionAdmin";
@@ -8,6 +8,7 @@ import publicityRouter from "./publicityAdmin";
 import imageRouter from "./imageAdmin";
 
 const router = Router();
+router.use("/", adminVerification);
 
 router.use("/articles", articlesRouter);
 router.use("/authors", authorRouter);
