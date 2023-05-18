@@ -7,10 +7,10 @@ import {
 
 const router = Router();
 
-router.get("/", getAllArticles);
-
 router.get("/author", getArticlesByAuthor);
 
 router.get("/:id", getOneArticle);
+
+router.get("/", getAllArticles);
 
 export default router;

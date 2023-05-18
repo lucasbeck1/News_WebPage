@@ -28,7 +28,8 @@ type dataUpdate = {
 
 // ------------------------------------------------------------------
 
-export const getAllArticles = async (_req: Request, res: Response) => {
+export const getAllArticles = async (req: Request, res: Response) => {
+  const page = Number(req.query.page) || 0;
   try {
     const allArticles = await Article.find({
       relations: {
@@ -46,7 +47,7 @@ export const getAllArticles = async (_req: Request, res: Response) => {
         author: { name: true },
         section: { name: true },
       },
-      skip: 0,
+      skip: page * 100,
       take: 100,
       order: {
         createdAt: "DESC",
@@ -67,6 +68,7 @@ export const getAllArticles = async (_req: Request, res: Response) => {
 export const getArticlesByAuthor = async (req: Request, res: Response) => {
   try {
     const { name } = req.query;
+    const page = Number(req.query.page) || 0;
     const search: searchArticle = {};
 
     if (name) {
@@ -94,7 +96,7 @@ export const getArticlesByAuthor = async (req: Request, res: Response) => {
         author: { name: true },
         section: { name: true },
       },
-      skip: 0,
+      skip: page * 100,
       take: 100,
       order: {
         createdAt: "DESC",
@@ -117,7 +119,7 @@ export const getOneArticle = async (req: Request, res: Response) => {
     const { id } = req.params;
     const oneArticle = await Article.findOne({
       where: {
-        id: parseInt(id),
+        id: Number(id),
       },
       relations: {
         author: true,
