@@ -2,6 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { RootState } from "../store";
+// @ts-ignore
+import SwipeableViews from "react-swipeable-views-react-18-fix";
+
+import Footer from "../components/public/footer";
+import ManageAuthors from "../components/manage/authors/manageAuthors";
+import ManageArticles from "../components/manage/articles/manageArticles";
+import ManageSections from "../components/manage/sections/manageSections";
+import ManageSponsors from "../components/manage/sponsors/manageSponsors";
+import ManagePublicities from "../components/manage/publicities/managePublicities";
 
 import { useTheme } from "@mui/material/styles";
 import ArticleIcon from "@mui/icons-material/Article";
@@ -11,17 +20,10 @@ import GroupIcon from "@mui/icons-material/Group";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
-import Footer from "../components/public/footer";
 import Box from "@mui/material/Box";
-import SwipeableViews from "react-swipeable-views";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-import ManageAuthors from "../components/manage/authors/manageAuthors";
-import ManageArticles from "../components/manage/articles/manageArticles";
-import ManageSections from "../components/manage/sections/manageSections";
-import ManageSponsors from "../components/manage/sponsors/manageSponsors";
-import ManagePublicities from "../components/manage/publicities/managePublicities";
 
 interface TabPanelProps {
   children?: React.ReactNode;
