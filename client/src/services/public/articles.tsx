@@ -19,9 +19,11 @@ function getApiArticles(dispatch: AppDispatch): Promise<{
   payload: Article[];
   type: "articles/storeArticles";
 }> {
-  const request = axios.get(localhost + "/public/articles").then((req) => {
-    return dispatch(storeArticles(req.data));
-  });
+  const request = axios
+    .get(localhost + "/public/articles?page=0")
+    .then((req) => {
+      return dispatch(storeArticles(req.data));
+    });
 
   return request;
 }

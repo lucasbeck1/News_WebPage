@@ -45,7 +45,7 @@ function getApiArticles(
     payload: Article[];
     type: "articles/storeArticles";
   }> = axios
-    .get(localhost + "/author/articles/author?name=" + encodeURI(name))
+    .get(localhost + "/author/articles/author?page=0&name=" + encodeURI(name))
     .then((res) => {
       return dispatch(storeArticles(res.data));
     });
@@ -54,7 +54,7 @@ function getApiArticles(
 
 function createApiArticle(data: ArticleCreation): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(localhost + "/admin/articles", data, {
+    .post(localhost + "/author/articles", data, {
       withCredentials: true,
     })
     .then((res) => {
@@ -71,7 +71,7 @@ function updateApiArticle(
   id: number
 ): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .put(localhost + "/admin/articles/" + id.toString(), data, {
+    .put(localhost + "/author/articles/" + id.toString(), data, {
       withCredentials: true,
     })
     .then((res) => {
@@ -85,7 +85,7 @@ function updateApiArticle(
 
 function deleteApiArticle(id: number): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .delete(localhost + "/admin/articles/" + id.toString(), {
+    .delete(localhost + "/author/articles/" + id.toString(), {
       withCredentials: true,
     })
     .then((res) => {
