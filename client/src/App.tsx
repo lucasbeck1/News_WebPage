@@ -9,7 +9,7 @@ import Detail from "./pages/detail";
 import Section from "./pages/section";
 import Admin from "./pages/admin";
 import Author from "./pages/author";
-import Management from "./pages/management";
+import Management from "./pages/adminManage";
 import MyArticles from "./components/manageAuhtor/manageArticles";
 import Metrics from "./pages/metrics";
 import Login from "./pages/login";

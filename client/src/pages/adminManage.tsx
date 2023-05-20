@@ -6,11 +6,11 @@ import { RootState } from "../store";
 import SwipeableViews from "react-swipeable-views-react-18-fix";
 
 import Footer from "../components/public/footer";
-import ManageAuthors from "../components/manage/authors/manageAuthors";
-import ManageArticles from "../components/manage/articles/manageArticles";
-import ManageSections from "../components/manage/sections/manageSections";
-import ManageSponsors from "../components/manage/sponsors/manageSponsors";
-import ManagePublicities from "../components/manage/publicities/managePublicities";
+import ManageAuthors from "../components/manageAdmin/authors/manageAuthors";
+import ManageArticles from "../components/manageAdmin/articles/manageArticles";
+import ManageSections from "../components/manageAdmin/sections/manageSections";
+import ManageSponsors from "../components/manageAdmin/sponsors/manageSponsors";
+import ManagePublicities from "../components/manageAdmin/publicities/managePublicities";
 
 import { useTheme } from "@mui/material/styles";
 import ArticleIcon from "@mui/icons-material/Article";
