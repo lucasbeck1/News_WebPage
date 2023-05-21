@@ -1,5 +1,5 @@
 import axios from "axios";
-import { localhost } from "../url";
+import { domain } from "../url";
 import { storeArticles } from "../../reducers/sliceArticles";
 import { AppDispatch } from "../../store";
 
@@ -19,11 +19,9 @@ function getApiArticles(dispatch: AppDispatch): Promise<{
   payload: Article[];
   type: "articles/storeArticles";
 }> {
-  const request = axios
-    .get(localhost + "/public/articles?page=0")
-    .then((req) => {
-      return dispatch(storeArticles(req.data));
-    });
+  const request = axios.get(domain + "/public/articles?page=0").then((req) => {
+    return dispatch(storeArticles(req.data));
+  });
 
   return request;
 }

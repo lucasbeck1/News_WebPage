@@ -1,7 +1,7 @@
 import { authState, clearState } from "../../reducers/sliceAuth";
 import { AppDispatch } from "../../store";
 import axios from "axios";
-import { localhost } from "../url";
+import { domain } from "../url";
 
 type loginRequest = {
   mail: string;
@@ -36,7 +36,7 @@ function loginApi(
   dispatch: AppDispatch
 ): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(localhost + "/public/auth/login", data, {
+    .post(domain + "/public/auth/login", data, {
       withCredentials: true,
     })
     .then((res) => {
@@ -54,7 +54,7 @@ function loginApi(
 
 function logoutApi(dispatch: AppDispatch): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .get(localhost + "/public/auth/logout", {
+    .get(domain + "/public/auth/logout", {
       withCredentials: true,
     })
     .then((res) => {
@@ -70,7 +70,7 @@ function logoutApi(dispatch: AppDispatch): Promise<{ message: string }> {
 
 function registerApi(data: registerRequest): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(localhost + "/public/auth/register", data)
+    .post(domain + "/public/auth/register", data)
     .then((req) => {
       return req.data;
     });

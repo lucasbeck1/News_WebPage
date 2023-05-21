@@ -1,5 +1,5 @@
 import axios from "axios";
-import { localhost } from "../url";
+import { domain } from "../url";
 import { storeArticles } from "../../reducers/sliceArticles";
 import { AppDispatch } from "../../store";
 
@@ -45,7 +45,7 @@ function getApiArticles(
     payload: Article[];
     type: "articles/storeArticles";
   }> = axios
-    .get(localhost + "/author/articles/author?page=0&name=" + encodeURI(name))
+    .get(domain + "/author/articles/author?page=0&name=" + encodeURI(name))
     .then((res) => {
       return dispatch(storeArticles(res.data));
     });
@@ -54,7 +54,7 @@ function getApiArticles(
 
 function createApiArticle(data: ArticleCreation): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(localhost + "/author/articles", data, {
+    .post(domain + "/author/articles", data, {
       withCredentials: true,
     })
     .then((res) => {
@@ -71,7 +71,7 @@ function updateApiArticle(
   id: number
 ): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .put(localhost + "/author/articles/" + id.toString(), data, {
+    .put(domain + "/author/articles/" + id.toString(), data, {
       withCredentials: true,
     })
     .then((res) => {
@@ -85,7 +85,7 @@ function updateApiArticle(
 
 function deleteApiArticle(id: number): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .delete(localhost + "/author/articles/" + id.toString(), {
+    .delete(domain + "/author/articles/" + id.toString(), {
       withCredentials: true,
     })
     .then((res) => {

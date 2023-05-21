@@ -1,5 +1,5 @@
 import axios from "axios";
-import { localhost } from "../url";
+import { domain } from "../url";
 import { storeAuthors } from "../../reducers/sliceUsers";
 import { AppDispatch } from "../../store";
 
@@ -32,7 +32,7 @@ function getApiAuthors(dispatch: AppDispatch): Promise<{
   type: "authors/storeAuthors";
 }> {
   const request = axios
-    .get(localhost + "/admin/authors", {
+    .get(domain + "/admin/authors", {
       withCredentials: true,
     })
     .then((req) => {
@@ -44,7 +44,7 @@ function getApiAuthors(dispatch: AppDispatch): Promise<{
 
 function createApiAuthor(data: authorCreation): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(localhost + "/admin/authors", data, {
+    .post(domain + "/admin/authors", data, {
       withCredentials: true,
     })
     .then((res) => {
@@ -58,7 +58,7 @@ function createApiAuthor(data: authorCreation): Promise<{ message: string }> {
 
 function updateApiAuthor(data: authorUpdate): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .put(localhost + "/admin/authors/" + data.id.toString(), data, {
+    .put(domain + "/admin/authors/" + data.id.toString(), data, {
       withCredentials: true,
     })
     .then((res) => {
@@ -73,7 +73,7 @@ function updateApiAuthor(data: authorUpdate): Promise<{ message: string }> {
 function deleteApiAuthor(id: string): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios({
     method: "delete",
-    url: localhost + "/admin/authors/" + id,
+    url: domain + "/admin/authors/" + id,
     withCredentials: true,
   })
     .then((res) => {

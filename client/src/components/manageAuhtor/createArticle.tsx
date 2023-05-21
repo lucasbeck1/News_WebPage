@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 import { RootState } from "../../store";
 import { createApiArticle } from "../../services/author/articles";
-import { localhost } from "../../services/url";
+import { domain } from "../../services/url";
 import UploadInput from "./uploadInput";
 
 import Button from "@mui/material/Button";
@@ -207,12 +207,12 @@ function CreateArticle() {
     if (status === "Upload Ok") {
       setInput({
         ...input,
-        image: localhost + "/admin/images/" + imageName,
+        image: domain + "/admin/images/" + imageName,
       });
       setErrors(
         verifyInput({
           ...input,
-          image: localhost + "/admin/images/" + imageName,
+          image: domain + "/admin/images/" + imageName,
         })
       );
     } else {

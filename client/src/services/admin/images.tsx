@@ -1,5 +1,5 @@
 import axios from "axios";
-import { localhost } from "../url";
+import { domain } from "../url";
 
 function uploadApiImage(
   formData: FormData
@@ -7,7 +7,7 @@ function uploadApiImage(
   const data = formData;
 
   const request: Promise<{ message: string; fileName: string }> = axios
-    .post(localhost + "/admin/images", data, {
+    .post(domain + "/admin/images", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

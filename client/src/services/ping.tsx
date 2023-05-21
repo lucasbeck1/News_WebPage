@@ -1,9 +1,9 @@
 import axios from "axios";
-import { localhost } from "./url";
+import { domain } from "./url";
 
 function apiStatus() {
   axios
-    .get(localhost + "/status")
+    .get(domain + "/status")
     .then(() => {
       return "Connection Success";
     })
