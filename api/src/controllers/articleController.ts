@@ -47,11 +47,11 @@ export const getAllArticles = async (req: Request, res: Response) => {
         author: { name: true },
         section: { name: true },
       },
-      skip: page * 100,
-      take: 100,
       order: {
         createdAt: "DESC",
       },
+      skip: page * 100,
+      take: 100,
     });
     return res.status(200).json(allArticles);
   } catch (error) {
@@ -96,11 +96,11 @@ export const getArticlesByAuthor = async (req: Request, res: Response) => {
         author: { name: true },
         section: { name: true },
       },
-      skip: page * 100,
-      take: 100,
       order: {
         createdAt: "DESC",
       },
+      skip: page * 100,
+      take: 100,
     });
     return res.status(200).json(allArticles);
   } catch (error) {
