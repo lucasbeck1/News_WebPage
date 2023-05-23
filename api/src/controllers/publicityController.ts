@@ -8,7 +8,7 @@ type publicityType = {
   start: Date;
   finish: Date;
   payment: JSON;
-  sponsorId: number;
+  sponsorId: string;
 };
 
 // ------------------------------------------------------------------

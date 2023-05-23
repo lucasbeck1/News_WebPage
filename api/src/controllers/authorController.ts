@@ -7,7 +7,6 @@ type authorCreateType = {
   name: string;
   mail: string;
   password: string;
-  adminKey: string;
 };
 
 type authorUpdateType = {

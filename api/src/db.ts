@@ -15,6 +15,6 @@ export const AppDataSource = new DataSource({
   database: db_name,
   synchronize: true,
   entities: [Article, Author, Section, Sponsor, Publicity],
-  //entities: ["entities/*.ts"],
+  // entities: ["entities/*.ts"],
   // logging: true,
 });

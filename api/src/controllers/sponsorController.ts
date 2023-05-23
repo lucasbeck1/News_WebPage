@@ -1,9 +1,12 @@
 import { Request, Response } from "express";
 import { Sponsor } from "../entities/sponsorEntity";
+import { saltRounds } from "../config";
+import bcrypt from "bcrypt";
 
 type sponsorType = {
   name: string;
   mail: string;
+  password: string;
 };
 
 // ------------------------------------------------------------------
@@ -33,7 +36,7 @@ export const getOneSponsor = async (req: Request, res: Response) => {
 
     const oneSponsor = await Sponsor.findOne({
       where: {
-        id: parseInt(id),
+        id: id,
       },
       relations: {
         publicities: true,
@@ -60,15 +63,20 @@ export const createSponsor = async (
   res: Response
 ) => {
   try {
-    const { name, mail } = req.body;
+    const { name, mail, password } = req.body;
 
-    if (!name || !mail) {
+    if (!name || !mail || !password) {
       return res.status(404).json({ message: "More data is required" });
     }
 
     const sponsorNew = new Sponsor();
     sponsorNew.mail = name;
     sponsorNew.name = mail;
+
+    const salt: string = await bcrypt.genSalt(saltRounds);
+    const hash: string = await bcrypt.hash(password, salt);
+    sponsorNew.password = hash;
+
     await sponsorNew.save();
 
     return res.status(201).json(sponsorNew);
@@ -87,10 +95,10 @@ export const updateSponsor = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const sponsor = await Sponsor.findOneBy({ id: parseInt(id) });
+    const sponsor = await Sponsor.findOneBy({ id: id });
     if (!sponsor) return res.status(404).json({ message: "Not sponsor found" });
 
-    await Sponsor.update({ id: parseInt(id) }, req.body);
+    await Sponsor.update({ id: id }, req.body);
 
     //return res.sendStatus(204);
     return res.status(201).json({ message: "Update succesfull" });
@@ -109,7 +117,7 @@ export const deleteSponsor = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const result = await Sponsor.delete({ id: parseInt(id) });
+    const result = await Sponsor.delete({ id: id });
     if (result.affected === 0) {
       return res.status(404).json({ message: "Sponsor not found" });
     }

@@ -11,14 +11,17 @@ import { Publicity } from "./publicityEntity";
 
 @Entity()
 export class Sponsor extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   mail: string;
+
+  @Column()
+  password: string;
 
   @OneToMany(() => Publicity, (publicity) => publicity.sponsor)
   publicities: Publicity[];
