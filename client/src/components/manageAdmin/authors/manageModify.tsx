@@ -28,6 +28,7 @@ interface User {
     id: string;
     name: string;
     mail: string;
+    admin: boolean;
   };
 }
 
@@ -59,7 +60,7 @@ function ManageModify({ user }: User) {
 
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState({
-    admin: false,
+    admin: user.admin,
     name: "",
     mail: "",
     oldPassword: "",
@@ -67,7 +68,7 @@ function ManageModify({ user }: User) {
   });
   const [error, setError] = useState({});
   const initialDataJson = JSON.stringify({
-    admin: false,
+    admin: user.admin,
     name: "",
     mail: "",
     oldPassword: "",
@@ -83,7 +84,7 @@ function ManageModify({ user }: User) {
 
   function handleOpen() {
     setInput({
-      admin: false,
+      admin: user.admin,
       name: "",
       mail: "",
       oldPassword: "",
@@ -135,7 +136,9 @@ function ManageModify({ user }: User) {
       err.mail = "Invalid e-mail address";
     }
     // ** OldPassword **
-    else if (input.oldPassword && input.oldPassword.length < 4) {
+    else if (!input.oldPassword) {
+      err.oldPassword = "Field Required";
+    } else if (input.oldPassword && input.oldPassword.length < 4) {
       err.oldPassword = "Password minimum 4 characters";
     } else if (input.oldPassword && RegEXP_Password.test(input.oldPassword)) {
       err.oldPassword = "Quote characters are not allowed";
