@@ -109,21 +109,26 @@ export const updateAuthor = async (req: Request, res: Response) => {
     const author = await Author.findOneBy({ id: id });
     if (!author) return res.status(404).json({ message: "Not author found" });
 
-    //const { name, mail, admin, oldPassword, newPassword } = req.body;
-    const { name, mail, admin, newPassword } = req.body;
+    const { name, mail, admin, oldPassword, newPassword } = req.body;
 
     const propertiesUpdated: authorUpdateType = {};
 
-    /* let checkPass: boolean;
+    let checkPass: boolean;
 
     if (oldPassword) {
       checkPass = await bcrypt.compare(oldPassword, author.password);
     } else {
       checkPass = false;
-    } */
+    }
 
-    if (admin) {
-      propertiesUpdated.admin = admin;
+    if (checkPass !== true) {
+      return res.status(404).json({ message: "Invalid request" });
+    }
+
+    if (admin === "true") {
+      propertiesUpdated.admin = true;
+    } else if (admin === "false") {
+      propertiesUpdated.admin = false;
     }
 
     if (name) {
