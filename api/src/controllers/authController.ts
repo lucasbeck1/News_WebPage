@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Author } from "../entities/authorEntity";
 import { saltRounds } from "../config";
 import bcrypt from "bcrypt";
-import myPassport from "../middlewares/passport.middleware";
+//import myPassport from "../middlewares/passport.middleware";
 
 type loginRequest = {
   mail: string;
@@ -34,7 +34,7 @@ export const login = async (
       res.cookie("name", author.name, { signed: false, sameSite: "strict" });
       res.cookie("admin", author.admin, { signed: false, sameSite: "strict" });
 
-      myPassport.authenticate("local", { failureRedirect: "/login" });
+      //myPassport.authenticate("local", { failureRedirect: "/login" });
 
       return res.status(200).json({ message: "Loggin Succesfull" });
     } else {

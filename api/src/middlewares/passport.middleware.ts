@@ -6,18 +6,19 @@ import { Author } from "../entities/authorEntity";
 
 import bcrypt from "bcrypt";
 
-/* type User = {
+type User = {
   id: string;
   mail: string;
   password: string;
-}; */
+};
 
 const myPassport = new passport.Passport();
 
 myPassport.use(
-  new Strategy(function (mail, password, done) {
+  new Strategy(function (username, password, done) {
     console.log("------------ USER AQUI ---------------");
-    Author.findOneBy({ mail: mail })
+    console.log(username, password);
+    Author.findOneBy({ mail: username })
       .then(async (user) => {
         if (!user) {
           return done(null, false);
@@ -41,8 +42,8 @@ myPassport.serializeUser(function (user, done) {
   done(null, user);
 });
 
-myPassport.deserializeUser(function (id: string, done) {
-  Author.findOne({ where: { id: id } })
+myPassport.deserializeUser(function (user: User, done) {
+  Author.findOne({ where: { id: user.id } })
     .then((user) => {
       done(null, user);
     })

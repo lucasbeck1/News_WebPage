@@ -8,6 +8,12 @@ type loginRequest = {
   password: string;
 };
 
+type loginRequest2 = {
+  username: string;
+  mail: string;
+  password: string;
+};
+
 type registerRequest = {
   name: string;
   mail: string;
@@ -35,8 +41,13 @@ function loginApi(
   data: loginRequest,
   dispatch: AppDispatch
 ): Promise<{ message: string }> {
+  const data2: loginRequest2 = {
+    username: data.mail,
+    mail: data.mail,
+    password: data.password,
+  };
   const request: Promise<{ message: string }> = axios
-    .post(domain + "/public/auth/login", data, {
+    .post(domain + "/public/auth/login", data2, {
       withCredentials: true,
     })
     .then((res) => {

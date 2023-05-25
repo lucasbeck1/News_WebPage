@@ -41,12 +41,12 @@ app.use(
   session({
     secret: cookieKey,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
   })
 );
 app.use(myPassport.initialize());
 app.use(myPassport.session());
-//app.use(myPassport.authenticate("session"));
+// app.use(myPassport.authenticate("session"));
 
 app.use((req, _res, next) => {
   console.log(req.session);
@@ -54,6 +54,7 @@ app.use((req, _res, next) => {
   console.log("USER", req.user);
   console.log("Co", req.cookies);
   console.log("CoS", req.signedCookies);
+  console.log("Body", req.body);
 
   next();
 });
