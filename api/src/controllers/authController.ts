@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Author } from "../entities/authorEntity";
 import { saltRounds } from "../config";
 import bcrypt from "bcrypt";
+import myPassport from "../middlewares/passport.middleware";
 
 type loginRequest = {
   mail: string;
@@ -32,6 +33,9 @@ export const login = async (
       res.cookie("id", author.id, { signed: true, sameSite: "strict" });
       res.cookie("name", author.name, { signed: false, sameSite: "strict" });
       res.cookie("admin", author.admin, { signed: false, sameSite: "strict" });
+
+      myPassport.authenticate("local", { failureRedirect: "/login" });
+
       return res.status(200).json({ message: "Loggin Succesfull" });
     } else {
       return res.status(404).json({ message: "Invalid Request" });
@@ -60,6 +64,17 @@ export const logOut = async (
     res.clearCookie("id", { signed: true, sameSite: "strict" });
     res.clearCookie("name", { signed: false, sameSite: "strict" });
     res.clearCookie("admin", { signed: false, sameSite: "strict" });
+    res.clearCookie("connect.sid", {
+      signed: true,
+      sameSite: "none",
+      httpOnly: true,
+    });
+
+    /*  req.logout(function (err) {
+      if (err) {
+        console.log(err);
+      }
+    }); */
     return res.json({ message: "Loggout Succesfull" });
   } catch (error) {
     console.log(error);
