@@ -2,23 +2,21 @@ import passport from "passport";
 import { Strategy } from "passport-local";
 
 import { Author } from "../entities/authorEntity";
-//import { Request, Response, NextFunction } from "express";
 
 import bcrypt from "bcrypt";
 
 type User = {
   id: string;
-  mail: string;
-  password: string;
 };
 
 const myPassport = new passport.Passport();
 
 myPassport.use(
   new Strategy(function (username, password, done) {
-    console.log("------------ USER AQUI ---------------");
-    console.log(username, password);
-    Author.findOneBy({ mail: username })
+    Author.findOne({
+      where: { mail: username },
+      select: { id: true, password: true, admin: true, name: true },
+    })
       .then(async (user) => {
         if (!user) {
           return done(null, false);
@@ -30,7 +28,9 @@ myPassport.use(
         if (!checkPass) {
           return done(null, false);
         }
-        return done(null, user);
+        return done(null, {
+          id: user.id,
+        });
       })
       .catch((err) => {
         return done(err);
@@ -43,9 +43,16 @@ myPassport.serializeUser(function (user, done) {
 });
 
 myPassport.deserializeUser(function (user: User, done) {
-  Author.findOne({ where: { id: user.id } })
+  Author.findOneBy({ id: user.id })
     .then((user) => {
-      done(null, user);
+      if (!user) {
+        return done(null, false);
+      }
+      done(null, {
+        id: user.id,
+        admin: user.admin,
+        name: user.name,
+      });
     })
     .catch((err) => {
       return done(err);

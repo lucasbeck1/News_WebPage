@@ -46,7 +46,6 @@ app.use(
 );
 app.use(myPassport.initialize());
 app.use(myPassport.session());
-// app.use(myPassport.authenticate("session"));
 
 app.use((req, _res, next) => {
   console.log(req.session);

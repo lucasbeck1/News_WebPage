@@ -1,5 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import { Author } from "../entities/authorEntity";
+
+type Usertype = {
+  id?: string;
+  admin?: boolean;
+  name?: string;
+};
 
 // ------------------------------------------------------------------
 
@@ -8,19 +13,13 @@ export const adminVerification = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { id } = req.signedCookies;
+  const user: Usertype | undefined = req.user;
   const { name, admin } = req.cookies;
 
-  if (!id || !name || !admin || admin !== "true") {
+  if (!user || !user.id || !name || !admin || admin !== "true") {
     return res.status(404).json({ message: "Invalid request" });
   }
-
-  const adminAuthor = await Author.findOne({
-    where: { id: id },
-    select: { name: true, admin: true },
-  });
-
-  if (!adminAuthor || adminAuthor.name !== name || adminAuthor.admin !== true) {
+  if (user.name !== name || user.admin !== true) {
     return res.status(400).json({ message: "Invalid request" });
   }
 
@@ -34,23 +33,14 @@ export const authorVerification = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { id } = req.signedCookies;
+  const user: Usertype | undefined = req.user;
   const { name, admin } = req.cookies;
 
-  if (!id || !name || !admin || admin !== "false") {
+  if (!user || !user.id || !name || !admin || admin !== "false") {
     return res.status(404).json({ message: "Invalid request" });
   }
 
-  const adminAuthor = await Author.findOne({
-    where: { id: id },
-    select: { name: true, admin: true },
-  });
-
-  if (
-    !adminAuthor ||
-    adminAuthor.name !== name ||
-    adminAuthor.admin !== false
-  ) {
+  if (user.name !== name || user.admin !== false) {
     return res.status(400).json({ message: "Invalid request" });
   }
 
