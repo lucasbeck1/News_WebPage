@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Author } from "../entities/authorEntity";
-import { saltRounds } from "../config";
+import { saltRounds } from "../config/keys.config";
 import bcrypt from "bcrypt";
 
 type authorCreateType = {

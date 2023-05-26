@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Sponsor } from "../entities/sponsorEntity";
-import { saltRounds } from "../config";
+import { saltRounds } from "../config/keys.config";
 import bcrypt from "bcrypt";
 
 type sponsorType = {

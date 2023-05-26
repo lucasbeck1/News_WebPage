@@ -4,7 +4,13 @@ import { Author } from "./entities/authorEntity";
 import { Section } from "./entities/sectionEntity";
 import { Sponsor } from "./entities/sponsorEntity";
 import { Publicity } from "./entities/publicityEntity";
-import { db_host, db_name, db_port, db_username, db_password } from "./config";
+import {
+  db_host,
+  db_name,
+  db_port,
+  db_username,
+  db_password,
+} from "./config/keys.config";
 
 export const AppDataSource = new DataSource({
   type: "mysql",
