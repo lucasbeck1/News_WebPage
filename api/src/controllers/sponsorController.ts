@@ -64,9 +64,24 @@ export const createSponsor = async (
 ) => {
   try {
     const { name, mail, password } = req.body;
+    const RegEXP_User = /[`ª!@#$%^*_+=[\]{};'"\\|,<>/~]/;
+    const RegEXP_Mail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const RegEXP_Password = /[`'"]/;
 
     if (!name || !mail || !password) {
-      return res.status(404).json({ message: "More data is required" });
+      return res.status(404).json({ message: "Invalid Request" });
+    } else if (
+      typeof name !== "string" ||
+      typeof mail !== "string" ||
+      typeof password !== "string"
+    ) {
+      return res.status(404).json({ message: "Invalid Request" });
+    } else if (RegEXP_User.test(name)) {
+      return res.status(404).json({ message: "Invalid Request" });
+    } else if (!RegEXP_Mail.test(mail)) {
+      return res.status(404).json({ message: "Invalid Request" });
+    } else if (RegEXP_Password.test(password)) {
+      return res.status(404).json({ message: "Invalid Request" });
     }
 
     const sponsorNew = new Sponsor();
