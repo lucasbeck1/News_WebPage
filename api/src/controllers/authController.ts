@@ -1,15 +1,8 @@
 import { Request, Response } from "express";
 import { Author } from "../entities/authorEntity";
-import { saltRounds } from "../config/keys.config";
 import bcrypt from "bcrypt";
 
 type loginRequest = {
-  mail: string;
-  password: string;
-};
-
-type registerRequest = {
-  name: string;
   mail: string;
   password: string;
 };
@@ -66,52 +59,5 @@ export const logOut = async (
   } catch (error) {
     console.log(error);
     return res.send(error);
-  }
-};
-
-// ------------------------------------------------------------------
-
-export const register = async (
-  req: Request<unknown, unknown, registerRequest>,
-  res: Response
-) => {
-  try {
-    const { name, mail, password } = req.body;
-    const RegEXP_User = /[`ª!@#$%^*_+=[\]{};'"\\|,<>/~]/;
-    const RegEXP_Mail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    const RegEXP_Password = /[`'"]/;
-
-    if (!name || !mail || !password) {
-      return res.status(404).json({ message: "Invalid Request" });
-    } else if (
-      typeof name !== "string" ||
-      typeof mail !== "string" ||
-      typeof password !== "string"
-    ) {
-      return res.status(404).json({ message: "Invalid Request" });
-    } else if (RegEXP_User.test(name)) {
-      return res.status(404).json({ message: "Invalid Request" });
-    } else if (!RegEXP_Mail.test(mail)) {
-      return res.status(404).json({ message: "Invalid Request" });
-    } else if (RegEXP_Password.test(password)) {
-      return res.status(404).json({ message: "Invalid Request" });
-    }
-
-    const authorCreation = new Author();
-    authorCreation.name = name;
-    authorCreation.mail = mail;
-
-    const salt: string = await bcrypt.genSalt(saltRounds);
-    const hash: string = await bcrypt.hash(password, salt);
-    authorCreation.password = hash;
-
-    await authorCreation.save();
-    return res.status(201).json({ message: "Create succesfull" });
-  } catch (error) {
-    if (error instanceof Error) {
-      return res.status(500).json({ message: error.message });
-    } else {
-      return res.status(500).json({ message: "Response Error" });
-    }
   }
 };
