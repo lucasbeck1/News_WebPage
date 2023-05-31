@@ -46,3 +46,24 @@ export const authorVerification = async (
 
   return next();
 };
+
+// ------------------------------------------------------------------
+
+export const sponsorVerification = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const sponsorData = req.signedCookies.sid;
+  const { name } = req.cookies;
+
+  if (!sponsorData || !sponsorData.id || !sponsorData.name || !name) {
+    return res.status(404).json({ message: "Invalid request" });
+  }
+
+  if (sponsorData.name !== name) {
+    return res.status(404).json({ message: "Invalid request" });
+  }
+
+  return next();
+};

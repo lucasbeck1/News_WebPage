@@ -74,13 +74,22 @@ export const loginSponsor = async (
     const { mail, password } = req.body;
     if (!mail || !password)
       return res.status(404).json({ message: "Missing data" });
-    const author = await Sponsor.findOneBy({ mail: mail });
-    if (!author) return res.status(404).json({ message: "Invalid Request" });
+    const sponsor = await Sponsor.findOneBy({ mail: mail });
+    if (!sponsor) return res.status(404).json({ message: "Invalid Request" });
 
-    const checkPass: boolean = await bcrypt.compare(password, author.password);
+    const checkPass: boolean = await bcrypt.compare(password, sponsor.password);
     if (checkPass) {
       // Cookie assignment
-      res.cookie("name", author.name, { signed: false, sameSite: "strict" });
+      res.cookie(
+        "sid",
+        { id: sponsor.id, name: sponsor.id },
+        {
+          signed: true,
+          sameSite: "none",
+          httpOnly: true,
+        }
+      );
+      res.cookie("name", sponsor.name, { signed: false, sameSite: "strict" });
 
       return res.status(200).json({ message: "Loggin Succesfull" });
     } else {
@@ -103,6 +112,11 @@ export const logOutSponsor = async (
 ) => {
   try {
     // Cookie deletion
+    res.clearCookie("connect.sid", {
+      signed: true,
+      sameSite: "none",
+      httpOnly: true,
+    });
     res.clearCookie("name", { signed: false, sameSite: "strict" });
 
     return res.json({ message: "Loggout Succesfull" });
