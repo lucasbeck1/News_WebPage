@@ -19,12 +19,29 @@ type searchPublicity = {
 
 // ------------------------------------------------------------------
 
-export const getAllPublicity = async (_req: Request, res: Response) => {
+export const getAllPublicity = async (req: Request, res: Response) => {
   try {
+    const page = Number(req.query.page) || 0;
+
     const allPublicity = await Publicity.find({
       relations: {
         sponsor: true,
       },
+      select: {
+        id: true,
+        image: true,
+        active: true,
+        finished: true,
+        approved: true,
+        start: true,
+        finish: true,
+        sponsor: { name: true },
+      },
+      order: {
+        finish: "DESC",
+      },
+      skip: page * 100,
+      take: 100,
     });
 
     return res.status(200).json(allPublicity);
@@ -45,6 +62,20 @@ export const getActivePublicity = async (_req: Request, res: Response) => {
       where: {
         active: true,
       },
+      select: {
+        id: true,
+        image: true,
+        active: true,
+        finished: true,
+        approved: true,
+        start: true,
+        finish: true,
+        sponsor: { name: true },
+      },
+      order: {
+        finish: "DESC",
+      },
+      take: 200,
     });
 
     return res.status(200).json(allPublicity);
@@ -99,6 +130,16 @@ export const getOnePublicity = async (req: Request, res: Response) => {
       },
       relations: {
         sponsor: true,
+      },
+      select: {
+        id: true,
+        image: true,
+        active: true,
+        finished: true,
+        approved: true,
+        start: true,
+        finish: true,
+        sponsor: { name: true },
       },
     });
 
