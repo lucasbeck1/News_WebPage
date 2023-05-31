@@ -11,6 +11,12 @@ type publicityType = {
   sponsorId: string;
 };
 
+type searchPublicity = {
+  sponsor?: {
+    name: string;
+  };
+};
+
 // ------------------------------------------------------------------
 
 export const getAllPublicity = async (_req: Request, res: Response) => {
@@ -39,6 +45,37 @@ export const getActivePublicity = async (_req: Request, res: Response) => {
       where: {
         active: true,
       },
+    });
+
+    return res.status(200).json(allPublicity);
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({ message: error.message });
+    } else {
+      return res.status(500).json({ message: "Response Error" });
+    }
+  }
+};
+
+// ------------------------------------------------------------------
+
+export const getPublicityBySponsor = async (req: Request, res: Response) => {
+  try {
+    const { name } = req.params;
+    const page = Number(req.query.page) || 0;
+    const search: searchPublicity = {};
+
+    if (!name) {
+      return res.status(404).json({ message: "Invalid Request" });
+    }
+
+    const allPublicity = await Publicity.find({
+      where: search,
+      order: {
+        finish: "DESC",
+      },
+      skip: page * 100,
+      take: 100,
     });
 
     return res.status(200).json(allPublicity);

@@ -9,8 +9,9 @@ import session from "express-session";
 import { cookieKey } from "./config/keys.config";
 import myPassport from "./config/passport.config";
 import publicRouter from "./routes/public";
-import authorRouter from "./routes/author";
 import adminRouter from "./routes/admin";
+import authorRouter from "./routes/author";
+import sponsorRouter from "./routes/sponsor";
 
 // Express and midlewares
 const app = express();
@@ -38,6 +39,7 @@ app.use(myPassport.session());
 
 // Routers
 app.use("/public", publicRouter);
+app.use("/sponsor", sponsorRouter);
 app.use("/author", authorRouter);
 app.use("/admin", adminRouter);
 
