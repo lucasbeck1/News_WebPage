@@ -12,9 +12,9 @@ type User = {
 const myPassport = new passport.Passport();
 
 myPassport.use(
-  new Strategy(function (username, password, done) {
+  new Strategy(function (mail, password, done) {
     Author.findOne({
-      where: { mail: username },
+      where: { mail: mail },
       select: { id: true, password: true, admin: true, name: true },
     })
       .then(async (user) => {
