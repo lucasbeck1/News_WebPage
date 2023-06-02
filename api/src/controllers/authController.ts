@@ -90,6 +90,7 @@ export const loginSponsor = async (
         }
       );
       res.cookie("name", sponsor.name, { signed: false, sameSite: "strict" });
+      res.cookie("sponsor", true, { signed: false, sameSite: "strict" });
 
       return res.status(200).json({ message: "Loggin Succesfull" });
     } else {
