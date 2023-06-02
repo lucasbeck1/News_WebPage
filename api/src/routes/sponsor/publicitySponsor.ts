@@ -6,7 +6,7 @@ import {
 
 const router = Router();
 
-router.get("/", getPublicityBySponsor);
+router.get("/:name", getPublicityBySponsor);
 router.post("/", createPublicity);
 
 export default router;
