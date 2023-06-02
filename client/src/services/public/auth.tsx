@@ -79,13 +79,37 @@ function logoutApi(dispatch: AppDispatch): Promise<{ message: string }> {
   return request;
 }
 
-function registerApi(data: registerRequest): Promise<{ message: string }> {
+function registerSponsorApi(
+  data: registerRequest
+): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(domain + "/public/auth/register", data)
+    .post(domain + "/public/auth/registerSponsor", data)
     .then((req) => {
       return req.data;
     });
   return request;
 }
 
-export { loginApi, logoutApi, registerApi, checkCredentials };
+function logoutSponsorApi(dispatch: AppDispatch): Promise<{ message: string }> {
+  const request: Promise<{ message: string }> = axios
+    .get(domain + "/public/auth/logoutSponsor", {
+      withCredentials: true,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .then((resData) => {
+      dispatch(clearState());
+      return resData;
+    });
+
+  return request;
+}
+
+export {
+  loginApi,
+  logoutApi,
+  logoutSponsorApi,
+  registerSponsorApi,
+  checkCredentials,
+};

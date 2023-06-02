@@ -4,7 +4,7 @@ import { NavLink, useNavigate, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import { RootState } from "../store";
-import { registerApi } from "../services/public/auth";
+import { registerSponsorApi } from "../services/public/auth";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
