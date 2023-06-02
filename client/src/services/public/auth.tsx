@@ -3,12 +3,12 @@ import { AppDispatch } from "../../store";
 import axios from "axios";
 import { domain } from "../url";
 
-type loginRequest = {
+type dataRequest = {
   mail: string;
   password: string;
 };
 
-type loginRequest2 = {
+type loginRequest = {
   username: string;
   mail: string;
   password: string;
@@ -32,22 +32,25 @@ function checkCredentials(dispatch: AppDispatch): void {
   } else if (cookies.includes("admin=false") && nameEncoded) {
     const name = decodeURI(nameEncoded.split("=")[1]);
     dispatch(authState({ type: "author", name }));
+  } else if (cookies.includes("sponsor=true") && nameEncoded) {
+    const name = decodeURI(nameEncoded.split("=")[1]);
+    dispatch(authState({ type: "sponsor", name }));
   } else {
     dispatch(clearState());
   }
 }
 
 function loginApi(
-  data: loginRequest,
+  data: dataRequest,
   dispatch: AppDispatch
 ): Promise<{ message: string }> {
-  const data2: loginRequest2 = {
+  const credentials: loginRequest = {
     username: data.mail,
     mail: data.mail,
     password: data.password,
   };
   const request: Promise<{ message: string }> = axios
-    .post(domain + "/public/auth/login", data2, {
+    .post(domain + "/public/auth/login", credentials, {
       withCredentials: true,
     })
     .then((res) => {
@@ -76,6 +79,32 @@ function logoutApi(dispatch: AppDispatch): Promise<{ message: string }> {
       return resData;
     });
 
+  return request;
+}
+
+function loginSponsorApi(
+  data: dataRequest,
+  dispatch: AppDispatch
+): Promise<{ message: string }> {
+  const credentials: loginRequest = {
+    username: data.mail,
+    mail: data.mail,
+    password: data.password,
+  };
+  const request: Promise<{ message: string }> = axios
+    .post(domain + "/public/auth/loginSponsor", credentials, {
+      withCredentials: true,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .then((resData) => {
+      checkCredentials(dispatch);
+      return resData;
+    })
+    .catch(() => {
+      return { message: "Invalid credentials" };
+    });
   return request;
 }
 
@@ -109,6 +138,7 @@ function logoutSponsorApi(dispatch: AppDispatch): Promise<{ message: string }> {
 export {
   loginApi,
   logoutApi,
+  loginSponsorApi,
   logoutSponsorApi,
   registerSponsorApi,
   checkCredentials,

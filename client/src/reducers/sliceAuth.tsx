@@ -1,15 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface UserAuth {
-  name: string;
-  type: string;
-}
-
 enum UserType {
   none = "none",
   author = "author",
   admin = "admin",
+  sponsor = "sponsor",
 }
+
+type UserAuth = {
+  name: string;
+  type: string;
+};
 
 const initialState: UserAuth = { name: "", type: "none" };
 
