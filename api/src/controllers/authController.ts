@@ -92,7 +92,7 @@ export const loginSponsor = async (
       res.cookie("name", sponsor.name, { signed: false, sameSite: "strict" });
       res.cookie("sponsor", true, { signed: false, sameSite: "strict" });
 
-      return res.status(200).json({ message: "Loggin Succesfull" });
+      return res.status(200).json({ message: "Loggout Succesfull" });
     } else {
       return res.status(404).json({ message: "Invalid Request" });
     }
@@ -119,6 +119,7 @@ export const logOutSponsor = async (
       httpOnly: true,
     });
     res.clearCookie("name", { signed: false, sameSite: "strict" });
+    res.clearCookie("sponsor", { signed: false, sameSite: "strict" });
 
     return res.json({ message: "Loggout Succesfull" });
   } catch (error) {
