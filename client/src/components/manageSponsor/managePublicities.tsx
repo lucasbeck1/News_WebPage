@@ -7,7 +7,6 @@ import { RootState } from "../../store";
 
 import { getPublicityBySponsor } from "../../services/sponsor/publicities";
 import Footer from "../public/footer";
-import { NavLink } from "react-router-dom";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -47,7 +46,7 @@ function ManagePublicities() {
 
   const authorName = useSelector((state: RootState) => state.auth.name);
   const typeUser = useSelector((state: RootState) => state.auth.type);
-  const myArticles = useSelector((state: RootState) => state.articles);
+  const myPublicities = useSelector((state: RootState) => state.publicities);
 
   useEffect(() => {
     getPublicityBySponsor(dispatch, authorName);
@@ -77,7 +76,7 @@ function ManagePublicities() {
         <ScopedCssBaseline enableColorScheme>
           <Paper sx={{ width: "100%", p: 2 }}>
             <TableContainer component={Paper} sx={{ minHeight: 410 }}>
-              {myArticles.length ? (
+              {myPublicities.length ? (
                 <Table
                   sx={{ minWidth: 650 }}
                   size="small"
@@ -85,17 +84,15 @@ function ManagePublicities() {
                 >
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell>Title</StyledTableCell>
-                      <StyledTableCell align="right">Section</StyledTableCell>
-                      <StyledTableCell align="right">
-                        Create Date
-                      </StyledTableCell>
+                      <StyledTableCell>Date</StyledTableCell>
+                      <StyledTableCell align="right">Active</StyledTableCell>
+                      <StyledTableCell align="right">Approved</StyledTableCell>
                       <StyledTableCell align="right">Actions</StyledTableCell>
                     </TableRow>
                   </TableHead>
 
                   <TableBody>
-                    {myArticles
+                    {myPublicities
                       .slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
@@ -108,24 +105,13 @@ function ManagePublicities() {
                           }}
                         >
                           <StyledTableCell component="th" scope="row">
-                            <NavLink
-                              style={{
-                                textDecoration: "none",
-                                color: "inherit",
-                              }}
-                              to={`/detail/${row.id}`}
-                              title="Go to read"
-                            >
-                              {row.headline.length > 90
-                                ? row.headline.slice(0, 90) + "..."
-                                : row.headline}
-                            </NavLink>
+                            {row.start.toString()} - {row.finish.toString()}
                           </StyledTableCell>
                           <StyledTableCell align="right">
-                            {row.section.name}
+                            {row.active.toString()}
                           </StyledTableCell>
                           <StyledTableCell align="right">
-                            {row.createdAt.slice(0, 10)}
+                            {row.approved.toString()}
                           </StyledTableCell>
                           <StyledTableCell align="right">
                             Modify - Delete
@@ -218,7 +204,7 @@ function ManagePublicities() {
               <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={myArticles.length || 0}
+                count={myPublicities.length || 0}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
