@@ -7,7 +7,7 @@ function uploadApiImage(
   const data = formData;
 
   const request: Promise<{ message: string; fileName: string }> = axios
-    .post(domain + "/author/images", data, {
+    .post(domain + "/sponsor/images", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
