@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
-// import { logoutApi } from "../services/public/auth";
+import { logoutSponsorApi } from "../services/public/auth";
 import { RootState } from "../store";
 
 import AppBar from "@mui/material/AppBar";
@@ -119,11 +119,11 @@ function Sponsor() {
 
   async function logoutUser() {
     handleClose2();
-    // const logMessage = await logoutApi(dispatch);
+    const logMessage = await logoutSponsorApi(dispatch);
     navigate("/");
-    // if (logMessage.message !== "Loggout Succesfull") {
-    //  Swal.fire("Logout Error", "Please try again", "error");
-    // }
+    if (logMessage.message !== "Loggout Succesfull") {
+      Swal.fire("Logout Error", "Please try again", "error");
+    }
   }
 
   return (
