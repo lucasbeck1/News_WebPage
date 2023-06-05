@@ -98,7 +98,7 @@ export const createSponsor = async (
 
     await sponsorNew.save();
 
-    return res.status(201).json(sponsorNew);
+    return res.status(201).json({ message: "Register Succesfull" });
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });
