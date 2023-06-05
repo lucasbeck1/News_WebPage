@@ -138,13 +138,13 @@ function Register() {
   }
 
   async function handleSubmit() {
-    //const msg = await registerApi(input);
-    //if (msg.message === "Register Succesfull") {
-    Swal.fire("Welcome", "Register Succesfull", "success");
-    navigate("/");
-    //} else {
-    //  Swal.fire("Error", msg.message, "error");
-    //}
+    const msg = await registerSponsorApi(input);
+    if (msg.message === "Register Succesfull") {
+      Swal.fire("Welcome", "Register Succesfull", "success");
+      navigate("/");
+    } else {
+      Swal.fire("Error", msg.message, "error");
+    }
   }
 
   /* 
