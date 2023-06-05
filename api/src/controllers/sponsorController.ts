@@ -11,12 +11,16 @@ type sponsorType = {
 
 // ------------------------------------------------------------------
 
-export const getAllSponsor = async (_req: Request, res: Response) => {
+export const getAllSponsor = async (req: Request, res: Response) => {
   try {
+    const page = Number(req.query.page) || 0;
+
     const allSponsor = await Sponsor.find({
-      relations: {
-        publicities: true,
+      order: {
+        name: "ASC",
       },
+      skip: page * 100,
+      take: 100,
     });
     return res.status(200).json(allSponsor);
   } catch (error) {
