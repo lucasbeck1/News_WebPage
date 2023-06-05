@@ -13,7 +13,7 @@ type Publicity = {
 
 const initialState: Publicity[] = [];
 
-const publicitiesSlice = createSlice({
+const publicitySlice = createSlice({
   name: "publicities",
   initialState,
   reducers: {
@@ -26,6 +26,6 @@ const publicitiesSlice = createSlice({
   },
 });
 
-export const { addPublicity, storePublicities } = publicitiesSlice.actions;
+export const { addPublicity, storePublicities } = publicitySlice.actions;
 
-export default publicitiesSlice.reducer;
+export default publicitySlice.reducer;
