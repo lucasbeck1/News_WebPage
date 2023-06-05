@@ -1,4 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ContentLoader from "react-content-loader";
+import { RootState } from "../../../store";
+
+import { getApiSponsors } from "../../../services/admin/sponsors";
+import ManageDelete from "./manageDelete";
+import ManageModify from "./manageModify";
+import ManageCreate from "./manageCreate";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
@@ -8,16 +17,14 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
-import authors from "../../../dataExamples/authors.json";
 import { Box, Button, IconButton } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ClearIcon from "@mui/icons-material/Clear";
-import CheckIcon from "@mui/icons-material/Check";
-import ManageDelete from "./manageDelete";
-import ManageModify from "./manageModify";
-import ManageCreate from "./manageCreate";
+
+type Sponsor = {
+  id: string;
+  name: string;
+  mail: string;
+  password?: string;
+};
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,6 +47,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function ManageSponsors() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getApiSponsors(dispatch);
+  }, []);
+
+  const allSponsors: Sponsor[] = useSelector(
+    (state: RootState) => state.sponsors
+  );
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -68,26 +85,30 @@ function ManageSponsors() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {authors
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                  <StyledTableRow
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <StyledTableCell component="th" scope="row">
-                      {row.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">{row.mail}</StyledTableCell>
-                    <StyledTableCell align="right">
-                      {Math.round(Math.random() * 10)}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      <ManageModify user={row} />
-                      <ManageDelete />
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
+              {allSponsors.length ? (
+                allSponsors
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => (
+                    <StyledTableRow
+                      key={row.name}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <StyledTableCell component="th" scope="row">
+                        {row.mail}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">10</StyledTableCell>
+                      <StyledTableCell align="right">
+                        <ManageModify user={row} />
+                        <ManageDelete />
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))
+              ) : (
+                <p>No Sponsors</p>
+              )}
             </TableBody>
           </Table>
         </TableContainer>
@@ -106,7 +127,7 @@ function ManageSponsors() {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={authors.length}
+            count={allSponsors.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
