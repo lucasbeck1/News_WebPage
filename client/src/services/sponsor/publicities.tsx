@@ -21,6 +21,11 @@ type PublictyCreation = {
   finish: Date;
 };
 
+type PublictyUpdate = {
+  image?: string;
+  active?: boolean;
+};
+
 axios.defaults.withCredentials = true;
 
 function getPublicityBySponsor(
@@ -45,7 +50,7 @@ function createApiPublicity(
   data: PublictyCreation
 ): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(domain + "/author/articles", data, {
+    .post(domain + "/sponsor/publicities", data, {
       withCredentials: true,
     })
     .then((res) => {
@@ -57,4 +62,40 @@ function createApiPublicity(
   return request;
 }
 
-export { getPublicityBySponsor, createApiPublicity };
+function updateApiPublicity(
+  data: PublictyUpdate,
+  id: number
+): Promise<{ message: string }> {
+  const request: Promise<{ message: string }> = axios
+    .put(domain + "/sponsor/publicities/" + id.toString(), data, {
+      withCredentials: true,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch(() => {
+      return { message: "REQUEST ERROR" };
+    });
+  return request;
+}
+
+function deleteApiPublicity(id: number): Promise<{ message: string }> {
+  const request: Promise<{ message: string }> = axios
+    .delete(domain + "/sponsor/publicities/" + id.toString(), {
+      withCredentials: true,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch(() => {
+      return { message: "REQUEST ERROR" };
+    });
+  return request;
+}
+
+export {
+  getPublicityBySponsor,
+  createApiPublicity,
+  updateApiPublicity,
+  deleteApiPublicity,
+};
