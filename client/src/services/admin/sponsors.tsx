@@ -7,6 +7,18 @@ type Sponsor = {
   id: string;
   name: string;
   mail: string;
+};
+
+type SponsorCreate = {
+  name: string;
+  mail: string;
+  password: string;
+};
+
+type SponsorUpdate = {
+  id: string;
+  name?: string;
+  mail?: string;
   password?: string;
 };
 
@@ -25,4 +37,49 @@ function getApiSponsors(dispatch: AppDispatch): Promise<{
   return request;
 }
 
-export { getApiSponsors };
+function createApiSponsor(data: SponsorCreate): Promise<{ message: string }> {
+  const request: Promise<{ message: string }> = axios
+    .post(domain + "/author/sponsors", data, {
+      withCredentials: true,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch(() => {
+      return { message: "REQUEST ERROR" };
+    });
+  return request;
+}
+
+function updateApiSponsor(
+  data: SponsorUpdate,
+  id: string
+): Promise<{ message: string }> {
+  const request: Promise<{ message: string }> = axios
+    .put(domain + "/author/sponsors/" + id, data, {
+      withCredentials: true,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch(() => {
+      return { message: "REQUEST ERROR" };
+    });
+  return request;
+}
+
+function deleteApiSponsor(id: string): Promise<{ message: string }> {
+  const request: Promise<{ message: string }> = axios
+    .delete(domain + "/author/sponsors/" + id, {
+      withCredentials: true,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch(() => {
+      return { message: "REQUEST ERROR" };
+    });
+  return request;
+}
+
+export { getApiSponsors, createApiSponsor, updateApiSponsor, deleteApiSponsor };
