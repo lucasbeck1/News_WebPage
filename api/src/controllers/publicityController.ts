@@ -8,7 +8,7 @@ type publicityType = {
   start: Date;
   finish: Date;
   payment: JSON;
-  sponsorId: string;
+  name: string;
 };
 
 type searchPublicity = {
@@ -163,9 +163,9 @@ export const createPublicity = async (
   res: Response
 ) => {
   try {
-    const { image, start, finish, payment, sponsorId } = req.body;
+    const { image, start, finish, payment, name } = req.body;
 
-    if (!image || !start || !finish || !payment || !sponsorId) {
+    if (!image || !start || !finish || !payment || !name) {
       return res.status(404).json({ message: "More data is required" });
     }
 
@@ -182,7 +182,7 @@ export const createPublicity = async (
     publicityNew.finish = finish;
     publicityNew.payment = payment;
 
-    const sponsor = await Sponsor.findOneBy({ id: sponsorId });
+    const sponsor = await Sponsor.findOneBy({ name: name });
     if (sponsor) {
       publicityNew.sponsor = sponsor;
     }
