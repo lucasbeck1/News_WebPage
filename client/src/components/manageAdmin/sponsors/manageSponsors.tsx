@@ -17,6 +17,8 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 import { Box, Button, IconButton } from "@mui/material";
 
 type Sponsor = {
@@ -107,7 +109,10 @@ function ManageSponsors() {
                     </StyledTableRow>
                   ))
               ) : (
-                <p>No Sponsors</p>
+                <Alert variant="standard" severity="info">
+                  <AlertTitle>Info</AlertTitle>
+                  No sponsors — <strong>No data was found!</strong>
+                </Alert>
               )}
             </TableBody>
           </Table>
