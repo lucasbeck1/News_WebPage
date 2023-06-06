@@ -90,21 +90,21 @@ function ManageSponsors() {
               {allSponsors.length ? (
                 allSponsors
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => (
+                  .map((sponsor) => (
                     <StyledTableRow
-                      key={row.name}
+                      key={sponsor.name}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <StyledTableCell component="th" scope="row">
-                        {row.mail}
+                        {sponsor.mail}
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        {row.name}
+                        {sponsor.name}
                       </StyledTableCell>
                       <StyledTableCell align="right">10</StyledTableCell>
                       <StyledTableCell align="right">
-                        <ManageModify user={row} />
-                        <ManageDelete />
+                        <ManageModify user={sponsor} />
+                        <ManageDelete author={sponsor} />
                       </StyledTableCell>
                     </StyledTableRow>
                   ))

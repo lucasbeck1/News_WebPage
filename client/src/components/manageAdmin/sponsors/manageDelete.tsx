@@ -1,22 +1,60 @@
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getApiSponsors,
+  deleteApiSponsor,
+} from "../../../services/admin/sponsors";
+
+import Swal from "sweetalert2";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Swal from "sweetalert2";
 
-function ManageDelete() {
+type Author = {
+  id: string;
+  name: string;
+  mail: string;
+  password?: string;
+};
+
+function ManageDelete(props: { author: Author }) {
+  const dispatch = useDispatch();
+  const { name, id } = props.author;
+
   const handleClickOpen = () => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
+      reverseButtons: true,
       confirmButtonColor: "rgb(18,109,162)",
       cancelButtonColor: "grey",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Deleted!", "The sponsor has been deleted.", "success");
-      }
-    });
+      preConfirm: () => {
+        deleteApiSponsor(id)
+          .then((response) => {
+            if (response.message !== "Delete succesfull") {
+              throw new Error(response.message);
+            }
+            return response.message;
+          })
+          .catch((error) => {
+            Swal.fire(`Request failed`, `${error}`, "error");
+          });
+      },
+    })
+
+      .then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            `${name} Deleted!`,
+            "The sponsor has been deleted",
+            "success"
+          );
+        }
+      })
+      .then(() => {
+        getApiSponsors(dispatch);
+      });
   };
 
   return (
