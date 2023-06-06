@@ -137,6 +137,14 @@ function ManageCreate() {
   }
 
   async function submit() {
+    if (typeUser !== "admin") {
+      Swal.fire(
+        `Request failed`,
+        "Administrator permissions not found",
+        "error"
+      );
+      return handleClose();
+    }
     const msg = await createApiSponsor(input);
     if (msg.message === "Register Succesfull") {
       Swal.fire("Created!", `Create succesfull: ${input.name}`, "success");
@@ -162,7 +170,7 @@ function ManageCreate() {
         ADD
       </Button>
       <Dialog open={open} onClose={handleClose} maxWidth="md">
-        <DialogTitle>Create User</DialogTitle>
+        <DialogTitle>Create Sponsor</DialogTitle>
         <DialogContent>
           <DialogContentText>Fill all the fields</DialogContentText>
           <TextField

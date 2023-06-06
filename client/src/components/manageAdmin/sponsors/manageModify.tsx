@@ -46,7 +46,7 @@ function ManageModify({ user }: User) {
   // **** Global Variables ****
   //****************************
   const dispatch = useDispatch();
-  const typeAuthor = useSelector((state: RootState) => state.auth.type);
+  const typeUser = useSelector((state: RootState) => state.auth.type);
 
   //****************************
   // **** Local Variables ****
@@ -157,6 +157,14 @@ function ManageModify({ user }: User) {
   }
 
   async function submit() {
+    if (typeUser !== "admin") {
+      Swal.fire(
+        `Request failed`,
+        "Administrator permissions not found",
+        "error"
+      );
+      return handleClose();
+    }
     const msg = await updateApiSponsor(
       {
         name: input.name,
@@ -187,7 +195,7 @@ function ManageModify({ user }: User) {
         <EditIcon />
       </IconButton>
       <Dialog open={open} onClose={handleClose} maxWidth="md">
-        <DialogTitle>Edit User</DialogTitle>
+        <DialogTitle>Edit Sponsor</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Fill the fields you want to change
@@ -249,7 +257,7 @@ function ManageModify({ user }: User) {
             helperText={errorExplain(error, InputProp.newPassword)}
           />
 
-          {typeAuthor !== "admin" && (
+          {typeUser !== "admin" && (
             <Typography
               variant="body2"
               style={{ paddingTop: "5px", paddingLeft: "10px", color: "red" }}
@@ -260,7 +268,9 @@ function ManageModify({ user }: User) {
 
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            {initialDataJson === inputJson || Object.keys(error).length ? (
+            {initialDataJson === inputJson ||
+            Object.keys(error).length ||
+            typeUser !== "admin" ? (
               <Button disabled>Modify</Button>
             ) : (
               <Button

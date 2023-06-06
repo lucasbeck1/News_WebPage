@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
 import {
   getApiSponsors,
   deleteApiSponsor,
@@ -18,8 +19,16 @@ type Author = {
 function ManageDelete(props: { author: Author }) {
   const dispatch = useDispatch();
   const { name, id } = props.author;
+  const typeUser = useSelector((state: RootState) => state.auth.type);
 
   const handleClickOpen = () => {
+    if (typeUser !== "admin") {
+      return Swal.fire(
+        `Request failed`,
+        "Administrator permissions not found",
+        "error"
+      );
+    }
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
