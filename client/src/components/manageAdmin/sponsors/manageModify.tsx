@@ -165,6 +165,7 @@ function ManageModify({ user }: User) {
       );
       return handleClose();
     }
+
     const msg = await updateApiSponsor(
       {
         name: input.name,

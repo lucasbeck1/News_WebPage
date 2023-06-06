@@ -19,7 +19,7 @@ type Author = {
 function ManageDelete(props: { author: Author }) {
   const dispatch = useDispatch();
   const { name, id } = props.author;
-  const typeUser = useSelector((state: RootState) => state.auth.type);
+  const typeUser: string = useSelector((state: RootState) => state.auth.type);
 
   const handleClickOpen = () => {
     if (typeUser !== "admin") {
@@ -29,6 +29,7 @@ function ManageDelete(props: { author: Author }) {
         "error"
       );
     }
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -47,7 +48,7 @@ function ManageDelete(props: { author: Author }) {
             return response.message;
           })
           .catch((error) => {
-            Swal.fire(`Request failed`, `${error}`, "error");
+            return Swal.fire(`Request failed`, `${error}`, "error");
           });
       },
     })
@@ -62,7 +63,7 @@ function ManageDelete(props: { author: Author }) {
         }
       })
       .then(() => {
-        getApiSponsors(dispatch);
+        return getApiSponsors(dispatch);
       });
   };
 

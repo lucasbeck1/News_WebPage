@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { RootState } from "../../../store";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
 import {
   getApiAuthors,
   deleteApiAuthor,
@@ -21,8 +20,17 @@ type Author = {
 function ManageDelete(props: { author: Author }) {
   const dispatch = useDispatch();
   const { name, id } = props.author;
+  const typeUser: string = useSelector((state: RootState) => state.auth.type);
 
   const handleClickOpen = () => {
+    if (typeUser !== "admin") {
+      return Swal.fire(
+        `Request failed`,
+        "Administrator permissions not found",
+        "error"
+      );
+    }
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -41,7 +49,7 @@ function ManageDelete(props: { author: Author }) {
             return response.message;
           })
           .catch((error) => {
-            Swal.fire(`Request failed`, `${error}`, "error");
+            return Swal.fire(`Request failed`, `${error}`, "error");
           });
       },
     })
@@ -52,7 +60,7 @@ function ManageDelete(props: { author: Author }) {
         }
       })
       .then(() => {
-        getApiAuthors(dispatch);
+        return getApiAuthors(dispatch);
       });
   };
 

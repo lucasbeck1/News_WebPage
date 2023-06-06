@@ -146,6 +146,15 @@ function ManageCreate() {
   }
 
   async function submit() {
+    if (typeUser !== "admin") {
+      Swal.fire(
+        `Request failed`,
+        "Administrator permissions not found",
+        "error"
+      );
+      return handleClose();
+    }
+
     const msg = await createApiAuthor(input);
     if (msg.message === "Create succesfull") {
       Swal.fire("Created!", `Create succesfull: ${input.name}`, "success");

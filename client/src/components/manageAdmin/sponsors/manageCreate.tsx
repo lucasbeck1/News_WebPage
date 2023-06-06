@@ -145,6 +145,7 @@ function ManageCreate() {
       );
       return handleClose();
     }
+
     const msg = await createApiSponsor(input);
     if (msg.message === "Register Succesfull") {
       Swal.fire("Created!", `Create succesfull: ${input.name}`, "success");
