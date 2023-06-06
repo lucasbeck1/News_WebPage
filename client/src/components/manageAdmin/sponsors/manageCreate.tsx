@@ -14,11 +14,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import FormControl from "@mui/material/FormControl";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Typography } from "@mui/material";
 
@@ -48,14 +43,12 @@ function ManageCreate() {
 
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState({
-    admin: false,
     name: "",
     mail: "",
     password: "",
   });
   const [error, setError] = useState({});
   const initialDataJson = JSON.stringify({
-    admin: false,
     name: "",
     mail: "",
     password: "",
@@ -68,7 +61,6 @@ function ManageCreate() {
 
   function handleOpen() {
     setInput({
-      admin: false,
       name: "",
       mail: "",
       password: "",
@@ -78,7 +70,6 @@ function ManageCreate() {
 
   function handleClose() {
     setInput({
-      admin: false,
       name: "",
       mail: "",
       password: "",
@@ -216,29 +207,6 @@ function ManageCreate() {
             error={comprobe(error, InputProp.password)}
             helperText={errorExplain(error, InputProp.password)}
           />
-          <FormControl>
-            <FormLabel id="radio-group-label-1">Type</FormLabel>
-            <RadioGroup
-              row
-              aria-labelledby="radio-group-label-1"
-              name="typebook"
-              onChange={(e) => changeInput(e, "admin")}
-              value={input.admin}
-            >
-              <FormControlLabel
-                name="admin"
-                value={true}
-                control={<Radio />}
-                label="Admin"
-              />
-              <FormControlLabel
-                name="admin"
-                value={false}
-                control={<Radio />}
-                label="User"
-              />
-            </RadioGroup>
-          </FormControl>
           {typeUser === "admin" ? (
             <></>
           ) : (

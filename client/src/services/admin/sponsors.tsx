@@ -16,7 +16,6 @@ type SponsorCreate = {
 };
 
 type SponsorUpdate = {
-  id: string;
   name?: string;
   mail?: string;
   password?: string;
