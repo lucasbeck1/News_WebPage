@@ -83,7 +83,7 @@ export const loginSponsor = async (
       // Cookie assignment
       res.cookie(
         "sid",
-        { id: sponsor.id, name: sponsor.id },
+        { id: sponsor.id, name: sponsor.name },
         {
           signed: true,
           sameSite: "none",

@@ -188,7 +188,7 @@ export const createPublicity = async (
     }
     await publicityNew.save();
 
-    return res.status(201).json(publicityNew);
+    return res.status(201).json({ message: "Create succesfull" });
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });
