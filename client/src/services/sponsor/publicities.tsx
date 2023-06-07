@@ -15,10 +15,10 @@ type Publicity = {
 };
 
 type PublictyCreation = {
+  name: string;
   image: string;
-  payment: JSON;
-  start: Date;
-  finish: Date;
+  start: string;
+  finish: string;
 };
 
 type PublictyUpdate = {
@@ -50,9 +50,13 @@ function createApiPublicity(
   data: PublictyCreation
 ): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
-    .post(domain + "/sponsor/publicities", data, {
-      withCredentials: true,
-    })
+    .post(
+      domain + "/sponsor/publicities",
+      { ...data, payment: {} },
+      {
+        withCredentials: true,
+      }
+    )
     .then((res) => {
       return res.data;
     })
