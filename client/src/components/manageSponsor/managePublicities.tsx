@@ -7,6 +7,7 @@ import { RootState } from "../../store";
 
 import { getPublicityBySponsor } from "../../services/sponsor/publicities";
 import Footer from "../public/footer";
+import CreatePublicity from "./createPublicity";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -105,7 +106,8 @@ function ManagePublicities() {
                           }}
                         >
                           <StyledTableCell component="th" scope="row">
-                            {row.start.toString()} - {row.finish.toString()}
+                            {row.start.toString().slice(0, 10)} {" to "}
+                            {row.finish.toString().slice(0, 10)}
                           </StyledTableCell>
                           <StyledTableCell align="right">
                             {row.active.toString()}
@@ -200,7 +202,7 @@ function ManagePublicities() {
                 borderRadius: 1,
               }}
             >
-              ADD
+              <CreatePublicity />
               <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"

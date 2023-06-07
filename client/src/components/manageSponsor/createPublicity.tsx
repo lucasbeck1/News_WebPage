@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 import { RootState } from "../../store";
-import { createApiPublicity } from "../../services/sponsor/publicities";
+import {
+  getPublicityBySponsor,
+  createApiPublicity,
+} from "../../services/sponsor/publicities";
 import { domain } from "../../services/url";
 import UploadInput from "./uploadInput";
 
@@ -33,7 +36,7 @@ enum InputProp {
   finish = "finish",
 }
 
-function CreateArticle() {
+function CreatePublicity() {
   //****************************
   // **** Global Variables ****
   //****************************
@@ -117,6 +120,7 @@ function CreateArticle() {
 
   function verifyInput(input: Input) {
     let err: Input = {};
+
     // ** start **
     if (!input.start) {
       err.start = "Start date required";
@@ -125,6 +129,45 @@ function CreateArticle() {
     else if (!input.finish) {
       err.finish = "Finish date required";
     }
+    // ** Compare dates **
+    /*    
+    else if (input.start && input.finish) {
+      let startYear = Number(input.start?.slice(0, 4));
+      let finishYear = Number(input.finish?.slice(0, 4));
+
+      let startMonth = Number(input.start?.slice(5, 7));
+      let finishMonth = Number(input.finish?.slice(5, 7));
+
+      let startDay = Number(input.start?.slice(8, 10));
+      let finishDay = Number(input.finish?.slice(8, 10));
+
+      const actualDate = new Date();
+      const year = actualDate.getFullYear();
+      const month = actualDate.getMonth() + 1;
+      const day = actualDate.getDay();
+
+      if (startYear > finishYear) {
+        err.finish = "End date must be after start date";
+      } else if (startYear === finishYear && startMonth > finishMonth) {
+        err.finish = "End date must be after start date";
+      } else if (
+        startYear === finishYear &&
+        startMonth === finishMonth &&
+        startDay >= finishDay
+      ) {
+        err.finish = "End date must be after start date";
+      } else if (startYear < year || startMonth < month || startDay < day) {
+        err.start = "Invalid Date";
+      } else if (
+        finishYear > year + 50 ||
+        finishYear < year ||
+        finishMonth < month ||
+        finishDay < day
+      ) {
+        err.finish = "Invalid Date";
+      }
+    } 
+    */
     // ** image **
     else if (!input.image) {
       err.image = "No image uploaded";
@@ -158,18 +201,16 @@ function CreateArticle() {
   }
 
   async function submit() {
-    /* 
     const msg = await createApiPublicity(input);
     if (msg.message === "Create succesfull") {
       Swal.fire("Created!", "Created succesfully", "success");
+      getPublicityBySponsor(dispatch, nameUser);
     } else {
       Swal.fire("Error!", msg.message, "error");
     }
-    */
+
     handleClose();
   }
-
-  console.log(input);
 
   return (
     <>
@@ -189,12 +230,12 @@ function CreateArticle() {
         <DialogTitle>Create Article</DialogTitle>
         <DialogContent>
           <DialogContentText>Fill all the fields</DialogContentText>
+          <p>Start date</p>
           <TextField
             autoFocus
             margin="dense"
             id="start"
             name="start"
-            label="Start date"
             type="date"
             fullWidth
             variant="outlined"
@@ -203,13 +244,12 @@ function CreateArticle() {
             error={comprobe(errors, InputProp.start)}
             helperText={errorExplain(errors, InputProp.start)}
           />
-
+          <p>Finish date</p>
           <TextField
             autoFocus
             margin="dense"
             id="finish"
             name="finish"
-            label="Finish date"
             type="date"
             fullWidth
             variant="outlined"
@@ -266,4 +306,4 @@ function CreateArticle() {
   );
 }
 
-export default CreateArticle;
+export default CreatePublicity;

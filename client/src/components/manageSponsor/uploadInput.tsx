@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { RootState } from "../../store";
 
-import { uploadApiImage } from "../../services/author/images";
+import { uploadApiImage } from "../../services/sponsor/images";
 
 import TextField from "@mui/material/TextField";
 import { InputAdornment } from "@mui/material";
