@@ -1,29 +1,30 @@
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { useDispatch } from "react-redux";
+import { RootState } from "../../store";
 
 import {
-  deleteApiArticle,
-  getApiArticles,
-} from "../../services/author/articles";
+  deleteApiPublicity,
+  getPublicityBySponsor,
+} from "../../services/sponsor/publicities";
 
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-type Article = {
+type Publicity = {
   id: number;
-  headline: string;
-  drophead: string;
-  body: string;
   image: string;
-  createdAt: string;
-  updatedAt: string;
-  author: { name: string };
-  section: { name: string };
+  active: boolean;
+  finished: boolean;
+  approved: boolean;
+  payment: JSON;
+  start: Date;
+  finish: Date;
 };
 
-function DeleteArticle(props: { data: Article }) {
+function DeletePublicity(props: { data: Publicity }) {
   const dispatch = useDispatch();
   const articleData = props.data;
+  const nameUser = useSelector((state: RootState) => state.auth.name);
 
   const handleClickOpen = () => {
     Swal.fire({
@@ -37,7 +38,7 @@ function DeleteArticle(props: { data: Article }) {
       confirmButtonText: "Yes, delete it!",
       preConfirm: () => {
         const dataId: number = articleData.id;
-        deleteApiArticle(dataId)
+        deleteApiPublicity(dataId)
           .then((response) => {
             if (response.message !== "Delete succesfull") {
               throw new Error(response.message);
@@ -45,17 +46,18 @@ function DeleteArticle(props: { data: Article }) {
             return response.message;
           })
           .catch((error) => {
-            Swal.showValidationMessage(`Request failed: ${error}`);
+            Swal.fire("Request failed", `${error}`, "error");
+            /* Swal.showValidationMessage(`Request failed: ${error}`); */
           });
       },
     })
       .then((result) => {
         if (result.isConfirmed) {
-          Swal.fire("Deleted!", "The article has been deleted", "success");
+          Swal.fire("Deleted!", "The publicity has been deleted", "success");
         }
       })
       .then(() => {
-        getApiArticles(dispatch, articleData.author.name);
+        getPublicityBySponsor(dispatch, nameUser);
       });
   };
 
@@ -72,4 +74,4 @@ function DeleteArticle(props: { data: Article }) {
   );
 }
 
-export default DeleteArticle;
+export default DeletePublicity;
