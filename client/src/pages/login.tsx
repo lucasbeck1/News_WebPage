@@ -4,7 +4,7 @@ import { NavLink, useNavigate, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import { RootState } from "../store";
-import { loginApi } from "../services/public/auth";
+import { loginApi, loginSponsorApi } from "../services/public/auth";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -55,6 +55,8 @@ function Login() {
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.auth);
 
+  const [loginSponsor, setLoginSponsor] = useState(false);
+
   const [input, setInput] = useState({
     mail: "",
     password: "",
@@ -82,6 +84,14 @@ function Login() {
         [name]: e.target.value,
       })
     );
+  }
+
+  function changeTypeLogin() {
+    if (loginSponsor) {
+      setLoginSponsor(false);
+    } else {
+      setLoginSponsor(true);
+    }
   }
 
   function verifyInput(input: Input) {
@@ -123,11 +133,20 @@ function Login() {
   }
 
   async function handleSubmit() {
-    const msg = await loginApi(input, dispatch);
-    if (msg.message === "Loggin Succesfull") {
-      navigate("/");
+    if (loginSponsor) {
+      const msg = await loginSponsorApi(input, dispatch);
+      if (msg.message === "Loggin Succesfull") {
+        navigate("/");
+      } else {
+        Swal.fire("Error", msg.message, "error");
+      }
     } else {
-      Swal.fire("Error", msg.message, "error");
+      const msg = await loginApi(input, dispatch);
+      if (msg.message === "Loggin Succesfull") {
+        navigate("/");
+      } else {
+        Swal.fire("Error", msg.message, "error");
+      }
     }
   }
 
@@ -149,6 +168,24 @@ function Login() {
             >
               {"<-"} Go Back
             </NavLink>
+            <br />
+            {loginSponsor ? (
+              <Button
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={() => changeTypeLogin()}
+              >
+                I am an Author
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={() => changeTypeLogin()}
+              >
+                I am a Sponsor
+              </Button>
+            )}
           </Box>
           <Container component="main" maxWidth="xs">
             <Box
@@ -164,7 +201,7 @@ function Login() {
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Login
+                {loginSponsor ? "Login Sponsor" : "Login Author"}
               </Typography>
               <Box
                 component="form"
