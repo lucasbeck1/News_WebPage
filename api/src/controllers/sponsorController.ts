@@ -89,8 +89,8 @@ export const createSponsor = async (
     }
 
     const sponsorNew = new Sponsor();
-    sponsorNew.mail = name;
-    sponsorNew.name = mail;
+    sponsorNew.mail = mail;
+    sponsorNew.name = name;
 
     const salt: string = await bcrypt.genSalt(saltRounds);
     const hash: string = await bcrypt.hash(password, salt);
