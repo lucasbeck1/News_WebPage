@@ -114,7 +114,7 @@ export const logOutSponsor = async (
 ) => {
   try {
     // Cookie deletion
-    res.clearCookie("connect.sid", {
+    res.clearCookie("sid", {
       signed: true,
       sameSite: "none",
       httpOnly: true,
