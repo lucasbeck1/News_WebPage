@@ -8,6 +8,7 @@ import { RootState } from "../../store";
 import { getPublicityBySponsor } from "../../services/sponsor/publicities";
 import Footer from "../public/footer";
 import CreatePublicity from "./createPublicity";
+import ModifyPublicity from "./modifyPublicity";
 import DeletePublicity from "./deletePublicity";
 
 import Table from "@mui/material/Table";
@@ -117,7 +118,7 @@ function ManagePublicities() {
                             {row.approved.toString()}
                           </StyledTableCell>
                           <StyledTableCell align="right">
-                            Modify -
+                            <ModifyPublicity data={row} />
                             <DeletePublicity data={row} />
                           </StyledTableCell>
                         </StyledTableRow>

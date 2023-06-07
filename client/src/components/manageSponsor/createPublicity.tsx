@@ -227,7 +227,7 @@ function CreatePublicity() {
       </Button>
 
       <Dialog open={open} onClose={handleClose} maxWidth="md">
-        <DialogTitle>Create Article</DialogTitle>
+        <DialogTitle>Create Publicity</DialogTitle>
         <DialogContent>
           <DialogContentText>Fill all the fields</DialogContentText>
           <p>Start date</p>
