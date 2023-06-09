@@ -1,4 +1,11 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ContentLoader from "react-content-loader";
+
+import { RootState } from "../../../store";
+import { getPublicityBySponsor } from "../../../services/sponsor/publicities";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
@@ -8,13 +15,8 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TablePagination from "@mui/material/TablePagination";
-import authors from "../../../dataExamples/authors.json";
-import articles from "../../../dataExamples/articles.json";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Box, Button, IconButton } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
-import DeleteIcon from "@mui/icons-material/Delete";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
 import InfoIcon from "@mui/icons-material/Info";
@@ -40,6 +42,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function ManagePublicities() {
+  const dispatch = useDispatch();
+
+  const authorName = useSelector((state: RootState) => state.auth.name);
+  const myPublicities = useSelector((state: RootState) => state.publicities);
+
+  useEffect(() => {
+    getPublicityBySponsor(dispatch, authorName);
+  }, []);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -58,66 +69,118 @@ function ManagePublicities() {
     <>
       <Paper sx={{ width: "100%" }}>
         <TableContainer component={Paper} sx={{ minHeight: 410 }}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Owner</StyledTableCell>
-                <StyledTableCell align="right">Start</StyledTableCell>
-                <StyledTableCell align="right">Finish</StyledTableCell>
-                <StyledTableCell align="right">Active</StyledTableCell>
-                <StyledTableCell align="right">Actions</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {articles
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                  <StyledTableRow
-                    key={row.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <StyledTableCell component="th" scope="row">
-                      Computer Technology LTD
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.createdAt}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.updatedAt}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      <CheckIcon />
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      <IconButton
-                        sx={{ p: 0, m: 0 }}
-                        size="small"
-                        aria-label="modify"
-                        color="secondary"
-                      >
-                        <InfoIcon />
-                      </IconButton>
-                      <IconButton
-                        sx={{ p: 0, m: 0 }}
-                        size="small"
-                        aria-label="modify"
-                        color="primary"
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton
-                        sx={{ p: 0, m: 0 }}
-                        size="small"
-                        aria-label="delete"
-                        color="default"
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody>
-          </Table>
+          {myPublicities.length ? (
+            <Table
+              sx={{ minWidth: 650 }}
+              size="small"
+              aria-label="a dense table"
+            >
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Owner</StyledTableCell>
+                  <StyledTableCell align="center">Date</StyledTableCell>
+                  <StyledTableCell align="right">Active</StyledTableCell>
+                  <StyledTableCell align="right">Approved</StyledTableCell>
+                  <StyledTableCell align="right">Actions</StyledTableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {myPublicities
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => (
+                    <StyledTableRow
+                      key={row.id}
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}
+                    >
+                      <StyledTableCell component="th" scope="row">
+                        Computer Technology LTD
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.start.toString().slice(0, 10)} {" to "}
+                        {row.finish.toString().slice(0, 10)}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.active.toString()}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.approved.toString()}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        Modify - Delete
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          ) : (
+            <>
+              <Table
+                sx={{ minWidth: 650 }}
+                size="small"
+                aria-label="a dense table"
+              >
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Title</StyledTableCell>
+                    <StyledTableCell align="right">Section</StyledTableCell>
+                    <StyledTableCell align="right">Create Date</StyledTableCell>
+                    <StyledTableCell align="right">Actions</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+              </Table>
+
+              <ContentLoader
+                speed={2.5}
+                backgroundColor="#d4d4d4"
+                foregroundColor="#898989"
+                viewBox="0 0 180 70"
+              >
+                <rect
+                  x="5"
+                  y="5"
+                  rx="1"
+                  ry="1"
+                  width="10.5rem"
+                  height="0.4rem"
+                />
+                <rect
+                  x="5"
+                  y="15"
+                  rx="1"
+                  ry="1"
+                  width="10.5rem"
+                  height="0.4rem"
+                />
+                <rect
+                  x="5"
+                  y="25"
+                  rx="1"
+                  ry="1"
+                  width="10.5rem"
+                  height="0.4rem"
+                />
+                <rect
+                  x="5"
+                  y="35"
+                  rx="1"
+                  ry="1"
+                  width="10.5rem"
+                  height="0.4rem"
+                />
+                <rect
+                  x="5"
+                  y="45"
+                  rx="1"
+                  ry="1"
+                  width="10.5rem"
+                  height="0.4rem"
+                />
+              </ContentLoader>
+            </>
+          )}
         </TableContainer>
         <Box
           sx={{
@@ -130,20 +193,11 @@ function ManagePublicities() {
             borderRadius: 1,
           }}
         >
-          <Button
-            sx={{ p: 0, m: 0 }}
-            size="small"
-            aria-label="modify"
-            color="primary"
-            variant="outlined"
-            endIcon={<AddCircleIcon />}
-          >
-            ADD
-          </Button>
+          ADD
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={articles.length}
+            count={myPublicities.length || 0}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
