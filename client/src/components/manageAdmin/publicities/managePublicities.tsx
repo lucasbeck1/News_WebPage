@@ -6,6 +6,7 @@ import ContentLoader from "react-content-loader";
 import { RootState } from "../../../store";
 import { getPublicityBySponsor } from "../../../services/sponsor/publicities";
 import ModifyPublicity from "./modifyPublicity";
+import DeletePublicity from "./deletePublicity";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -111,6 +112,7 @@ function ManagePublicities() {
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         <ModifyPublicity data={row} />
+                        <DeletePublicity data={row} />
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
