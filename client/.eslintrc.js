@@ -33,6 +33,10 @@ module.exports = {
     "semi": [
       "error",
       "always"
+    ],
+    "max-len": [
+      "error", 
+      { "code": 82 }
     ]
   }
 };
