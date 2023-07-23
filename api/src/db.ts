@@ -1,9 +1,5 @@
 import { DataSource } from "typeorm";
-import { Article } from "./entities/articleEntity";
-import { Author } from "./entities/authorEntity";
-import { Section } from "./entities/sectionEntity";
-import { Sponsor } from "./entities/sponsorEntity";
-import { Publicity } from "./entities/publicityEntity";
+import * as entities from "./entities/_index";
 import {
   db_host,
   db_name,
@@ -20,7 +16,6 @@ export const AppDataSource = new DataSource({
   password: db_password,
   database: db_name,
   synchronize: true,
-  entities: [Article, Author, Section, Sponsor, Publicity],
-  // entities: ["entities/*.ts"],
+  entities: entities,
   // logging: true,
 });
