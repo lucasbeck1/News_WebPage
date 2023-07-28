@@ -1,7 +1,7 @@
 import axios from "axios";
 import { domain } from "../url";
-import { storeSponsors } from "../../reducers/sliceSponsors";
-import { AppDispatch } from "../../store";
+import { storeSponsors } from "../../store/reducers/sliceSponsors";
+import { AppDispatch } from "../../store/store";
 
 type Sponsor = {
   id: string;

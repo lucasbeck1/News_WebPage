@@ -4,7 +4,7 @@ import Header from "../components/public/header";
 import Footer from "../components/public/footer";
 import CardsContainer from "../components/public/cardsContainer";
 import { getApiArticles } from "../services/public/articles";
-import { RootState } from "../store";
+import { RootState } from "../store/store";
 import { useParams } from "react-router-dom";
 import Container from "@mui/material/Container";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";

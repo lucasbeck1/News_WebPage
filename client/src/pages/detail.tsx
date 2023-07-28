@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { getApiArticles } from "../services/public/articles";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "../store/store";
 
 function Detail() {
   const { id } = useParams();

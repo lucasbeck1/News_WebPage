@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { RootState } from "../../store";
+import { RootState } from "../../store/store";
 
 import {
   deleteApiPublicity,

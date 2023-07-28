@@ -1,7 +1,7 @@
 import axios from "axios";
 import { domain } from "../url";
-import { storePublicities } from "../../reducers/slicePublicities";
-import { AppDispatch } from "../../store";
+import { storePublicities } from "../../store/reducers/slicePublicities";
+import { AppDispatch } from "../../store/store";
 
 type Publicity = {
   id: number;

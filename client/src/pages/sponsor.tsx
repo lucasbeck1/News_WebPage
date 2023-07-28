@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
 import { logoutSponsorApi } from "../services/public/auth";
-import { RootState } from "../store";
+import { RootState } from "../store/store";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";

@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ContentLoader from "react-content-loader";
-import { RootState } from "../../../store";
+import { RootState } from "../../../store/store";
 
 import { getApiSections } from "../../../services/admin/sections";
 import CreateSection from "./createSections";
@@ -74,11 +74,7 @@ function ManageSections() {
       <Paper sx={{ width: "100%" }}>
         <TableContainer component={Paper} sx={{ minHeight: 410 }}>
           {allSections ? (
-            <Table
-              sx={{ minWidth: 650 }}
-              size="small"
-              aria-label="a dense table"
-            >
+            <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Section</StyledTableCell>
@@ -130,14 +126,7 @@ function ManageSections() {
                 foregroundColor="#898989"
                 viewBox="0 0 180 70"
               >
-                <rect
-                  x="5"
-                  y="5"
-                  rx="1"
-                  ry="1"
-                  width="10.5rem"
-                  height="0.4rem"
-                />
+                <rect x="5" y="5" rx="1" ry="1" width="10.5rem" height="0.4rem" />
                 <rect
                   x="5"
                   y="15"

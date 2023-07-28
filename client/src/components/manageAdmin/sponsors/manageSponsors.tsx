@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ContentLoader from "react-content-loader";
-import { RootState } from "../../../store";
+import { RootState } from "../../../store/store";
 
 import { getApiSponsors } from "../../../services/admin/sponsors";
 import ManageDelete from "./manageDelete";

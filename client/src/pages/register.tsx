@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-import { RootState } from "../store";
+import { RootState } from "../store/store";
 import { registerSponsorApi } from "../services/public/auth";
 
 import Avatar from "@mui/material/Avatar";
@@ -34,12 +34,7 @@ enum InputProp {
 
 function Copyright(props: any) {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website

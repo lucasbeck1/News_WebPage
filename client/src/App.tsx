@@ -2,7 +2,7 @@ import { HashRouter as Router } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
-import { RootState } from "./store";
+import { RootState } from "./store/store";
 
 import Home from "./pages/home";
 import Detail from "./pages/detail";

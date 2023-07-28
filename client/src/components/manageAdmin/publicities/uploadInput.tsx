@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { RootState } from "../../../store";
+import { RootState } from "../../../store/store";
 
 import { uploadApiImage } from "../../../services/sponsor/images";
 

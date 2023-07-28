@@ -1,9 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../store";
-import {
-  getApiAuthors,
-  deleteApiAuthor,
-} from "../../../services/admin/authors";
+import { RootState } from "../../../store/store";
+import { getApiAuthors, deleteApiAuthor } from "../../../services/admin/authors";
 
 import Swal from "sweetalert2";
 import { IconButton } from "@mui/material";

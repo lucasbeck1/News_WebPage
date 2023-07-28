@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../store";
+import { RootState } from "../../../store/store";
 import {
   getApiSponsors,
   createApiSponsor,
@@ -138,11 +138,7 @@ function ManageCreate() {
 
   async function submit() {
     if (typeUser !== "admin") {
-      Swal.fire(
-        `Request failed`,
-        "Administrator permissions not found",
-        "error"
-      );
+      Swal.fire(`Request failed`, "Administrator permissions not found", "error");
       return handleClose();
     }
 

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
-import { RootState } from "../../../store";
+import { RootState } from "../../../store/store";
 import { createApiArticle } from "../../../services/admin/articles";
 import { domain } from "../../../services/url";
 import UploadInput from "./uploadInput";

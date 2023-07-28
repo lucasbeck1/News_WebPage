@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { RootState } from "../store";
+import { RootState } from "../store/store";
 
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";

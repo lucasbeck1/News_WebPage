@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../store";
-import {
-  getApiAuthors,
-  createApiAuthor,
-} from "../../../services/admin/authors";
+import { RootState } from "../../../store/store";
+import { getApiAuthors, createApiAuthor } from "../../../services/admin/authors";
 
 import Swal from "sweetalert2";
 import Button from "@mui/material/Button";
@@ -147,11 +144,7 @@ function ManageCreate() {
 
   async function submit() {
     if (typeUser !== "admin") {
-      Swal.fire(
-        `Request failed`,
-        "Administrator permissions not found",
-        "error"
-      );
+      Swal.fire(`Request failed`, "Administrator permissions not found", "error");
       return handleClose();
     }
 

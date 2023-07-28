@@ -1,5 +1,5 @@
-import { authState, clearState } from "../../reducers/sliceAuth";
-import { AppDispatch } from "../../store";
+import { authState, clearState } from "../../store/reducers/sliceAuth";
+import { AppDispatch } from "../../store/store";
 import axios from "axios";
 import { domain } from "../url";
 
@@ -108,9 +108,7 @@ function loginSponsorApi(
   return request;
 }
 
-function registerSponsorApi(
-  data: registerRequest
-): Promise<{ message: string }> {
+function registerSponsorApi(data: registerRequest): Promise<{ message: string }> {
   const request: Promise<{ message: string }> = axios
     .post(domain + "/public/auth/registerSponsor", data)
     .then((req) => {

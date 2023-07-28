@@ -1,7 +1,7 @@
 import axios from "axios";
 import { domain } from "../url";
-import { storeAuthors } from "../../reducers/sliceUsers";
-import { AppDispatch } from "../../store";
+import { storeAuthors } from "../../store/reducers/sliceUsers";
+import { AppDispatch } from "../../store/store";
 
 type Author = {
   id: string;

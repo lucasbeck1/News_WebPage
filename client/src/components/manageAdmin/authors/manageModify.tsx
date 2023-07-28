@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../store";
-import {
-  getApiAuthors,
-  updateApiAuthor,
-} from "../../../services/admin/authors";
+import { RootState } from "../../../store/store";
+import { getApiAuthors, updateApiAuthor } from "../../../services/admin/authors";
 
 import Swal from "sweetalert2";
 import { IconButton } from "@mui/material";
@@ -168,11 +165,7 @@ function ManageModify({ user }: User) {
 
   async function submit() {
     if (typeUser !== "admin") {
-      Swal.fire(
-        `Request failed`,
-        "Administrator permissions not found",
-        "error"
-      );
+      Swal.fire(`Request failed`, "Administrator permissions not found", "error");
       return handleClose();
     }
 

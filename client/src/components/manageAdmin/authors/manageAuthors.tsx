@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ContentLoader from "react-content-loader";
-import { RootState } from "../../../store";
+import { RootState } from "../../../store/store";
 
 import { getApiAuthors } from "../../../services/admin/authors";
 import ManageDelete from "./manageDelete";
@@ -77,11 +77,7 @@ function ManageAuthors() {
       <Paper sx={{ width: "100%" }}>
         <TableContainer component={Paper} sx={{ minHeight: 410 }}>
           {allAuthors ? (
-            <Table
-              sx={{ minWidth: 650 }}
-              size="small"
-              aria-label="a dense table"
-            >
+            <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Name</StyledTableCell>
@@ -101,9 +97,7 @@ function ManageAuthors() {
                       <StyledTableCell component="th" scope="row">
                         {user.name}
                       </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {user.mail}
-                      </StyledTableCell>
+                      <StyledTableCell align="right">{user.mail}</StyledTableCell>
                       <StyledTableCell align="right">
                         {user.admin ? (
                           <IconButton
@@ -156,14 +150,7 @@ function ManageAuthors() {
                 foregroundColor="#898989"
                 viewBox="0 0 180 70"
               >
-                <rect
-                  x="5"
-                  y="5"
-                  rx="1"
-                  ry="1"
-                  width="10.5rem"
-                  height="0.4rem"
-                />
+                <rect x="5" y="5" rx="1" ry="1" width="10.5rem" height="0.4rem" />
                 <rect
                   x="5"
                   y="15"

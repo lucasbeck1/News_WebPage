@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import ContentLoader from "react-content-loader";
-import { RootState } from "../../store";
+import { RootState } from "../../store/store";
 
 import { getPublicityBySponsor } from "../../services/sponsor/publicities";
 import Footer from "../public/footer";
@@ -96,10 +96,7 @@ function ManagePublicities() {
 
                   <TableBody>
                     {myPublicities
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       .map((row) => (
                         <StyledTableRow
                           key={row.id}

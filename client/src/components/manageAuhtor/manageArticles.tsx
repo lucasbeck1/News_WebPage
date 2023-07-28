@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ContentLoader from "react-content-loader";
-import { RootState } from "../../store";
+import { RootState } from "../../store/store";
 import DeleteArticle from "./deleteArticle";
 import ModifyArticle from "./modifyArticle";
 import CreateArticle from "./createArticle";
@@ -85,19 +85,14 @@ function ManageArticles() {
                     <TableRow>
                       <StyledTableCell>Title</StyledTableCell>
                       <StyledTableCell align="right">Section</StyledTableCell>
-                      <StyledTableCell align="right">
-                        Create Date
-                      </StyledTableCell>
+                      <StyledTableCell align="right">Create Date</StyledTableCell>
                       <StyledTableCell align="right">Actions</StyledTableCell>
                     </TableRow>
                   </TableHead>
 
                   <TableBody>
                     {myArticles
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       .map((row) => (
                         <StyledTableRow
                           key={row.id}

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ContentLoader from "react-content-loader";
 
-import { RootState } from "../../store";
+import { RootState } from "../../store/store";
 import { getApiSections } from "../../services/public/sections";
 
 import Toolbar from "@mui/material/Toolbar";
@@ -29,10 +29,7 @@ function Header() {
           noWrap
           sx={{ flex: 1 }}
         >
-          <NavLink
-            style={{ textDecoration: "none", color: "inherit" }}
-            to={`/`}
-          >
+          <NavLink style={{ textDecoration: "none", color: "inherit" }} to={`/`}>
             Rocky News
           </NavLink>
         </Typography>

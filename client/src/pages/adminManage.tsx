@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { RootState } from "../store";
+import { RootState } from "../store/store";
 // @ts-ignore
 import SwipeableViews from "react-swipeable-views-react-18-fix";
 

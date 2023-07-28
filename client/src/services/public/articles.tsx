@@ -1,7 +1,7 @@
 import axios from "axios";
 import { domain } from "../url";
-import { storeArticles } from "../../reducers/sliceArticles";
-import { AppDispatch } from "../../store";
+import { storeArticles } from "../../store/reducers/sliceArticles";
+import { AppDispatch } from "../../store/store";
 
 type Article = {
   id: number;

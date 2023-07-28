@@ -8,7 +8,7 @@ import CarouselContainer from "../components/public/carouselContainer";
 import Swip from "../components/public/swipeableContainer";
 import { getApiArticles } from "../services/public/articles";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "../store/store";
 
 function Home() {
   const dispatch = useDispatch();

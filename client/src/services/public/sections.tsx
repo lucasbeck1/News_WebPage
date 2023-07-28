@@ -1,7 +1,7 @@
 import axios from "axios";
 import { domain } from "../url";
-import { storeSections } from "../../reducers/sliceSections";
-import { AppDispatch } from "../../store";
+import { storeSections } from "../../store/reducers/sliceSections";
+import { AppDispatch } from "../../store/store";
 
 type Section = {
   id: number;
