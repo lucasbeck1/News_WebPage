@@ -32,7 +32,7 @@ Crear una aplicación web donde se puedan encontrar diferentes tipos de noticias
 
 Lenguaje: TypeScript  
 
-Frontend: React, Redux, Material UI  
+Frontend: Vite, React, Redux, Material UI  
 
 Backend: Node.js, Express, TypeORM  
 
@@ -51,7 +51,7 @@ _ Otra opción es que descargues este repositorio y sigas las  siguientes instru
 ### Instalacion y referencia de la base de datos
 
 1. Instalar MySQL u otra base de datos relacional, como puede ser PostgreSQL o MariaDB.
-2. Crear una base de datos con el nombre "videogames"
+2. Crear una base de datos con el nombre "rocky_db"
 3. Dentro de ./api cree un archivo .env con sus credenciales, como se muestra a continuacion
 
 ```Javascript
@@ -71,7 +71,7 @@ Reemplazar los datos provistos con los propios
 - nombre_db: STRING - Enum que recibe el nombre de la base de datos para typeORM: Para MySQL es: "mysql", para otras bases puedes consultar la documentación.
 - dominio_db: STRING - Url donde se aloja la base de datos, para local: "localhost"
 - puerto_db: NUMBER -Puerto en donde se ejecuta la base de datos, para MySQL el puerto por defecto es: 3306
-- database_name: STRING - El nombre de la base de datos.
+- database_name: STRING - El nombre de la base de datos, en este caso "rocky_db".
 - user_db: STRING - Nombre del usuario de la base de datos.
 - password_db: STRING - Contraseña del usuario de la base de datos.
 - numero_de_hashes: NUMBER - Número de hashes para almacenar las contraseñas.
