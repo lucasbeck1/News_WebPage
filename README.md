@@ -1,6 +1,11 @@
 # Learning project - Rocky News
 
+
 <!-- ![Rocky News - Home](./sample.png) -->
+
+<!-- <img src="./sample.png" alt="Rocky News - Home" style="width: 800px; border: 2px solid white; padding: 2px;"/> -->
+
+<img src="./sample.png" alt="Rocky News - Home" style="border: 2px solid white; padding: 2px;"/>
 
 # Objetivos 🎯
 
