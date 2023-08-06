@@ -1,11 +1,7 @@
 # Learning project - Rocky News
 
-
-<!-- ![Rocky News - Home](./sample.png) -->
-
 <!-- <img src="./sample.png" alt="Rocky News - Home" style="width: 800px; border: 2px solid white; padding: 2px;"/> -->
-
-<img src="./sample.png" alt="Rocky News - Home" style="border: 2px solid white; padding: 2px;"/>
+![Rocky News - Home](./sample.png)
 
 # Objetivos 🎯
 
@@ -32,9 +28,9 @@ Crear una aplicación web donde se puedan encontrar diferentes tipos de noticias
 
 Lenguaje: TypeScript  
 
-Frontend: Vite, React, Redux, Material UI  
+Frontend: Vite, React, Redux, Material UI, Sweet Alert  
 
-Backend: Node.js, Express, TypeORM  
+Backend: Node.js, Express, TypeORM, Passport, Bcrypt, Multer  
 
 DataBase: MySQL
 
