@@ -20,24 +20,26 @@ function Header() {
 
   const allSections = useSelector((state: RootState) => state.sections);
 
-  function WeatherInfo(props: { text: string }) {
+  function WeatherInfo(props: { temp: string }) {
     return (
       <>
         <Typography component="h2" variant="h6" color="inherit" noWrap>
-          {props.text}
+          {props.temp}
         </Typography>
-        <CloudIcon />
+        <CloudIcon style={{ color: "grey" }} />
       </>
     );
   }
 
-  function EconomyInfo(props: { text: string }) {
+  function EconomyInfo(props: { text: string; value: number }) {
     return (
       <>
         <Typography component="h2" variant="h6" color="inherit" noWrap>
           {props.text}
         </Typography>
-        <ArrowDropUpIcon />
+
+        <p>{props.value}</p>
+        <ArrowDropUpIcon style={{ color: "green" }} />
       </>
     );
   }
@@ -45,7 +47,7 @@ function Header() {
   return (
     <>
       <Toolbar sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <WeatherInfo text="18°C" />
+        <WeatherInfo temp="18°C" />
         <Typography
           component="h2"
           variant="h5"
@@ -58,7 +60,7 @@ function Header() {
             Rocky News
           </NavLink>
         </Typography>
-        <EconomyInfo text="2.5%" />
+        <EconomyInfo text="Market" value={2} />
       </Toolbar>
       <Toolbar
         component="nav"
