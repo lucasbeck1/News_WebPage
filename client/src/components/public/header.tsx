@@ -8,6 +8,8 @@ import { getApiSections } from "../../services/public/sections";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
+import CloudIcon from "@mui/icons-material/Cloud";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
 function Header() {
   const dispatch = useDispatch();
@@ -18,9 +20,32 @@ function Header() {
 
   const allSections = useSelector((state: RootState) => state.sections);
 
+  function WeatherInfo(props: { text: string }) {
+    return (
+      <>
+        <Typography component="h2" variant="h6" color="inherit" noWrap>
+          {props.text}
+        </Typography>
+        <CloudIcon />
+      </>
+    );
+  }
+
+  function EconomyInfo(props: { text: string }) {
+    return (
+      <>
+        <Typography component="h2" variant="h6" color="inherit" noWrap>
+          {props.text}
+        </Typography>
+        <ArrowDropUpIcon />
+      </>
+    );
+  }
+
   return (
     <>
       <Toolbar sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <WeatherInfo text="18°C" />
         <Typography
           component="h2"
           variant="h5"
@@ -33,6 +58,7 @@ function Header() {
             Rocky News
           </NavLink>
         </Typography>
+        <EconomyInfo text="2.5%" />
       </Toolbar>
       <Toolbar
         component="nav"

@@ -7,7 +7,7 @@
 
 ## Del Proyecto
 
-- Construir una App utlizando TypeScript, React, Redux, Node.js, Express y TypeOrm.
+- Construir una App utlizando TypeScript, React, Redux toolkit, Node.js, Express y TypeOrm.
 
 - Conectar frontend, backend y base de datos.
 
