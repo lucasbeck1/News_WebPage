@@ -36,10 +36,15 @@ function Header() {
             gap: 2,
           }}
         >
-          <Typography component="h2" variant="h6" color="inherit">
+          <Typography
+            component="h2"
+            variant="h6"
+            color="inherit"
+            style={{ fontSize: 18 }}
+          >
             {props.temp}
           </Typography>
-          <CloudIcon style={{ color: "grey", marginBottom: 5, fontSize: 26 }} />
+          <CloudIcon style={{ color: "grey", marginBottom: 5, fontSize: 24 }} />
         </Box>
       </>
     );
@@ -58,11 +63,17 @@ function Header() {
             justifyContent: "center",
             alignItems: "center",
             flexWrap: "wrap",
-
             gap: 0,
           }}
         >
-          <Typography component="h2" variant="h6" color="inherit">
+          <Typography
+            component="h2"
+            variant="h6"
+            color="inherit"
+            style={{
+              fontSize: 18,
+            }}
+          >
             {props.text}
           </Typography>
           <Box
@@ -70,6 +81,8 @@ function Header() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              marginTop: -2,
+              marginBottom: -2,
             }}
           >
             <ArrowDropUpIcon
@@ -84,6 +97,7 @@ function Header() {
                 marginLeft: -10,
                 marginRight: 10,
                 color: "green",
+                fontSize: 18,
               }}
             >
               {props.value + "%"}
@@ -117,7 +131,7 @@ function Header() {
             Rocky News
           </NavLink>
         </Typography>
-        <EconomyInfo text="Market" value={2} />
+        <EconomyInfo text="Market Blue" value={2} />
       </Toolbar>
       <Toolbar
         component="nav"
