@@ -5,6 +5,7 @@ import ContentLoader from "react-content-loader";
 import { RootState } from "../../store/store";
 import { getApiSections } from "../../services/public/sections";
 
+import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
@@ -23,10 +24,23 @@ function Header() {
   function WeatherInfo(props: { temp: string }) {
     return (
       <>
-        <Typography component="h2" variant="h6" color="inherit" noWrap>
-          {props.temp}
-        </Typography>
-        <CloudIcon style={{ color: "grey" }} />
+        <Box
+          sx={{
+            pb: 1,
+            pt: 1,
+            pl: 1,
+            pr: 1,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          <Typography component="h2" variant="h6" color="inherit">
+            {props.temp}
+          </Typography>
+          <CloudIcon style={{ color: "grey", marginBottom: 5, fontSize: 26 }} />
+        </Box>
       </>
     );
   }
@@ -34,19 +48,62 @@ function Header() {
   function EconomyInfo(props: { text: string; value: number }) {
     return (
       <>
-        <Typography component="h2" variant="h6" color="inherit" noWrap>
-          {props.text}
-        </Typography>
+        <Box
+          sx={{
+            pb: 1,
+            pt: 1,
+            pl: 1,
+            pr: 1,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
 
-        <p>{props.value}</p>
-        <ArrowDropUpIcon style={{ color: "green" }} />
+            gap: 0,
+          }}
+        >
+          <Typography component="h2" variant="h6" color="inherit">
+            {props.text}
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ArrowDropUpIcon
+              style={{ color: "green", fontSize: 52, padding: 0, margin: 0 }}
+            />
+            <Typography
+              component="h2"
+              variant="h6"
+              color="inherit"
+              style={{
+                padding: 0,
+                marginLeft: -10,
+                marginRight: 10,
+                color: "green",
+              }}
+            >
+              {props.value + "%"}
+            </Typography>
+          </Box>
+        </Box>
       </>
     );
   }
 
   return (
     <>
-      <Toolbar sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Toolbar
+        sx={{
+          borderBottom: 1,
+          borderColor: "divider",
+          display: "grid",
+          gridTemplateColumns: "20% 60% 20%",
+        }}
+      >
         <WeatherInfo temp="18°C" />
         <Typography
           component="h2"
