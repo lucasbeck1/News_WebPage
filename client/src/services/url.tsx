@@ -1,3 +1,4 @@
-const localhost: string = "http://localhost:3001";
+const localhost: string =
+  import.meta.env.VITE_backend_url || "http://localhost:3001";
 
 export const domain: string = localhost;
