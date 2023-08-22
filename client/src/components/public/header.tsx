@@ -21,7 +21,7 @@ function Header() {
 
   const allSections = useSelector((state: RootState) => state.sections);
 
-  function WeatherInfo(props: { temp: string }) {
+  function WeatherInfo(props: { text: string; value: number }) {
     return (
       <>
         <Box
@@ -33,18 +33,38 @@ function Header() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            gap: 2,
+            flexWrap: "wrap",
+            gap: 1,
           }}
         >
           <Typography
             component="h2"
             variant="h6"
             color="inherit"
-            style={{ fontSize: 18 }}
+            style={{ fontSize: 18, lineHeight: "100%", textAlign: "center" }}
           >
-            {props.temp}
+            {props.text}
           </Typography>
-          <CloudIcon style={{ color: "grey", marginBottom: 5, fontSize: 24 }} />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 1,
+              marginTop: -1,
+              marginBottom: -1,
+            }}
+          >
+            <Typography
+              component="h2"
+              variant="h6"
+              color="inherit"
+              style={{ fontSize: 18 }}
+            >
+              {props.value + "°C"}
+            </Typography>
+            <CloudIcon style={{ color: "grey", marginBottom: 5, fontSize: 24 }} />
+          </Box>
         </Box>
       </>
     );
@@ -72,6 +92,7 @@ function Header() {
             color="inherit"
             style={{
               fontSize: 18,
+              textAlign: "center",
             }}
           >
             {props.text}
@@ -115,16 +136,15 @@ function Header() {
           borderBottom: 1,
           borderColor: "divider",
           display: "grid",
-          gridTemplateColumns: "20% 60% 20%",
+          gridTemplateColumns: "1fr 3fr 1fr",
         }}
       >
-        <WeatherInfo temp="18°C" />
+        <WeatherInfo text="Mendoza City" value={18} />
         <Typography
           component="h2"
           variant="h5"
           color="inherit"
           align="center"
-          noWrap
           sx={{ flex: 1 }}
         >
           <NavLink style={{ textDecoration: "none", color: "inherit" }} to={`/`}>
