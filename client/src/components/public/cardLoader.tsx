@@ -16,8 +16,8 @@ export default function CardLoader() {
           foregroundColor="#898989"
           viewBox="0 0 180 70"
         >
-          <rect x="0" y="5" rx="0" ry="0" width="1280" height="0.8rem" />
-          <rect x="0" y="20" rx="0" ry="0" width="1280" height="5rem" />
+          <rect x="0" y="5" rx="0" ry="0" width="1280" height="12" />
+          <rect x="0" y="20" rx="0" ry="0" width="1280" height="50" />
         </ContentLoader>
       </Box>
     </>

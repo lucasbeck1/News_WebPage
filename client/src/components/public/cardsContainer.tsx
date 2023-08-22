@@ -43,7 +43,7 @@ function CardsContainer(props: { articles: ArticleData[] }) {
         <Grid container spacing={4}>
           {load &&
             articles.map((article) => (
-              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12} key={article.id}>
                 <CardArticle key={article.id} article={article} />
               </Grid>
             ))}

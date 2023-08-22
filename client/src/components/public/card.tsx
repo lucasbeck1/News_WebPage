@@ -26,7 +26,7 @@ export default function CardArticle(props: ArticleData) {
 
   return (
     <>
-      <Grid direction="column" alignItems="center" item xs={12}>
+      <Grid alignItems="center" item xs={12}>
         <NavLink
           style={{ textDecoration: "none", color: "inherit" }}
           to={`/detail/${id}`}
